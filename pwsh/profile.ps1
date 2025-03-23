@@ -386,7 +386,9 @@ elseif ($IsMacOS) {
 #*
 elseif ($IsLinux) {
 
-
+  function bashtest {
+    write-host -ForegroundColor Red "RED TEST..."
+  }
   #*############################
   #*#         PYTHON           #
   #*############################
