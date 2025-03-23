@@ -29,9 +29,9 @@ if ($IsWindows) {
   #!##############################
   #!#         Exports            #
   #!##############################
-  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin' -ForegroundColor Blue  
-  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Templates' -ForegroundColor Blue  
-  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Cross-Platform-Powershell' -ForegroundColor Blue  
+  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin' -ForegroundColor Blue
+  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Templates' -ForegroundColor Blue
+  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Cross-Platform-Powershell' -ForegroundColor Blue
 
   $Env:Path += ";$env:USERPROFILE\Bin"
   $Env:Path += ";$env:USERPROFILE\Bin\Templates"
