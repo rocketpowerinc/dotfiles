@@ -26,9 +26,9 @@
 if ($IsWindows) {
   #todo FYI all the linux LIKE commands are all done automaticaly with Titus Powershell Profile now
 
-  #!##############################
-  #!#         Exports            #
-  #!##############################
+  #!#####################################
+  #!#         Exported Paths            #
+  #!#####################################
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Templates' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Cross-Platform-Powershell' -ForegroundColor Blue
@@ -385,6 +385,17 @@ elseif ($IsMacOS) {
 #*     `-'       `--' hjm
 #*
 elseif ($IsLinux) {
+
+  #!#####################################
+  #!#         Exported Paths            #
+  #!#####################################
+  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$HOME/.local/bin' -ForegroundColor Blue
+  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$HOME/.local/bin/Templates' -ForegroundColor Blue
+  Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$HOME/.local/bin/Cross-Platform-Powershell' -ForegroundColor Blue
+
+  $env:PATH += ":$HOME/.local/bin"
+  $env:PATH += ":$HOME/.local/bin/Templates"
+  $env:PATH += ":$HOME/.local/bin/Cross-Platform-Powershell"
 
   function bashtest {
     write-host -ForegroundColor Red "RED TEST..."
