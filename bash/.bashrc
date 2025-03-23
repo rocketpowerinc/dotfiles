@@ -1,4 +1,4 @@
-#fastfetch #*add this in $HOME/.bashrc not here so the 
+#fastfetch #*manually add this in $HOME/.bashrc not here so no conflicts if not installed
 #!######################################################################
 #!#                    Generic from a Fresh Bashrc                    ##
 #!######################################################################
