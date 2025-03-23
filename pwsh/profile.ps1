@@ -64,7 +64,7 @@ if ($IsWindows) {
     Write-Host -ForegroundColor Green "1..."
     Start-Sleep -Seconds 1
 
-    Write-Host -ForegroundColor Magenta "TEST MOTHER FUCKER!"
+    Write-Host -ForegroundColor Magenta "TEST"
 
     Read-Host "Press Enter to Exit"
   }
@@ -431,7 +431,7 @@ elseif ($IsLinux) {
     Write-Host -ForegroundColor Green "1..."
     Start-Sleep -Seconds 1
 
-    Write-Host -ForegroundColor Magenta "TEST MOTHER FUCKER!"
+    Write-Host -ForegroundColor Magenta "TEST"
 
     Read-Host "Press Enter to Exit"
   }
