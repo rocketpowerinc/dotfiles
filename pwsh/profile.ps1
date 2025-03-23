@@ -2,6 +2,12 @@
 # Windows Mac Linux
 # $PROFILE.CurrentUserAllHosts
 
+#Long Version
+#Windows= $env:USERPROFILE\Documents\PowerShell\profile.ps1
+#Mac=
+#Linux= $HOME/.config/powershell/profile.ps1
+
+
 
 
 
