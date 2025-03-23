@@ -410,6 +410,32 @@ elseif ($IsLinux) {
   }
 
   function pserver { python3 -m http.server 9999 } #*Starts a python server on port 9999 in current folder
+
+
+
+  #*############################
+  #*#         Admin            #
+  #*############################
+
+  function Test {
+    Write-Host -ForegroundColor Red "3..."
+    Start-Sleep -Seconds 1
+    Write-Host -ForegroundColor Yellow "2..."
+    Start-Sleep -Seconds 1
+    Write-Host -ForegroundColor Green "1..."
+    Start-Sleep -Seconds 1
+
+    Write-Host -ForegroundColor Magenta "TEST MOTHER FUCKER!"
+
+    Read-Host "Press Enter to Exit"
+  }
+
+
+
+
+
+
+
 }
 
 
