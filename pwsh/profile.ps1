@@ -3,17 +3,6 @@
 # $PROFILE.CurrentUserAllHosts
 
 
-#!########################
-#!  UNIVERSAL One Liners #
-#!########################
-Write-Host "Ultimate Script Launcher Command:" -ForegroundColor Magenta -NoNewline; Write-Host " usl" -ForegroundColor Blue
-function usl { Invoke-WebRequest -useb http://192.168.1.72:9999/Project-USL/Ultimate-Script-Launcher.ps1 | Invoke-Expression }
-Write-Host "Project-CustomTkinter Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " pro, repro, proexe" -ForegroundColor Blue
-
-function pro { Invoke-WebRequest -useb http://192.168.1.72:9999/Project-USL/Python-RocketOS.ps1 | Invoke-Expression }
-
-
-
 
 
 #?                   .oodMMMMMMMMMMMMM
@@ -35,7 +24,7 @@ function pro { Invoke-WebRequest -useb http://192.168.1.72:9999/Project-USL/Pyth
 #?
 
 if ($IsWindows) {
-  #todo FYI all the linux like commands I had in my RocketOS dotfiles are all done automaticaly with Titus Powershell Profile now
+  #todo FYI all the linux LIKE commands are all done automaticaly with Titus Powershell Profile now
 
   #!##############################
   #!#         Exports            #
@@ -136,10 +125,6 @@ if ($IsWindows) {
   function ...... { Set-Location -Path ../../../../.. }
 
 
-  #*################################
-  #*#            SSH               #
-  #*################################
-  function pi4 { ssh rocket@192.168.1.72 }
 
   #*############################
   #*#         Backups           #
@@ -328,12 +313,6 @@ if ($IsWindows) {
   #*############################
   #*#         PYTHON           #
   #*############################
-  function repro { & $env:USERPROFILE\Downloads\CustomTkinter-App\Scripts\python $env:USERPROFILE\Downloads\CustomTkinter-App\App\_MainFrame.py }
-
-  function proexe {
-    & "$env:USERPROFILE\Downloads\CustomTkinter-App\Scripts\pyinstaller.exe" "$env:USERPROFILE\Downloads\CustomTkinter-App\_MainFrame_Windows.spec"
-    Start-Process "C:\Users\rocket\dist\_MainFrame.exe" -NoNewWindow
-  }
 
   Write-Host "Python Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " pyvenv, pyserver" -ForegroundColor Blue
 
@@ -371,15 +350,6 @@ if ($IsWindows) {
 #         `#########''########'
 #
 elseif ($IsMacOS) {
-  #!###############
-  #!   One Liners #
-  #!###############
-  function repro { & $HOME/Downloads/CustomTkinter-App/bin/python $HOME/Downloads/CustomTkinter-App/App/_MainFrame.py }
-
-  function proexe {
-    & "$HOME/Downloads/CustomTkinter-App/bin/pyinstaller" "$HOME/Downloads/CustomTkinter-App/_MainFrame_MacOS.spec"
-    Start-Process "/home/rocket/dist/_MainFrame" -NoNewWindow
-  }
 
   #*############################
   #*#         PYTHON           #
@@ -415,15 +385,7 @@ elseif ($IsMacOS) {
 #*     `-'       `--' hjm
 #*
 elseif ($IsLinux) {
-  #!###############
-  #!   One Liners #
-  #!###############
-  function repro { & $HOME/Downloads/CustomTkinter-App/bin/python $HOME/Downloads/CustomTkinter-App/App/_MainFrame.py }
 
-  function proexe {
-    & "$HOME/Downloads/CustomTkinter-App/bin/pyinstaller" "$HOME/Downloads/CustomTkinter-App/_MainFrame_Linux.spec"
-    Start-Process "/home/rocket/dist/_MainFrame" -NoNewWindow
-  }
 
   #*############################
   #*#         PYTHON           #

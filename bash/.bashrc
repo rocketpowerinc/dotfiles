@@ -26,7 +26,6 @@ ENDCOLOR="\e[0m"
 export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin:$HOME/bin"
 export PATH=$PATH:/usr/local/bin #Needed for podman-compose
 
-
 # $EDITORS
 export EDITOR=nvim
 export VISUAL=nvim
@@ -68,19 +67,6 @@ if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
 
 # Show auto-completion list automatically, without double tab
 if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
-
-#!######################################################################
-#!        #######     One Liners From Apache Server       #######     ##
-#!######################################################################
-
-alias usl='curl -sSL http://192.168.1.72:9999/RocketOS-2/Ultimate-Script-Launcher.sh | bash'
-alias pro='curl -sSL http://192.168.1.72:9999/RocketOS-2/Python-RocketOS.sh | bash'
-alias repro='$HOME/Downloads/CustomTkinter-App/bin/python $HOME/Downloads/CustomTkinter-App/App/_MainFrame.py'
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    alias proexe='echo -e "\033[33mRun pro first if I want a fresh build\033[0m" && sleep 3s && $HOME/Downloads/CustomTkinter-App/bin/pyinstaller  $HOME/Downloads/CustomTkinter-App/_MainFrame_MacOS.spec && /home/rocket/dist/_MainFrame'
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    alias proexe='echo -e "\033[33mRun pro first if I want a fresh build\033[0m" && sleep 3s && $HOME/Downloads/CustomTkinter-App/bin/pyinstaller  $HOME/Downloads/CustomTkinter-App/_MainFrame_Linux.spec && /home/rocket/dist/_MainFrame'
-fi
 
 ##########*DOTFILES
 propagate-dotfiles() {
@@ -356,7 +342,7 @@ alias doompurge="~/.emacs.d/bin/doom purge"
 #!###############################################################
 
 #Make Private/Public Key Pair in Pink
-alias mksshkey='echo -e "\033[1;35mEnter the key name: \033[0m\c" && read keyname && ssh-keygen -t ed25519 -C "$keyname" -f "/home/rocket/.ssh/$keyname" && echo -e "\033[1;35mKey created successfully.\033[0m"'
+alias mksshkey='echo -e "\033[1;35mEnter the key name: \033[0m\c" && read keyname && ssh-keygen -t ed25519 -C "$keyname" -f "$HOME/.ssh/$keyname" && echo -e "\033[1;35mKey created successfully.\033[0m"'
 
 #Copy from a list of keys
 function copykey() {
@@ -369,9 +355,9 @@ function copykey() {
 }
 
 #If I'm using sshpass (I would keep my password in that file)
-alias pash='sshpass -f /home/rocket/.sshpassfile ssh'
+alias pash='sshpass -f $HOME/.sshpassfile ssh'
 #Or I can keep in plain text like this
-#alias pash='sshpass -p 'candyass' ssh rocket@192.168.1.72'
+#alias pash='sshpass -p 'candyass' ssh user@192.168.1.x'
 
 #Remove Old Hosts file to start Fresh
 alias rmssh='rm $HOME/.ssh/known_hosts && rm $HOME/.ssh/known_hosts.old'
@@ -388,7 +374,6 @@ fi
 #!###############################################################
 alias gumls="gum file"
 alias ghome='bash $(gum file $HOME)'
-alias gumrocketos="pwsh -c GumRocketOS"
 
 #!###############################################################
 #!#                      Nala ALias                            ##
@@ -729,8 +714,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 #testing - going to try again because now installing bat with nix
 # Check if 'bat' exists at the specified path and is executable
-if [[ -x "/home/rocket/.nix-profile/bin/bat" ]]; then
-    alias cat='/home/rocket/.nix-profile/bin/bat'
+if [[ -x "$HOME/.nix-profile/bin/bat" ]]; then
+    alias cat="$HOME/.nix-profile/bin/bat"
 else
     unalias cat 2>/dev/null
 fi
@@ -766,9 +751,6 @@ fi
 #!###############################################################
 #!#                       Proxmox                              ##
 #!###############################################################
-
-#SSH KEYS
-alias cprogdesktopkey='read -p $'\''\e[95mEnter the guest ID: \e[0m'\'' id; qm guest exec $id --timeout 0 -- /bin/bash -c '\''echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPPQ1hCyXoqnBo/NiZR/eqxb5aK0rbgUNCkyjhOYz99l ROG-Desktop_key" >> /home/rocket/.ssh/authorized_keys'\'
 
 #Unlock container
 alias unlockprox='read -p $'\''\e[95mWhich VM or container would you like to unlock? \e[0m'\'' id; rm /var/lock/qemu-server/lock-$id.conf'
@@ -1220,10 +1202,8 @@ trim() {
 
 #+################################################################
 function rebuild() {
-  sudo nixos-rebuild switch
+    sudo nixos-rebuild switch
 }
-
-
 
 #!+Rebuil NixOS by calling my github repo
 
@@ -1237,7 +1217,7 @@ function rebuild() {
 #        #Confirm run usl-initial-install-part2.sh
 #        if gum confirm "Run Part 2 - Choose host to run 'sudo nixos-rebuild switch' against? "; then
 #            echo -e "${MAGENTA}Running part 2${ENDCOLOR}"
-#            /home/rocket/HyprNix/usl-initial-install-part2.sh
+#            $HOME/HyprNix/usl-initial-install-part2.sh
 #        else
 #            echo -e "${RED}Rebuild Canceled${ENDCOLOR}"
 #        fi
