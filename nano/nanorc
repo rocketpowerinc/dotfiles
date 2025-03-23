@@ -1,0 +1,33 @@
+set linenumbers  # Adds line numbers
+set indicator    # Display a scroll bar on the right that shows the position and size of the viewport.
+set autoindent   # Automatically indent new lines
+set constantshow # Always display cursor position
+set mouse        # Enable mouse support
+set zap          # Highlight text and delete it with backspace.
+#set nohelp # Hide help menu at the bottom to provide more editing space
+#set afterends # Make Ctrl+Right and Ctrl+Delete stop at word ends instead of beginnings.
+#set allow_insecure_backup # Allow backups to succeed even if permissions can't be (re)set due to OS considerations.
+#set boldtext # Use bold instead of reverse video for various interface elements.
+#set positionlog # Save the cursor position between editing sessions.
+#set casesensitive # Make search function case sensitive
+#set historylog # Save the last search patterns
+
+#Syntax
+include "/usr/share/nano/*.nanorc" # Include syntax highlighting definitions for different languages
+set speller "aspell -x -c"         # Set the spell checker program
+set tabsize 4                      # Set the number of spaces for a tab character
+set tabstospaces                   # Convert tabs to spaces
+
+######Backups
+#set backup                       # Create backup files
+#set backupdir "~/.nano/backups/" # Directory to store uniquely numbered backup files in the specified directory
+
+########Wrapping
+#set softwrap # Soft wrap long lines at screen edge
+#set atblanks # When soft line wrapping is enabled, wrap lines at blank characters instead of always at the edge of the screen.
+
+#+DO NOT FORGET TO REFRESH APACHE SERVER WITH THIS ALIAS refresh-oneliners when editting anything in this file
+#!DO NOT FORGET TO REFRESH APACHE SERVER WITH THIS ALIAS refresh-oneliners when editting anything in this file
+#+DO NOT FORGET TO REFRESH APACHE SERVER WITH THIS ALIAS refresh-oneliners when editting anything in this file
+#!DO NOT FORGET TO REFRESH APACHE SERVER WITH THIS ALIAS refresh-oneliners when editting anything in this file
+#+DO NOT FORGET TO REFRESH APACHE SERVER WITH THIS ALIAS refresh-oneliners when editting anything in this file

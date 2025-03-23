@@ -1,0 +1,9 @@
+{
+  "bg@rockets": {
+    "display:name": "Rockets",
+    "display:order": 2.1,
+    "bg:*": true,
+    "bg:activebordercolor": "#ffffff",
+    "bg:opacity": 0.3
+  }
+}
