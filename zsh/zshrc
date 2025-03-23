@@ -1,0 +1,12 @@
+test() {
+    echo -e "\033[0;31m3...\033[0m"
+    sleep 1
+    echo -e "\033[1;33m2...\033[0m"
+    sleep 1
+    echo -e "\033[0;32m1...\033[0m"
+    sleep 1
+
+    echo -e '\033[0;35mTEST\033[0m'
+
+    read -p "Press Enter to Exit"
+}

@@ -1,4 +1,10 @@
-#fastfetch #*manually add this in $HOME/.bashrc not here so no conflicts if not installed
+#fastfetch #*manually add this in $HOME/.bashrc not here so no conflicts if not installed + Titus's script calls it already so it would be duplicate
+#!###############################################################
+#!#                        Prompt                              ##
+#!###############################################################
+#Cyan
+PS1="\[\e[01;36m\]\u@\h: bash \w \[\e[5m\e[37m\]#\[\e[25m\e[00m\]"
+
 #!######################################################################
 #!#                    Generic from a Fresh Bashrc                    ##
 #!######################################################################
@@ -21,11 +27,19 @@ ENDCOLOR="\e[0m"
 #!######################################################################
 #!#                            Exports                                ##
 #!######################################################################
-
-# Paths
+#*PATHS - Export all directories in $HOME/.local/bin/
+echo -e "${MAGENTA}Path Exports:${ENDCOLOR} ${BLUE}all directories in HOME/.local/bin/${ENDCOLOR}"
+for dir in $HOME/.local/bin/*; do
+    if [ -d "$dir" ]; then
+        PATH="$dir:$PATH"
+    fi
+done
+export PATH
+#*#####################################################
+#More Paths
 export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin:$HOME/bin"
 export PATH=$PATH:/usr/local/bin #Needed for podman-compose
-
+#*#####################################################
 # $EDITORS
 export EDITOR=nvim
 export VISUAL=nvim
@@ -68,39 +82,18 @@ if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
 # Show auto-completion list automatically, without double tab
 if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 
-##########*DOTFILES
-propagate-dotfiles() {
+#!###############################
+#!#         Remember            #
+#!###############################
+echo -e "${MAGENTA}Install a .deb Command:${ENDCOLOR} ${BLUE}sudo dpkg -i package_name.deb${ENDCOLOR}"
 
-    #todo When adding new dotfiles in the proxmox repo also edit EOF-REFRESH-ONELINERS.sh file in the '207 (Apache-Server-CT)' Server
-    #Nano
-    mkdir $HOME/.nano/backups/ -p
-    curl http://192.168.1.207/Dotfiles/nanorc -o ~/.nanorc && echo -e "\e[32mnanorc propagated\e[0m"
-    sudo curl http://192.168.1.207/Dotfiles/nanorc -o /root/.nanorc && echo -e "\e[32msudo nanorc propagated\e[0m"
 
-    #Starship
-    curl http://192.168.1.207/Dotfiles/starship.toml -o $HOME/.config/starship.toml && echo -e "\e[32mstarship.toml propagated\e[0m"
+#!#####################################################
+#!#                       Admin                      ##
+#!#####################################################
+echo -e "${MAGENTA}Admin Commands:${ENDCOLOR} ${BLUE}resource, reboot, rebootsafe, rebootforce, shutdown, bios, test${ENDCOLOR}"
 
-    #FastFetch
-    mkdir $HOME/.config/fastfetch
-    curl http://192.168.1.207/Dotfiles/fastfetch.jsonc -o $HOME/.config/fastfetch/config.jsonc && echo -e "\e[32mfastfetch config.jsonc propagated\e[0m"
-
-}
-
-##########*Support Script
-alias support-script='curl -o ~/Downloads/Proxmox-Support-Script.sh http://192.168.1.207/Proxmox-Support-Script.sh && chmod +x ~/Downloads/Proxmox-Support-Script.sh && ~/Downloads/Proxmox-Support-Script.sh'
-
-#!#######################
-#!        Websites     ##
-#!#######################
-
-alias homepage="open http://192.168.1.200:3000/"
-alias files="open http://192.168.1.206:8080/"
-alias ghactivate="open https://github.com/login/device"
-
-#!###############################################################
-#!#                       Source Shells                        ##
-#!################################################################
-rebash() {
+resource() {
     printf "\033[0;33msourcing .bashrc...\033[0m\n"
     if [ -f "$HOME/.bashrc" ]; then
         source "$HOME/.bashrc"
@@ -110,15 +103,23 @@ rebash() {
     fi
 }
 
-#!###############################################################
-#!#                        Prompt                              ##
-#!###############################################################
-#Cyan
-PS1="\[\e[01;36m\]\u@\h: bash \w \[\e[5m\e[37m\]#\[\e[25m\e[00m\]"
+# HAS to be all caps or ghosty calls it if all small
+function TEST() {
+    echo -e "\033[0;31m3...\033[0m"
+    sleep 1
+    echo -e "\033[1;33m2...\033[0m"
+    sleep 1
+    echo -e "\033[0;32m1...\033[0m"
+    sleep 1
 
-#!###############################################################
-#!#                       Shutdown and restart                 ##
-#!###############################################################
+    echo -e '\033[0;35mTEST\033[0m'
+
+    read -p "Press Enter to Exit"
+}
+
+#*###############################################################
+#*#                       Shutdown and restart                 ##
+#*###############################################################
 
 #reboot
 alias reboot='sudo reboot now'
@@ -131,30 +132,40 @@ alias rebootforce='sudo shutdown -r -n now'
 alias shutdown='sudo shutdown now'
 
 #Bios
-alias boot-manager="sudo systemctl reboot --firmware-setup"
+alias bios="sudo systemctl reboot --firmware-setup"
 
 #!###############################################################
 #!#                       Maintenance                          ##
 #!###############################################################
-#*Ubuntu/Debian
-alias updatedebian='export NIXPKGS_ALLOW_UNFREE=1 && sudo flatpak update --noninteractive && sudo apt update && sudo apt upgrade -y && nix-channel --update && nix-env -u "*" && (command -v snap >/dev/null 2>&1 && sudo snap refresh)'
-alias cleandebian='sudo flatpak uninstall --unused && command sudo apt autoclean && command sudo apt autoremove -y && nix-store --gc'
+echo -e "${MAGENTA}Maintenance Commands:${ENDCOLOR} ${BLUE}update/clean {debian, arch, fedora, opensuse}${ENDCOLOR}"
+
+#*Debian
+alias updatedebian-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo flatpak update --noninteractive && sudo apt update && sudo apt upgrade -y && nix-channel --update && nix-env -u "*" && (command -v snap >/dev/null 2>&1 && sudo snap refresh)'
+alias cleandebian-nix='sudo flatpak uninstall --unused && command sudo apt autoclean && command sudo apt autoremove -y && nix-store --gc'
+
+#https://www.debian.org/doc/manuals/debian-faq/uptodate.en.html#aptitude-upgrade
+alias updatedebian='sudo aptitude update && sudo aptitude safe-upgrade -y && sudo aptitude full-upgrade -y && sudo aptitude clean'
 
 #*Arch
-alias updatearch='export NIXPKGS_ALLOW_UNFREE=1 && sudo pacman -Syu && nix-channel --update && nix-env -u "*"'
-alias cleanarch='sudo pacman -Yc && sudo pacman -Sc && nix-store --gc'
+alias updatearch-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo pacman -Syu --noconfirm && nix-channel --update && nix-env -u "*"'
+alias cleanarch-nix='sudo pacman -Rns $(pacman -Qdtq) && sudo pacman -Scc && sudo pacman -Sc && nix-store --gc'
+
+#alias updatearch='sudo pacman -Syu && sudo pacman -Sc'
+alias updatearch='sudo pacman -Syu && sudo paccache -r && sudo pacman -Rns $(pacman -Qtdq)'
+alias cleanarch='sudo pacman -Rns $(pacman -Qdtq) && sudo pacman -Scc && sudo pacman -Sc'
 
 #*Fedora
-alias updatefedora='export NIXPKGS_ALLOW_UNFREE=1 && sudo dnf check-update && sudo dnf upgrade -y && nix-channel --update && nix-env -u "*"'
-alias cleanfedora='sudo dnf autoremove -y && sudo dnf clean all && nix-store --gc'
+alias updatefedora-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo dnf check-update && sudo dnf upgrade -y && nix-channel --update && nix-env -u "*"'
+alias cleanfedora-nix='sudo dnf autoremove -y && sudo dnf clean all && nix-store --gc'
 
 #*OpenSUSE
-alias updateopensuse='export NIXPKGS_ALLOW_UNFREE=1 && sudo zypper dup --allow-vendor-change && sudo zypper refresh && sudo zypper update && sudo zypper patch && sudo zypper install-new-recommends && nix-channel --update && nix-env -u "*"'
-alias cleanopensuse='sudo zypper clean && nix-store --gc'
+alias updateopensuse-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo zypper dup --allow-vendor-change && sudo zypper refresh && sudo zypper update && sudo zypper patch && sudo zypper install-new-recommends && nix-channel --update && nix-env -u "*"'
+alias cleanopensuse-nix='sudo zypper clean && nix-store --gc'
 
 #!###############################################################
 #!#                       SystemCTL                            ##
 #!###############################################################
+echo -e "${MAGENTA}SystemCTL Commands:${ENDCOLOR} ${BLUE}sdisable, senable, srestart, sstart, sstatus${ENDCOLOR}"
 alias sdisable='sudo systemctl disable $@'
 alias senable='sudo systemctl enable $@'
 alias srestart='sudo systemctl restart $@'
@@ -164,6 +175,7 @@ alias sstatus='sudo systemctl status $@'
 #!###############################################################
 #!#                       Navigation                           ##
 #!###############################################################
+echo -e "${MAGENTA}Navigation Commands:${ENDCOLOR} ${BLUE}home/hm/~, downloads/dl, desktop/dt, documents/docs, ghub, bin, ...... ${ENDCOLOR}"
 
 #Home
 alias home="cd ~/"
@@ -182,12 +194,33 @@ alias dt="cd ~/Desktop"
 alias documents="cd ~/Documents"
 alias docs="cd ~/Documents"
 
+#Github
+alias ghub="cd ~/Github"
+
+#User Bin
+alias bin="cd ~/.local/bin"
+
 #Directory Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
+
+#!##################################################
+#!#                      Sripts                   ##
+#!##################################################
+echo -e "${MAGENTA}Scripts:${ENDCOLOR} ${BLUE}cp-bin${ENDCOLOR}"
+
+function cp-bin() {
+    rm -rf ~/.local/bin
+    mkdir -p ~/.local/bin
+    git clone https://github.com/ReevesA1/A1-Public.git
+    cp -rf A1-Public/bin/Linux/* ~/.local/bin
+    cp -rf A1-Public/bin/Universal/* ~/.local/bin
+    rm -rf A1-Public
+    chmod +x ~/.local/bin/*
+}
 
 #!###############################################################
 #!#                      SPELLING ALIASES                      ##
@@ -196,15 +229,37 @@ alias ......='cd ../../../../..'
 alias sudp='sudo'
 alias gerp='grep'
 
-#!###############################################################
-#!#                      Remembers                             ##
-#!###############################################################
-
+#!##########################################################
+#!#                      Recall                           ##
+#!##########################################################
+echo -e "${MAGENTA}Recall Commands:${ENDCOLOR} ${BLUE}shbang, ownership, executable, permission, bash-help${ENDCOLOR}"
 alias shbang='echo -e "#!/usr/bin/env bash"'
+#Privilege
+alias executable='echo -e "chmod +x"'
+alias ownership='echo -e "sudo chown $USER foo"'
+alias permission='echo -e "chmod 777 foo"' #read write and execute for everyone
+
+#*What are my aliases and function
+function bash-help() {
+    # Part 1: List all aliases in cyan
+    echo -e "\e[36mHere are your aliases:\e[0m"
+    alias | awk 'BEGIN{FS="="}{print $1}'
+
+    # Print a separator
+    echo -e "\e[0m----------------------------------------\e[0m"
+
+    # Part 2: List the last 10 functions in purple
+    echo -e "\e[35mThese are the last 10 functions:\e[0m"
+    compgen -A function | tail -n 10
+
+    # Reset color
+    echo -e "\e[0m"
+}
 
 #!###############################################################
 #!#                       Edit Dotfiles                        ##
 #!###############################################################
+echo -e "${MAGENTA}Edit Commands:${ENDCOLOR} ${BLUE}editfile${ENDCOLOR}"
 
 alias edit='nvim'
 alias editv='gnome-text-editor'
@@ -326,9 +381,29 @@ function editfile() {
     done
 }
 
+#!#######################
+#!        Websites     ##
+#!#######################
+echo -e "${MAGENTA}Websites Commands:${ENDCOLOR} ${BLUE}homepage, ghactivate${ENDCOLOR}"
+
+alias homepage="firefox https://homepage.craft.me/public"
+alias ghactivate="firefox https://github.com/login/device"
+
+#!#######################
+#!        Proxmox      ##
+#!#######################
+echo -e "${MAGENTA}Proxmox Commands:${ENDCOLOR} ${BLUE}unlockprox, support-script${ENDCOLOR}"
+
+alias support-script='curl -o ~/Downloads/Proxmox-Support-Script.sh http://192.168.1.207/Proxmox-Support-Script.sh && chmod +x ~/Downloads/Proxmox-Support-Script.sh && ~/Downloads/Proxmox-Support-Script.sh'
+
+#Unlock container
+alias unlockprox='read -p $'\''\e[95mWhich VM or container would you like to unlock? \e[0m'\'' id; rm /var/lock/qemu-server/lock-$id.conf'
+
 #!###############################################################
 #!#                       Emacs                                ##
 #!###############################################################
+#echo -e "${MAGENTA}Emacs Commands:${ENDCOLOR} ${BLUE}em, emacs, doomsync, doomdoctor, doomupgrade, doompurge${ENDCOLOR}"
+
 # emacs
 alias em="/usr/bin/emacs -nw"
 alias emacs="emacsclient -c -a 'emacs'"
@@ -340,12 +415,13 @@ alias doompurge="~/.emacs.d/bin/doom purge"
 #!###############################################################
 #!#                       SSH                                  ##
 #!###############################################################
+echo -e "${MAGENTA}SSH Commands:${ENDCOLOR} ${BLUE}mksshkey, cpkey, pash, rmssh${ENDCOLOR}"
 
 #Make Private/Public Key Pair in Pink
 alias mksshkey='echo -e "\033[1;35mEnter the key name: \033[0m\c" && read keyname && ssh-keygen -t ed25519 -C "$keyname" -f "$HOME/.ssh/$keyname" && echo -e "\033[1;35mKey created successfully.\033[0m"'
 
 #Copy from a list of keys
-function copykey() {
+function cpkey() {
     echo -e "\033[0;35mPlease choose a file you would like to copy to clipboard:\033[0m"
     select fname in ~/.ssh/*.pub; do
         cat "$fname" | xclip -selection clipboard
@@ -372,6 +448,8 @@ fi
 #!###############################################################
 #!#                       Gum                                  ##
 #!###############################################################
+echo -e "${MAGENTA}Gum Commands:${ENDCOLOR} ${BLUE}gumls, ghome${ENDCOLOR}"
+
 alias gumls="gum file"
 alias ghome='bash $(gum file $HOME)'
 
@@ -471,36 +549,22 @@ alias fff="fastfetch -c all.jsonc" #See every available module
 #!#####################################################
 #!#                       Python                     ##
 #!#####################################################
-alias pvenv='python3 -m venv venv && source venv/bin/activate'
+echo -e "${MAGENTA}Python Commands:${ENDCOLOR} ${BLUE}pyvenv, pyserver, pyserverback, pyserverkill${ENDCOLOR}"
+
+alias pyvenv='python3 -m venv venv && source venv/bin/activate'
 
 #Python Servers
-alias pserver='python3 -m http.server 9999'                    #*Starts a python server on port 9999 in pwd
-alias pserverback='nohup python3 -m http.server 9999 &'        #*Starts a python server in the background on port 9999 in pwd and creates a $HOME /nohup.out file
-alias pserverbackkill='pkill -f "python3 -m http.server 9999"' #*Kills the python server in the background on port 9999
-
-#!##############################################################################
-#!#                       What are my aliases and function                    ##
-#!##############################################################################
-
-function showbash() {
-    # Part 1: List all aliases in cyan
-    echo -e "\e[36mHere are your aliases:\e[0m"
-    alias | awk 'BEGIN{FS="="}{print $1}'
-
-    # Print a separator
-    echo -e "\e[0m----------------------------------------\e[0m"
-
-    # Part 2: List the last 10 functions in purple
-    echo -e "\e[35mThese are the last 10 functions:\e[0m"
-    compgen -A function | tail -n 10
-
-    # Reset color
-    echo -e "\e[0m"
-}
+alias pyserver='python3 -m http.server 9999'                #*Starts a python server on port 9999 in pwd
+alias pyserverback='nohup python3 -m http.server 9999 &'    #*Starts a python server in the background on port 9999 in pwd and creates a $HOME /nohup.out file
+alias pyserverkill='pkill -f "python3 -m http.server 9999"' #*Kills the python server in the background on port 9999
 
 #!###############################################################
 #!#                       Fixes and Diagnosing                 ##
 #!###############################################################
+echo -e "${MAGENTA}Fixes:${ENDCOLOR} ${BLUE}Rog-Laptop-SoundFix${ENDCOLOR}"
+
+#*Hardware - Rog-Laptop Sound Fix
+alias Rog-Laptop-SoundFix="sudo sh -c 'echo options snd-hda-intel model=asus-zenbook > /etc/modprobe.d/alsa-base.conf && echo blacklist snd_soc_skl >> /etc/modprobe.d/blacklist.conf'"
 
 # Fixes
 alias fix-nautilus='rm -rf ~/.config/nautilus'
@@ -715,7 +779,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 #testing - going to try again because now installing bat with nix
 # Check if 'bat' exists at the specified path and is executable
 if [[ -x "$HOME/.nix-profile/bin/bat" ]]; then
-    alias cat="$HOME/.nix-profile/bin/bat"
+    alias cat='$HOME/.nix-profile/bin/bat'
 else
     unalias cat 2>/dev/null
 fi
@@ -747,13 +811,6 @@ fi
 
 #could make vscode alias's like this to open projects
 #alias blog='code /Users/travisrodgers/Desktop/tm-hugo-new/travis-media-hugo'
-
-#!###############################################################
-#!#                       Proxmox                              ##
-#!###############################################################
-
-#Unlock container
-alias unlockprox='read -p $'\''\e[95mWhich VM or container would you like to unlock? \e[0m'\'' id; rm /var/lock/qemu-server/lock-$id.conf'
 
 #!###############################################################
 #!#                      debian-btrfs-bashrc                   ##
@@ -798,58 +855,48 @@ if [ -n "${ZSH_VERSION-}" ]; then
     }
 fi
 
-#!######################################################################
-#!#                       Update my docker-compose                    ##
-#!######################################################################
-function compose-update() {
+#!################################
+#!#         Docker-Compose       #
+#!################################
+echo -e "${MAGENTA}Docker-Compose Commands:${ENDCOLOR} ${BLUE}docker{up, down, pull, update, clean, ip}${ENDCOLOR}"
 
-    #*PROMPT ME TO TAKE A SNAPSHOT OF VM OR CT
-    # Define a function to display text in yellow
-    yellow() {
-        echo -e "\e[33m$1\e[0m"
-    }
-
-    # Prompt the user
-    yellow "Have you taken a snapshot of the VM or CT before updating? (Press Enter to continue, q to quit)"
-    read -n 1 -r answer
-
-    # Check the user's response
-    if [[ $answer =~ ^[Qq]$ ]]; then
-        yellow "Please take a snapshot before proceeding. Stopping script."
-        return
-    fi
-
-    #*Show running containers list and prompt user to cd into which working container directory
-
-    # Get a list of all running Docker containers
-    containers=$(sudo docker ps --format '{{.Names}}')
-
-    # Convert the list into an array
-    containers_array=($containers)
-
-    # Use the select command to present the options to the user
-    echo "Please select a container to cd in its working directory:"
-    select container_name in "${containers_array[@]}"; do
-        if [[ -n $container_name ]]; then
-            # Use docker inspect to find the working directory
-            working_dir=$(sudo docker inspect --format '{{ index .Config.Labels "com.docker.compose.project.working_dir"}}' $container_name)
-
-            # Change to the working directory of the selected container
-            cd $working_dir
-            echo "Changed directory to: $working_dir"
-            break
-        else
-            echo "Invalid selection"
-        fi
-    done
-
-    #!UPDATE CONTAINER
-    sudo docker-compose down
-    sudo docker-compose pull
-    sudo docker-compose up -d
-    sudo docker image prune -af
-
+dockerup() {
+    docker-compose up -d
 }
+
+dockerdown() {
+    docker-compose down
+}
+
+dockerpull() {
+    docker-compose pull
+}
+
+dockerupdate() {
+    echo "Stopping the Docker Compose services..."
+    docker-compose down
+    echo "Pulling the latest images..."
+    docker-compose pull
+    echo "Starting the Docker Compose services in detached mode..."
+    docker-compose up -d
+    echo "Pruning unused Docker images..."
+    docker image prune -af
+    echo "Docker Compose services have been updated and cleaned up."
+}
+
+dockerclean() {
+    docker image prune -af
+}
+
+dockerip() {
+    containers=$(docker ps -q)
+    for container in $containers; do
+        info=$(docker inspect --format '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container)
+        formatted_info=$(echo $info | sed 's|^/||')
+        echo -e "${MAGENTA}${formatted_info}${ENDCOLOR}"
+    done
+}
+
 #!######################################################################
 #!#                            Remove App                             ##
 #!######################################################################
@@ -870,6 +917,9 @@ remove-app() {
 #!######################################################################
 #!#                       Titus Functions                             ##
 #!######################################################################
+echo -e "${MAGENTA}Titus Commands:${ENDCOLOR} ${BLUE}titus${ENDCOLOR}"
+alias titus='curl -fsSL https://christitus.com/linux | sh'
+
 #https://github.com/ChrisTitusTech/mybash/blob/main/.bashrc
 
 #######################################################
@@ -1201,31 +1251,55 @@ trim() {
 #+                 ⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⠏⠀⠀⢻⣿⣿⣿⡄⠀⠀⠀⠹⣿⡿⡟⠀⠀⠀
 
 #+################################################################
+echo -e "${MAGENTA}Nix Commands:${ENDCOLOR} ${BLUE}editnix, editnixv, rebuildca, rebuild-Ser3, update-noflakes, rebuild-HyprNix, setup_nixpkgs, cleannix${ENDCOLOR}"
+echo -e "${MAGENTA}Nix-iso Commands:${ENDCOLOR} ${BLUE}build-iso, iso2prox${ENDCOLOR}"
+
+alias editnix='sudo nano /etc/nixos/configuration.nix'
+alias editnixv='sudo gnome-text-editor /etc/nixos/configuration.nix'
+
 function rebuild() {
     sudo nixos-rebuild switch
 }
+function rebuild-Ser3() {
+    mkdir -p "$HOME/Github"
+    if [ -d "$HOME/Github/Machine-Ser3" ]; then
+        rm -rf "$HOME/Github/Machine-Ser3"
+    fi
+    gh repo clone ReevesA1/Machine-Ser3 "$HOME/Github/Machine-Ser3"
+    bash $HOME/Github/Machine-Ser3/bootstrap.sh
+    cd $HOME
+}
 
-#!+Rebuil NixOS by calling my github repo
+function update-noflakes() {
+    sudo nix-channel --update
+    sudo nixos-rebuild switch --upgrade
+}
 
-#function rebuild() {
-#    if gum confirm "Run Part 1 - Refresh sources? "; then
-#
-#        #Confirm run usl-initial-install-part1.sh
-#        echo -e "${MAGENTA}Running Part 1 - Getting Latest Repo Changes...${ENDCOLOR}"
-#        cd $HOME && gh api repos/ReevesA1/HyprNix/contents/usl-initial-install-part1.sh | jq -r '.content' | base64 --decode | bash
-#
-#        #Confirm run usl-initial-install-part2.sh
-#        if gum confirm "Run Part 2 - Choose host to run 'sudo nixos-rebuild switch' against? "; then
-#            echo -e "${MAGENTA}Running part 2${ENDCOLOR}"
-#            $HOME/HyprNix/usl-initial-install-part2.sh
-#        else
-#            echo -e "${RED}Rebuild Canceled${ENDCOLOR}"
-#        fi
-#
-#    else
-#        echo -e "${RED}Rebuild Canceled${ENDCOLOR}"
-#    fi
-#}
+function cleannix() {
+    nix-collect-garbage -d
+}
+
+#!+Rebuil HyprNix by calling my github repo
+
+function rebuild-HyprNix() {
+    if gum confirm "Run Part 1 - Refresh sources? "; then
+
+        #Confirm run usl-initial-install-part1.sh
+        echo -e "${MAGENTA}Running Part 1 - Getting Latest Repo Changes...${ENDCOLOR}"
+        cd $HOME && gh api repos/ReevesA1/HyprNix/contents/usl-initial-install-part1.sh | jq -r '.content' | base64 --decode | bash
+
+        #Confirm run usl-initial-install-part2.sh
+        if gum confirm "Run Part 2 - Choose host to run 'sudo nixos-rebuild switch' against? "; then
+            echo -e "${MAGENTA}Running part 2${ENDCOLOR}"
+            $HOME/HyprNix/usl-initial-install-part2.sh
+        else
+            echo -e "${RED}Rebuild Canceled${ENDCOLOR}"
+        fi
+
+    else
+        echo -e "${RED}Rebuild Canceled${ENDCOLOR}"
+    fi
+}
 
 function setup_nixpkgs() {
     #*Install with the one-liner
@@ -1240,6 +1314,61 @@ function setup_nixpkgs() {
     echo -e "\e[33mUpdating Nix Unstable Channel\e[0m"
     nix-channel --add https://nixos.org/channels/nixpkgs-unstable
     nix-channel --update
+}
+
+###################################################################
+function build-iso() {
+    #Overwrite Configuration.nix
+    mkdir -p "$HOME/Github"
+    if [ -d "$HOME/Github/Configs-NixCustomiso" ]; then
+        rm -rf "$HOME/Github/Configs-NixCustomiso"
+    fi
+    gh repo clone ReevesA1/Configs-NixCustomiso "$HOME/Github/Configs-NixCustomiso"
+    sudo cp -f "$HOME/Github/Configs-NixCustomiso/configuration.nix" /etc/nixos/configuration.nix
+    #Build iso
+    cd "$HOME/Downloads"
+    nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=/etc/nixos/configuration.nix
+    cd $HOME
+}
+
+function iso2prox() {
+    find $HOME/Downloads/result/iso -type f -name "*.iso" -exec cp {} $HOME/Downloads/nixos-custom.iso \;
+    rm -rf $HOME/Downloads/result
+    rsync -avz --remove-source-files $HOME/Downloads/nixos-custom.iso root@192.168.1.61:/var/lib/vz/template/iso/
+}
+
+#!#############################################################################
+#!#                         RocketPowerInc Greeter                           ##
+#!#############################################################################
+echo -e "${MAGENTA}RocketPowerInc Commands:${ENDCOLOR} ${BLUE}pwr/pwr-greeter${ENDCOLOR}"
+
+#*pwr-greeter
+alias pwr-greeter=pwr
+function pwr() {
+    # Clone the repository into $HOME/Downloads
+    REPO_URL="https://github.com/rocketpowerinc/linux-greeter.git"
+    DOWNLOAD_PATH="$HOME/Downloads/linux-greeter"
+
+    # Clean up
+    rm -rf "$DOWNLOAD_PATH"
+
+    # Clone repo
+    git clone "$REPO_URL" "$DOWNLOAD_PATH"
+
+    # chmod +x
+    find $DOWNLOAD_PATH -type f -name "*.sh" -exec chmod +x {} \;
+
+    # Check if the clone was successful
+    if [ $? -ne 0 ]; then
+        zenity --error --text="Failed to clone the repository."
+        exit 1
+    fi
+
+    # Run the script
+    "$HOME/Downloads/linux-greeter/pwr-greeter.sh"
+
+    # Clean up
+    rm -rf "$DOWNLOAD_PATH"
 }
 
 #!###############################  EVALS KEEP AT THE BOTTOM   ###############################################
