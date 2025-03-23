@@ -1,6 +1,7 @@
-#! PATH
-# C:\Users\rocket\Documents\PowerShell\profile.ps1
+#! Profile Path
+# Windows Mac Linux
 # $PROFILE.CurrentUserAllHosts
+
 
 
 
