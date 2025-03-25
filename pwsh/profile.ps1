@@ -71,7 +71,7 @@ if ($IsWindows) {
 
 
 
-  #* Edit $Profile (Commented out because I now keep this on Main Notion Copy Paste script to always have it localy)
+  #* Edit pwsh $Profile
   function Edit { notepad $PROFILE.CurrentUserAllHosts }
   function EditTitus { notepad $PROFILE }
 
