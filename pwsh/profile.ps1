@@ -72,8 +72,8 @@ if ($IsWindows) {
 
 
   #* Edit $Profile (Commented out because I now keep this on Main Notion Copy Paste script to always have it localy)
-  #function Edit { notepad $PROFILE.CurrentUserAllHosts }
-  #function EditTitus { notepad $PROFILE }
+  function Edit { notepad $PROFILE.CurrentUserAllHosts }
+  function EditTitus { notepad $PROFILE }
 
   #* Source PWSH
   function resource { . $PROFILE.CurrentUserAllHosts }
