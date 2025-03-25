@@ -31,6 +31,8 @@
 #?
 
 if ($IsWindows) {
+  fastfetch
+
   #todo FYI all the linux LIKE commands are all done automaticaly with Titus Powershell Profile now
 
   #!#####################################
