@@ -31,6 +31,7 @@
 #?
 
 if ($IsWindows) {
+  #At Boot
   fastfetch
 
   #todo FYI all the linux LIKE commands are all done automaticaly with Titus Powershell Profile now
@@ -72,6 +73,7 @@ if ($IsWindows) {
   }
 
 
+  Write-Host "Dotfile Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " Edit (PROFILE.CurrentUserAllHosts), EditTitus" -ForegroundColor Blue
 
   #* Edit pwsh $Profile
   function Edit { notepad $PROFILE.CurrentUserAllHosts }
