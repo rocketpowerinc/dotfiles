@@ -144,23 +144,24 @@ alias updatedebian-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo flatpak update --n
 alias cleandebian-nix='sudo flatpak uninstall --unused && command sudo apt autoclean && command sudo apt autoremove -y && nix-store --gc'
 
 #https://www.debian.org/doc/manuals/debian-faq/uptodate.en.html#aptitude-upgrade
-alias updatedebian='sudo aptitude update && sudo aptitude safe-upgrade -y && sudo aptitude full-upgrade -y && sudo aptitude clean'
+alias updatedebian='sudo aptitude update && sudo aptitude safe-upgrade -y && sudo aptitude full-upgrade -y && sudo aptitude clean && sudo flatpak update --noninteractive'
+alias cleandebian='sudo flatpak uninstall --unused && command sudo apt autoclean && command sudo apt autoremove -y'
 
 #*Arch
-alias updatearch-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo pacman -Syu --noconfirm && nix-channel --update && nix-env -u "*"'
-alias cleanarch-nix='sudo pacman -Rns $(pacman -Qdtq) && sudo pacman -Scc && sudo pacman -Sc && nix-store --gc'
+alias updatearch-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo pacman -Syu --noconfirm && nix-channel --update && nix-env -u "*" && sudo flatpak update --noninteractive'
+alias cleanarch-nix='sudo pacman -Rns $(pacman -Qdtq) && sudo pacman -Scc && sudo pacman -Sc && nix-store --gc && sudo flatpak uninstall --unused'
 
 #alias updatearch='sudo pacman -Syu && sudo pacman -Sc'
-alias updatearch='sudo pacman -Syu && sudo paccache -r && sudo pacman -Rns $(pacman -Qtdq)'
-alias cleanarch='sudo pacman -Rns $(pacman -Qdtq) && sudo pacman -Scc && sudo pacman -Sc'
+alias updatearch='sudo pacman -Syu && sudo paccache -r && sudo pacman -Rns $(pacman -Qtdq) && sudo flatpak update --noninteractive'
+alias cleanarch='sudo pacman -Rns $(pacman -Qdtq) && sudo pacman -Scc && sudo pacman -Sc && sudo flatpak uninstall --unused'
 
 #*Fedora
-alias updatefedora-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo dnf check-update && sudo dnf upgrade -y && nix-channel --update && nix-env -u "*"'
-alias cleanfedora-nix='sudo dnf autoremove -y && sudo dnf clean all && nix-store --gc'
+alias updatefedora-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo dnf check-update && sudo dnf upgrade -y && nix-channel --update && nix-env -u "*" && sudo flatpak update --noninteractive'
+alias cleanfedora-nix='sudo dnf autoremove -y && sudo dnf clean all && nix-store --gc && sudo flatpak uninstall --unused'
 
 #*OpenSUSE
-alias updateopensuse-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo zypper dup --allow-vendor-change && sudo zypper refresh && sudo zypper update && sudo zypper patch && sudo zypper install-new-recommends && nix-channel --update && nix-env -u "*"'
-alias cleanopensuse-nix='sudo zypper clean && nix-store --gc'
+alias updateopensuse-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo zypper dup --allow-vendor-change && sudo zypper refresh && sudo zypper update && sudo zypper patch && sudo zypper install-new-recommends && nix-channel --update && nix-env -u "*" && sudo flatpak update --noninteractive'
+alias cleanopensuse-nix='sudo zypper clean && nix-store --gc && sudo flatpak uninstall --unused'
 
 #!###############################################################
 #!#                       SystemCTL                            ##
