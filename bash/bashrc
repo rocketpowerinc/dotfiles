@@ -1278,8 +1278,8 @@ function update-noflakes() {
 }
 
 function cleannix() {
-    nix-collect-garbage -d
     sudo flatpak uninstall --unused
+    nix-collect-garbage -d
 }
 
 #!+Rebuil HyprNix by calling my github repo
