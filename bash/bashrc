@@ -1272,9 +1272,9 @@ function rebuild-Ser3() {
 }
 
 function update-noflakes() {
+    sudo flatpak update --noninteractive
     sudo nix-channel --update
     sudo nixos-rebuild switch --upgrade
-    sudo flatpak update --noninteractive
 }
 
 function cleannix() {
