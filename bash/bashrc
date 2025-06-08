@@ -148,11 +148,11 @@ alias updatedebian='sudo aptitude update && sudo aptitude safe-upgrade -y && sud
 alias cleandebian='sudo flatpak uninstall --unused && command sudo apt autoclean && command sudo apt autoremove -y'
 
 #*Ubuntu
-alias updateubuntu-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && nix-channel --update && nix-env -u "*" && sudo flatpak update --noninteractive && (command -v snap >/dev/null 2>&1 && sudo snap refresh)'
+alias updateubuntu-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo apt update && sudo apt upgrade -y && command sudo apt full-upgrade -y && nix-channel --update && nix-env -u "*" && sudo flatpak update --noninteractive && (command -v snap >/dev/null 2>&1 && sudo snap refresh)'
 alias cleanubuntu-nix='sudo apt autoremove -y && sudo apt autoclean && nix-store --gc && sudo flatpak uninstall --unused'
 
-alias updateubuntu='sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean && sudo flatpak update --noninteractive && (command -v snap >/dev/null 2>&1 && sudo snap refresh)'
-alias cleanubuntu='sudo apt autoremove -y && sudo apt autoclean && sudo flatpak uninstall --unused'
+alias updateubuntu='sudo apt update && sudo apt upgrade -y && command sudo apt full-upgrade -y && command sudo apt autoremove -y && command sudo apt autoclean && sudo flatpak update --noninteractive && (command -v snap >/dev/null 2>&1 && sudo snap refresh)'
+alias cleanubuntu='command sudo apt autoremove -y && command sudo apt autoclean && sudo flatpak uninstall --unused'
 
 
 #*Arch
