@@ -906,6 +906,14 @@ dockerip() {
     done
 }
 
+########### LazyDocker
+lazydocker() {
+    sudo docker exec -it lazydocker lazydocker
+}
+
+alias lzd='lazydocker'
+
+
 #!######################################################################
 #!#                            Remove App                             ##
 #!######################################################################
