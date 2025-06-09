@@ -870,37 +870,37 @@ fi
 echo -e "${MAGENTA}Docker-Compose Commands:${ENDCOLOR} ${BLUE}docker{up, down, pull, update, clean, ip}${ENDCOLOR}"
 
 dockerup() {
-    docker-compose up -d
+    sudo docker compose up -d
 }
 
 dockerdown() {
-    docker-compose down
+    sudo docker compose down
 }
 
 dockerpull() {
-    docker-compose pull
+    sudo docker compose pull
 }
 
 dockerupdate() {
     echo "Stopping the Docker Compose services..."
-    docker-compose down
+    sudo docker compose down
     echo "Pulling the latest images..."
-    docker-compose pull
+    sudo docker compose pull
     echo "Starting the Docker Compose services in detached mode..."
-    docker-compose up -d
+    sudo docker compose up -d
     echo "Pruning unused Docker images..."
-    docker image prune -af
+    sudo docker image prune -af
     echo "Docker Compose services have been updated and cleaned up."
 }
 
 dockerclean() {
-    docker image prune -af
+    sudo docker image prune -af
 }
 
 dockerip() {
-    containers=$(docker ps -q)
+    containers=$(sudo docker ps -q)
     for container in $containers; do
-        info=$(docker inspect --format '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container)
+        info=$(sudo docker inspect --format '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container)
         formatted_info=$(echo $info | sed 's|^/||')
         echo -e "${MAGENTA}${formatted_info}${ENDCOLOR}"
     done
