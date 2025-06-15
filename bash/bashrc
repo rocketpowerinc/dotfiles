@@ -1395,10 +1395,11 @@ function pwr() {
 #!###############################################################
 #!#                         Zoxide                             ##
 #!###############################################################
-if command -v zoxide >/dev/null 2>&1; then
-    eval "$(zoxide init bash)"
-    bind '"\C-f":"zi\n"'
-fi
+#todo I had to comment out because it was messing with my Zorin OS
+#if command -v zoxide >/dev/null 2>&1; then
+#    eval "$(zoxide init bash)"
+#    bind '"\C-f":"zi\n"'
+#fi
 
 #*FYI I  will not alias z to cd because I want to keep the cd command but I could with this next line
 #eval "$(zoxide init --cmd cd bash)"
