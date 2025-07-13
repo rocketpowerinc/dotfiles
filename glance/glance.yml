@@ -61,22 +61,22 @@ pages:
             channels:
               - christitustech
 
-#          - title: Repo's
-#            type: repository
-#            repository: glanceapp/glance
-#            pull-requests-limit: 5
-#            issues-limit: 3
-#            commits-limit: 3
-#
-#
-#          - type: releases
-#            show-source-icon: true
-#            limit: 10
-#            repositories:
-#              - deskflow/deskflow
-#              - ChrisTitusTech/winutil
-#              - ChrisTitusTech/linutil
-#              - gtsteffaniak/filebrowser
+          - title: Repo's
+            type: repository
+            repository: glanceapp/glance
+            pull-requests-limit: 5
+            issues-limit: 3
+            commits-limit: 3
+
+
+          - type: releases
+            show-source-icon: true
+            limit: 10
+            repositories:
+              - deskflow/deskflow
+              - ChrisTitusTech/winutil
+              - ChrisTitusTech/linutil
+              - gtsteffaniak/filebrowser
 #*-------------------------------- Center ---------------------------------------
       - size: full
         widgets:
