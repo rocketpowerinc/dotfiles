@@ -73,6 +73,7 @@ pages:
             show-source-icon: true
             limit: 10
             repositories:
+              - glanceapp/glance
               - deskflow/deskflow
               - ChrisTitusTech/winutil
               - ChrisTitusTech/linutil
