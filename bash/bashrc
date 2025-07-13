@@ -87,7 +87,6 @@ if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 #!###############################
 echo -e "${MAGENTA}Install a .deb Command:${ENDCOLOR} ${BLUE}sudo dpkg -i package_name.deb${ENDCOLOR}"
 
-
 #!#####################################################
 #!#                       Admin                      ##
 #!#####################################################
@@ -153,7 +152,6 @@ alias cleanubuntu-nix='sudo apt autoremove -y && sudo apt autoclean && nix-store
 
 alias updateubuntu='sudo apt update && sudo apt upgrade -y && command sudo apt full-upgrade -y && command sudo apt autoremove -y && command sudo apt autoclean && sudo flatpak update --noninteractive && (command -v snap >/dev/null 2>&1 && sudo snap refresh)'
 alias cleanubuntu='command sudo apt autoremove -y && command sudo apt autoclean && sudo flatpak uninstall --unused'
-
 
 #*Arch
 alias updatearch-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo pacman -Syu --noconfirm && nix-channel --update && nix-env -u "*" && sudo flatpak update --noninteractive'
@@ -913,7 +911,6 @@ lazydocker() {
 
 alias lzd='lazydocker'
 
-
 #!######################################################################
 #!#                            Remove App                             ##
 #!######################################################################
@@ -1410,3 +1407,29 @@ function pwr() {
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
 fi
+
+#!#############################################################################
+#!#                         Refresh Glance Dotfiles                          ##
+#!#############################################################################
+
+function glance-refresh() {
+    REPO_URL="https://github.com/rocketpowerinc/dotfiles.git"
+    CLONE_DIR="$HOME/Downloads/dotfiles"
+    TARGET_PATH="$HOME/Docker/glance/config"
+
+    # Force delete the directory if it already exists
+    rm -rf "$CLONE_DIR"
+
+    # Clone the repository
+    git clone "$REPO_URL" "$CLONE_DIR"
+
+    # Move the glance.yml file
+    sudo mv "$CLONE_DIR/glance/glance.yml" "$TARGET_PATH/"
+
+    # Confirm success
+    if [ $? -eq 0 ]; then
+        echo "glance.yml moved to $TARGET_PATH"
+    else
+        echo "Failed to move glance.yml"
+    fi
+}
