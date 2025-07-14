@@ -84,11 +84,7 @@ pages:
 
           - type: docker-containers
             hide-by-default: false
-            services:
-              glance:
-                image: glanceapp/glance
-                volumes:
-                  - /var/run/docker.sock:/var/run/docker.sock
+
 
 
           - title: rocketpowerinc
