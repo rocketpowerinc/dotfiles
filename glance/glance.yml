@@ -152,6 +152,19 @@ pages:
                 subreddit: NixOS
                 show-thumbnails: true
 
+              - type: reddit
+                subreddit: MacApps
+                show-thumbnails: true
+
+              - type: reddit
+                subreddit: windowsapps
+                show-thumbnails: true
+
+              - type: reddit
+                subreddit: isoapps
+                show-thumbnails: true
+
+
           - type: rss
             limit: 10
             collapse-after: 3
