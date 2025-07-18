@@ -161,7 +161,7 @@ pages:
                 show-thumbnails: true
 
               - type: reddit
-                subreddit: isoapps
+                subreddit: iosapps
                 show-thumbnails: true
 
 
