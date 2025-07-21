@@ -308,6 +308,9 @@ pages:
                 subreddit: preppersales
                 show-thumbnails: true
 
+              - type: reddit
+                subreddit: kiwix
+                show-thumbnails: true
 
 
 
