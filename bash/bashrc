@@ -1433,3 +1433,12 @@ function glance-refresh() {
         echo "Failed to move glance.yml"
     fi
 }
+
+function goo() {
+[ -d go-pwr ] && rm -rf go-pwr
+rm -f ~/go/bin/go-pwr
+git clone https://github.com/rocketpowerinc/go-pwr.git
+cd go-pwr
+go install
+~/go/bin/go-pwr
+}
