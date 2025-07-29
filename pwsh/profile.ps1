@@ -271,6 +271,18 @@ if ($IsWindows) {
   function titus { Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://christitus.com/win | iex"' -Verb RunAs }
   function titusdev { Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://christitus.com/windev | iex"' -Verb RunAs }
 
+  #*###########################
+  #*#         Go-PWR          #
+  #*###########################
+
+  function goo {
+    Remove-Item -Recurse -Force go-pwr -ErrorAction SilentlyContinue
+    Remove-Item -Force `"$HOME\go\bin\go-pwr.exe`" -ErrorAction SilentlyContinue
+    git clone https://github.com/rocketpowerinc/go-pwr.git
+    Set-Location go-pwr
+    go install
+    & `"$HOME\go\bin\go-pwr.exe`"
+}
 
   #*##################################
   #*#         Power-Greeter          #
