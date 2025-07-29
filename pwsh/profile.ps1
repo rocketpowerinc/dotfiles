@@ -281,7 +281,7 @@ if ($IsWindows) {
     git clone https://github.com/rocketpowerinc/go-pwr.git
     Set-Location go-pwr
     go install
-    & `"$HOME\go\bin\go-pwr.exe`"
+    & "$env:USERPROFILE\go\bin\go-pwr.exe"
 }
 
   #*##################################
