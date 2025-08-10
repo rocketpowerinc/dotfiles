@@ -277,11 +277,11 @@ if ($IsWindows) {
 
   function goo {
     Remove-Item -Recurse -Force go-pwr -ErrorAction SilentlyContinue
-    Remove-Item -Force `"$HOME\go\bin\go-pwr.exe`" -ErrorAction SilentlyContinue
+    Remove-Item -Force `"$HOME\\go\\bin\\go-pwr.exe`" -ErrorAction SilentlyContinue
     git clone https://github.com/rocketpowerinc/go-pwr.git
     Set-Location go-pwr
-    go install
-    & "$env:USERPROFILE\go\bin\go-pwr.exe"
+    make install
+    & "$env:USERPROFILE\\go\\bin\\go-pwr.exe"
 }
 
   #*##################################
