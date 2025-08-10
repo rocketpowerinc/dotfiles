@@ -1435,10 +1435,10 @@ function glance-refresh() {
 }
 
 function goo() {
-[ -d go-pwr ] && rm -rf go-pwr
-rm -f ~/go/bin/go-pwr
-git clone https://github.com/rocketpowerinc/go-pwr.git
-cd go-pwr
-go install
-~/go/bin/go-pwr
+    rm -rf go-pwr && \\
+    rm -f ~/go/bin/go-pwr && \\
+    git clone https://github.com/rocketpowerinc/go-pwr.git && \\
+    cd go-pwr && \\
+    make install && \\
+    ~/go/bin/go-pwr
 }
