@@ -1437,6 +1437,7 @@ function glance-refresh() {
 
 # Alias to launch latest go-pwr
 function goo() {
+    tmux
     cd $HOME
     rm -rf go-pwr &&
     rm -f ~/go/bin/go-pwr &&
