@@ -1356,7 +1356,7 @@ function iso2prox() {
 #!#############################################################################
 #!#                         RocketPowerInc Greeter                           ##
 #!#############################################################################
-echo -e "${MAGENTA}RocketPowerInc Commands:${ENDCOLOR} ${BLUE}pwr/pwr-greeter${ENDCOLOR}"
+echo -e "${MAGENTA}RocketPowerInc Commands:${ENDCOLOR} ${BLUE}pwr/pwr-greeter goo/go-pwr${ENDCOLOR}"
 
 #*pwr-greeter
 alias pwr-greeter=pwr
@@ -1434,11 +1434,14 @@ function glance-refresh() {
     fi
 }
 
+
+# Alias to launch latest go-pwr
 function goo() {
-    rm -rf go-pwr && \\
-    rm -f ~/go/bin/go-pwr && \\
-    git clone https://github.com/rocketpowerinc/go-pwr.git && \\
-    cd go-pwr && \\
-    make install && \\
+    cd $HOME
+    rm -rf go-pwr &&
+    rm -f ~/go/bin/go-pwr &&
+    git clone https://github.com/rocketpowerinc/go-pwr.git &&
+    cd go-pwr &&
+    make install &&
     ~/go/bin/go-pwr
 }
