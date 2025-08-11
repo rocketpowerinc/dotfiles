@@ -271,23 +271,11 @@ if ($IsWindows) {
   function titus { Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://christitus.com/win | iex"' -Verb RunAs }
   function titusdev { Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "irm https://christitus.com/windev | iex"' -Verb RunAs }
 
-  #*###########################
-  #*#         Go-PWR          #
-  #*###########################
-
-  function goo {
-    Remove-Item -Recurse -Force go-pwr -ErrorAction SilentlyContinue
-    Remove-Item -Force `"$HOME\\go\\bin\\go-pwr.exe`" -ErrorAction SilentlyContinue
-    git clone https://github.com/rocketpowerinc/go-pwr.git
-    Set-Location go-pwr
-    make install
-    & "$env:USERPROFILE\\go\\bin\\go-pwr.exe"
-}
 
   #*##################################
   #*#         Power-Greeter          #
   #*##################################
-  Write-Host "RocketPowerInc Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " pwr {pwr-greeter}" -ForegroundColor Blue
+  Write-Host "RocketPowerInc Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " pwr {pwr-greeter} goo {go-pwr}" -ForegroundColor Blue
 
   # Define an alias for the script
   Set-Alias -Name pwr-greeter -Value pwr
@@ -331,7 +319,19 @@ if ($IsWindows) {
     Remove-Item -Recurse -Force $DOWNLOAD_PATH
   }
 
+  #*###########################
+  #*#         Go-PWR          #
+  #*###########################
 
+  function goo {
+    Set-Location $env:USERPROFILE
+    Remove-Item -Recurse -Force go-pwr -ErrorAction SilentlyContinue
+    Remove-Item -Force `"$HOME\\go\\bin\\go-pwr.exe`" -ErrorAction SilentlyContinue
+    git clone https://github.com/rocketpowerinc/go-pwr.git
+    Set-Location go-pwr
+    make install
+    & "$env:USERPROFILE\\go\\bin\\go-pwr.exe"
+  }
 
   #*############################
   #*#         PYTHON           #
