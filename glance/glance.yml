@@ -165,6 +165,10 @@ pages:
                 subreddit: iosapps
                 show-thumbnails: true
 
+              - type: reddit
+                subreddit: androidterminal
+                show-thumbnails: true
+
 
           - type: rss
             limit: 10
