@@ -1443,6 +1443,9 @@ function goo() {
         rm -f ~/go/bin/go-pwr &&
         git clone https://github.com/rocketpowerinc/go-pwr.git &&
         cd go-pwr &&
+        go clean -modcache &&
+        rm -f go.sum &&
+        go mod tidy &&
         make install &&
         ~/go/bin/go-pwr;
         exec bash"

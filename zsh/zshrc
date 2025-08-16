@@ -10,3 +10,22 @@ test() {
 
     read -p "Press Enter to Exit"
 }
+
+
+
+# Function to launch latest go-pwr
+function goo() {
+    cd "$HOME" || return
+    rm -rf go-pwr
+    rm -f "$HOME/go/bin/go-pwr"
+
+    git clone https://github.com/rocketpowerinc/go-pwr.git || return
+    cd go-pwr || return
+
+    go clean -modcache
+    rm -f go.sum
+    go mod tidy
+
+    make install || return
+    "$HOME/go/bin/go-pwr"
+}
