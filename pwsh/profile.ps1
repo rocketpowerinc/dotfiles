@@ -329,7 +329,7 @@ if ($IsWindows) {
     Remove-Item -Force `"$HOME\\go\\bin\\go-pwr.exe`" -ErrorAction SilentlyContinue
     git clone https://github.com/rocketpowerinc/go-pwr.git
     Set-Location go-pwr
-    make install
+    go install -v ./cmd/go-pwr
     & "$env:USERPROFILE\\go\\bin\\go-pwr.exe"
   }
 
