@@ -1,3 +1,7 @@
+#Exports
+export PATH="$HOME/go/bin:$PATH"
+
+
 test() {
     echo -e "\033[0;31m3...\033[0m"
     sleep 1

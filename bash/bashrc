@@ -39,6 +39,7 @@ export PATH
 #More Paths
 export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin:$HOME/bin"
 export PATH=$PATH:/usr/local/bin #Needed for podman-compose
+export PATH="$HOME/go/bin:$PATH" #Go path
 #*#####################################################
 # $EDITORS
 export EDITOR=nvim

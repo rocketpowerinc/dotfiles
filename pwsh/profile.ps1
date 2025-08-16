@@ -422,6 +422,8 @@ elseif ($IsLinux) {
   $env:PATH += ":$HOME/.local/bin"
   $env:PATH += ":$HOME/.local/bin/Templates"
   $env:PATH += ":$HOME/.local/bin/Cross-Platform-Powershell"
+  $env:PATH += ";$HOME\go\bin"
+
 
   function bashtest {
     write-host -ForegroundColor Red "RED TEST..."
