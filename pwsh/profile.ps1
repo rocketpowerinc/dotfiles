@@ -330,6 +330,7 @@ if ($IsWindows) {
     git clone https://github.com/rocketpowerinc/go-pwr.git
     Set-Location go-pwr
     go clean -modcache
+    Remove-Item go.sum -ErrorAction SilentlyContinue
     go mod tidy
     make install
     & "$env:USERPROFILE\\go\\bin\\go-pwr.exe"
