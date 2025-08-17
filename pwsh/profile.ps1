@@ -47,6 +47,12 @@ if ($IsWindows) {
   $Env:Path += ";$env:USERPROFILE\Bin\Templates"
   $Env:Path += ";$env:USERPROFILE\Bin\Cross-Platform-Powershell"
 
+  #!#####################################
+  #!#         Staple Aliases            #
+  #!#####################################
+  Set-Alias lzd lazydocker
+
+
   #!###############################
   #!#         Remember            #
   #!###############################
@@ -424,12 +430,10 @@ elseif ($IsLinux) {
   $env:PATH += ":$HOME/.local/bin/Cross-Platform-Powershell"
   $env:PATH += ";$HOME\go\bin"
 
-  #!#####################################
-  #!#         Staple Aliases            #
-  #!#####################################
-  Set-Alias lzd lazydocker
 
-
+  function bashtest {
+    write-host -ForegroundColor Red "RED TEST..."
+  }
   #*############################
   #*#         PYTHON           #
   #*############################
