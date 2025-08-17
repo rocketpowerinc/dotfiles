@@ -329,6 +329,10 @@ if ($IsWindows) {
   #*#         Go-PWR          #
   #*###########################
 
+  # Easy Alias
+  Set-Alias a go-pwr
+
+
   function goo {
     Set-Location $env:USERPROFILE
     Remove-Item -Recurse -Force go-pwr -ErrorAction SilentlyContinue
