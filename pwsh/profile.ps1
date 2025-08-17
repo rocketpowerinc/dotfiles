@@ -424,10 +424,12 @@ elseif ($IsLinux) {
   $env:PATH += ":$HOME/.local/bin/Cross-Platform-Powershell"
   $env:PATH += ";$HOME\go\bin"
 
+  #!#####################################
+  #!#         Staple Aliases            #
+  #!#####################################
+  Set-Alias lzd lazydocker
 
-  function bashtest {
-    write-host -ForegroundColor Red "RED TEST..."
-  }
+
   #*############################
   #*#         PYTHON           #
   #*############################
