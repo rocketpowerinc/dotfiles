@@ -1,5 +1,7 @@
 #! Moving the Dotfile
 
+Clear-Host
+
 # Define source and destination paths
 $source      = Join-Path $env:USERPROFILE "Downloads\Temp\dotfiles\xxxxx\xxxxxx.yml"
 $destination = Join-Path $env:USERPROFILE "Docker\docker-compose\xxxxxx\xxxxxx\xxxxxx.yml"
