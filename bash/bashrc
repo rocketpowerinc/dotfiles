@@ -1357,7 +1357,7 @@ function iso2prox() {
 #!#############################################################################
 #!#                         RocketPowerInc Greeter                           ##
 #!#############################################################################
-echo -e "${MAGENTA}RocketPowerInc Commands:${ENDCOLOR} ${BLUE}pwr/pwr-greeter goo/go-pwr${ENDCOLOR}"
+echo -e "${MAGENTA}RocketPowerInc Commands:${ENDCOLOR} ${BLUE}pwr/pwr-greeter a/goo/go-pwr${ENDCOLOR}"
 
 #*pwr-greeter
 alias pwr-greeter=pwr
@@ -1404,6 +1404,8 @@ function goo() {
         ~/go/bin/go-pwr;
         exec bash"
 }
+
+alias a='go-pwr'
 #!###############################  EVALS KEEP AT THE BOTTOM   ###############################################
 
 #!###############################################################
