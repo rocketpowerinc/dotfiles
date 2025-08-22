@@ -281,7 +281,7 @@ if ($IsWindows) {
   #*##################################
   #*#         Power-Greeter          #
   #*##################################
-  Write-Host "RocketPowerInc Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " pwr {pwr-greeter} goo {go-pwr}" -ForegroundColor Blue
+  Write-Host "RocketPowerInc Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " pwr {pwr-greeter} goo/a {go-pwr}" -ForegroundColor Blue
 
   # Define an alias for the script
   Set-Alias -Name pwr-greeter -Value pwr
