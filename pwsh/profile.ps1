@@ -47,10 +47,6 @@ if ($IsWindows) {
   $Env:Path += ";$env:USERPROFILE\Bin\Templates"
   $Env:Path += ";$env:USERPROFILE\Bin\Cross-Platform-Powershell"
 
-  #!#####################################
-  #!#         Staple Aliases            #
-  #!#####################################
-  Set-Alias lzd lazydocker
 
 
   #!###############################
@@ -149,6 +145,13 @@ if ($IsWindows) {
   Write-Host "Backup Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " Zipit, MainStackBackup, ReposBackup, UniGetBackup" -ForegroundColor Blue
   function Zipit { & 'C:\Program Files\7-Zip\7z.exe' a -tzip "archived-$(Get-Date -Format 'yyyy-MM-dd').zip" * -pProxmoxcandyass87! -mem=AES256 -mx=5 }
 
+  #*######################################
+  #*#             Docker                 #
+  #*######################################
+
+  Write-Host "Docker Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " lzd {lazydocker}" -ForegroundColor Blue
+
+  Set-Alias lzd lazydocker
 
 
   #*################################
@@ -182,16 +185,6 @@ if ($IsWindows) {
       Write-Host $formattedInfo -ForegroundColor Yellow
     }
   }
-
-  #*######################################
-  #*#         Docker Main-Stack           #
-  #*######################################
-
-  Write-Host "Docker Main Stack Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " MainStack {Up, Down, Update, Backup}" -ForegroundColor Blue
-  function MainStackUp { & "$env:USERPROFILE\WinPower\Host\Main-Stack\.Stack-Up.ps1" }
-  function MainStackDown { & "$env:USERPROFILE\WinPower\Host\Main-Stack\.Stack-Down.ps1" }
-  function MainStackUpdate { & "$env:USERPROFILE\WinPower\Host\Main-Stack\.Stack-Update.ps1" }
-  function MainStackBackup { & "$env:USERPROFILE\WinPower\Host\Main-Stack\.Stack-Backup.ps1" }
 
   #*###################################
   #*#         RocketPowerInc          #
