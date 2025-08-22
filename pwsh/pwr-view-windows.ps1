@@ -4,8 +4,8 @@ $command = gum choose `
   'notepad $PROFILE.CurrentUserAllHosts' `
   --header "Select which PowerShell profile to open" `
   --cursor "> " `
-  --cursor.foreground 99 `
-  --selected.foreground 99
+  --cursor.foreground "#1E90FF" `
+  --selected.foreground "#1E90FF"
 
 # Run the selected command if the user made a choice
 if ($command) {
