@@ -21,4 +21,14 @@ echo -e "\033[0;32mFile copied successfully to $DESTINATION\033[0m"
 
 
 
-#* Making Sure the Source Path Line exist in BashRC
+#* Making Sure the Source Path Line exist in Main ZSHRC
+
+TARGET="$HOME/.zshrc"
+LINE="source \"$HOME/Dotfiles/zsh/zshrc\""
+
+if grep -qxF "$LINE" "$TARGET"; then
+    printf '\033[33m%s\033[0m\n' ".zshrc is already sourced!"   # yellow
+else
+    echo "$LINE" >> "$TARGET"
+    printf '\033[32m%s\033[0m\n' ".zshrc has been sourced!"     # green
+fi
