@@ -5,7 +5,7 @@
 clear
 # Define source and destination paths
 SOURCE="$HOME/Downloads/Temp/dotfiles/bash/bashrc"
-DESTINATION="$HOME/Dotfiles/bash/.bashrc"
+DESTINATION="$HOME/Dotfiles/bash/bashrc"
 
 # Ensure destination directory exists
 DESTDIR=$(dirname "$DESTINATION")
