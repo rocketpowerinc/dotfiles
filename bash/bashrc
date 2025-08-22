@@ -1405,7 +1405,9 @@ function goo() {
         exec bash"
 }
 
-alias a='go-pwr'
+function a {
+    tmux new-session bash -c "go-pwr"
+}
 #!###############################  EVALS KEEP AT THE BOTTOM   ###############################################
 
 #!###############################################################
