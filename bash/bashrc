@@ -1388,6 +1388,22 @@ function pwr() {
     rm -rf "$DOWNLOAD_PATH"
 }
 
+
+# Alias to launch latest go-pwr
+function goo() {
+    tmux new-session bash -c "
+        cd \$HOME &&
+        rm -rf go-pwr &&
+        rm -f ~/go/bin/go-pwr &&
+        git clone https://github.com/rocketpowerinc/go-pwr.git &&
+        cd go-pwr &&
+        go clean -modcache &&
+        rm -f go.sum &&
+        go mod tidy &&
+        make install &&
+        ~/go/bin/go-pwr;
+        exec bash"
+}
 #!###############################  EVALS KEEP AT THE BOTTOM   ###############################################
 
 #!###############################################################
@@ -1409,9 +1425,11 @@ if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
 fi
 
-#!#############################################################################
-#!#                         Refresh Glance Dotfiles                          ##
-#!#############################################################################
+#!######################################################################
+#!#                         Refresh Dotfiles                          ##
+#!######################################################################
+
+echo -e "${MAGENTA}Refresh Dotfiles:${ENDCOLOR} ${BLUE}glance-refresh${ENDCOLOR}"
 
 function glance-refresh() {
     REPO_URL="https://github.com/rocketpowerinc/dotfiles.git"
@@ -1435,19 +1453,3 @@ function glance-refresh() {
     fi
 }
 
-
-# Alias to launch latest go-pwr
-function goo() {
-    tmux new-session bash -c "
-        cd \$HOME &&
-        rm -rf go-pwr &&
-        rm -f ~/go/bin/go-pwr &&
-        git clone https://github.com/rocketpowerinc/go-pwr.git &&
-        cd go-pwr &&
-        go clean -modcache &&
-        rm -f go.sum &&
-        go mod tidy &&
-        make install &&
-        ~/go/bin/go-pwr;
-        exec bash"
-}
