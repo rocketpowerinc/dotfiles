@@ -1,4 +1,4 @@
-#! Moving the Dotfile
+#* Moving the Dotfile
 
 Clear-Host
 
@@ -19,7 +19,7 @@ Write-Host "File copied successfully to $destination" -ForegroundColor Green
 
 
 
-# ! Making Sure the Source Path exist in $PROFILE.CurrentUserAllHosts
+#* Making Sure the Source Path Line exist in $PROFILE.CurrentUserAllHosts
 
 try {
     # Define the path to the pwsh profile
