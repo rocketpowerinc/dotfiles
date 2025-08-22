@@ -10,6 +10,17 @@ autoload -Uz colors && colors
 # Example minimal prompt
 PROMPT='%F{cyan}%n@%m%f %F{yellow}%~%f %# '
 
+# Tab-completion improvements
+autoload -Uz compinit && compinit
+
+#!######################################################################
+#!#                             Fastfetch                             ##
+#!######################################################################
+fastfetch
+alias ff="fastfetch"
+alias fff="fastfetch -c all.jsonc" #See every available module
+
+
 #!######################################################################
 #!#                            Exports                                ##
 #!######################################################################
