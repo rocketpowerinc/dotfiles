@@ -25,7 +25,12 @@ try {
     # Define the path to the pwsh profile
     $profilePath = $PROFILE.CurrentUserAllHosts
     $DotfilesPath = Join-Path $env:USERPROFILE "Dotfiles\pwsh\profile.ps1"
-    $sourceLine = ". `"$DotfilesPath`""  # Corrected quoting and added space before the path
+    $sourceLine = '. "' + $DotfilesPath + '"'
+
+    if (-not $profilePath) {
+        Write-Host "Error: $PROFILE.CurrentUserAllHosts is null. Cannot update profile. Make sure to be running this script in native pwsh session." -ForegroundColor Red
+        exit 1
+    }
 
     # Determine the directory containing the profile (no need for $configDir here)
     $profileDirectory = Split-Path -Path $profilePath -Parent
