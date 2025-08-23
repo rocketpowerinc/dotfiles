@@ -337,9 +337,12 @@ if ($IsWindows) {
   }
 
   function pyserver { python -m http.server 9999 } #*Starts a python server on port 9999 in current folder
-}
 
-function birthday {
+  #*############################
+  #*#         Birthday         #
+  #*############################
+
+  function birthday {
     # Get the OS installation date (converted to local time)
     $osInstallDate = (Get-CimInstance Win32_OperatingSystem).InstallDate.ToLocalTime()
 
@@ -351,8 +354,12 @@ function birthday {
 
     # Output the result
     Write-Output "Windows has been installed for $daysDifference days (since $osInstallDate)"
+  }
+  birthday
+
+
 }
-birthday
+
 
 ###################################################################################################
 #                       .888
