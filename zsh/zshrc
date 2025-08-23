@@ -29,6 +29,18 @@ printf "\033[0;35mExports:\033[0m \033[0;34m$HOME/go/bin\033[0m\n"
 
 export PATH="$HOME/go/bin:$PATH"
 
+#!######################################################################
+#!#                            Updates                                ##
+#!######################################################################
+
+updatemac() {
+    sudo softwareupdate -i -a
+    brew update && brew upgrade && brew upgrade --cask --greedy
+    brew cleanup
+    echo "✅ macOS & Homebrew updated successfully"
+}
+
+
 
 #!#############################################################################
 #!#                                Misc                                      ##
