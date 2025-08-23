@@ -103,7 +103,7 @@ function goo() {
 #!###############################################################
 #!#                       Navigation                           ##
 #!###############################################################
-printf "\033[0;35mNavigation Commands:\033[0m \033[0;34mhome/hm/~, downloads/dl, desktop/dt, documents/docs, ghub, bin, ......\033[0m\n"
+printf "\033[0;35mNavigation Commands:\033[0m \033[0;34mhome/hm/~, downloads/dl, desktop/dt, documents/docs, ghub, bin\033[0m\n"
 
 
 #Home
