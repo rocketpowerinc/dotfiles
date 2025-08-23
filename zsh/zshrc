@@ -64,6 +64,15 @@ test() {
 }
 
 
+#Speed test
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
+
+# alias to show the date
+alias da='date "+%Y-%m-%d %A %T %Z"'
+
+#todo not built yet
+#alias titus=''
+
 #!#############################################################################
 #!#                         RocketPowerInc Greeter                           ##
 #!#############################################################################
@@ -137,3 +146,98 @@ alias shbang='echo -e "#!/usr/bin/env bash"'
 alias executable='echo -e "chmod +x"'
 alias ownership='echo -e "sudo chown $USER foo"'
 alias permission='echo -e "chmod 777 foo"' #read write and execute for everyone
+
+
+#!###############################################################
+#!#                       Gum                                  ##
+#!###############################################################
+printf "\033[0;35mGum Commands:\033[0m \033[0;34mgumls, ghome\033[0m\n"
+
+alias gumls="gum file"
+alias ghome='bash $(gum file $HOME)'
+
+
+#!#####################################################
+#!#                       Python                     ##
+#!#####################################################
+printf "\033[0;35mPython Commands:\033[0m \033[0;34mpyvenv, pyserver, pyserverback, pyserverkill\033[0m\n"
+
+alias pyvenv='python3 -m venv venv && source venv/bin/activate'
+
+#Python Servers
+alias pyserver='python3 -m http.server 9999'                #*Starts a python server on port 9999 in pwd
+alias pyserverback='nohup python3 -m http.server 9999 &'    #*Starts a python server in the background on port 9999 in pwd and creates a $HOME /nohup.out file
+alias pyserverkill='pkill -f "python3 -m http.server 9999"' #*Kills the python server in the background on port 9999
+
+
+
+#!###############################################################
+#!#                       Github                              ##
+#!###############################################################
+
+alias addup='git add -u'
+alias addall='git add .'
+alias branch='git branch'
+alias checkout='git checkout'
+alias clone='git clone'
+alias commit='git commit -m'
+alias fetch='git fetch'
+alias pull='git pull origin'
+alias push='git push origin'
+alias stat='git status' # 'status' is protected name so using 'stat' instead
+alias tag='git tag'
+alias newtag='git tag -a'
+
+gcom() {
+    git add .
+    git commit -m "$1"
+}
+lazyg() {
+    git add .
+    git commit -m "$1"
+    git push
+}
+
+#!################################
+#!#         Docker-Compose       #
+#!################################
+printf "\033[0;35mDocker-Compose Commands:\033[0m \033[0;34mdocker{up, down, pull, update, clean, ip}\033[0m\n"
+
+dockerup() {
+    sudo docker compose up -d
+}
+
+dockerdown() {
+    sudo docker compose down
+}
+
+dockerpull() {
+    sudo docker compose pull
+}
+
+dockerupdate() {
+    echo "Stopping the Docker Compose services..."
+    sudo docker compose down
+    echo "Pulling the latest images..."
+    sudo docker compose pull
+    echo "Starting the Docker Compose services in detached mode..."
+    sudo docker compose up -d
+    echo "Pruning unused Docker images..."
+    sudo docker image prune -af
+    echo "Docker Compose services have been updated and cleaned up."
+}
+
+dockerclean() {
+    sudo docker image prune -af
+}
+
+dockerip() {
+    containers=$(sudo docker ps -q)
+    for container in $containers; do
+        info=$(sudo docker inspect --format '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container)
+        formatted_info=$(echo $info | sed 's|^/||')
+        echo -e "${MAGENTA}${formatted_info}${ENDCOLOR}"
+    done
+}
+
+alias lzd='lazydocker'
