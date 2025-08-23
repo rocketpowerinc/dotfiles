@@ -1422,12 +1422,6 @@ function a {
 #*FYI I  will not alias z to cd because I want to keep the cd command but I could with this next line
 #eval "$(zoxide init --cmd cd bash)"
 
-#!###############################################################
-#!#                         Starship                           ##
-#!###############################################################
-if command -v starship >/dev/null 2>&1; then
-    eval "$(starship init bash)"
-fi
 
 #!######################################################################
 #!#                         Refresh Dotfiles                          ##
@@ -1457,3 +1451,35 @@ function glance-refresh() {
     fi
 }
 
+
+#!###############################################################
+#!#                         Birthday                           ##
+#!###############################################################
+birthday() {
+    # Get OS install date (root filesystem birth time, trim after seconds)
+    os_install_date=$(/usr/bin/stat -c '%w' / | sed -E 's/([0-9]{2}:[0-9]{2}:[0-9]{2}).*/\1/')
+
+    # Some filesystems return "-" if no birth time is stored
+    if [ "$os_install_date" = "-" ]; then
+        echo -e "\033[0;31mError:\033[0m Filesystem does not record creation time."
+        return 1
+    fi
+
+    # Convert to epoch seconds
+    install_epoch=$(date -d "$os_install_date" +%s)
+    current_epoch=$(date +%s)
+
+    # Calculate difference in days
+    days_difference=$(( (current_epoch - install_epoch) / 86400 ))
+
+    # Print in yellow
+    echo -e "\033[0;33mLinux has been installed for $days_difference days (since $os_install_date)\033[0m"
+}
+birthday
+
+#!###############################################################
+#!#                         Starship                           ##
+#!###############################################################
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+fi
