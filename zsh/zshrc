@@ -241,3 +241,24 @@ dockerip() {
 }
 
 alias lzd='lazydocker'
+
+
+#!################################
+#!#           Birthday           #
+#!################################
+
+birthday() {
+    # Get OS install date from AppleSetupDone (trim after seconds)
+    os_install_date=$(/usr/bin/stat -f '%SB' -t '%Y-%m-%d %H:%M:%S' /var/db/.AppleSetupDone)
+
+    # Convert to epoch seconds
+    install_epoch=$(date -j -f "%Y-%m-%d %H:%M:%S" "$os_install_date" +%s)
+    current_epoch=$(date +%s)
+
+    # Calculate difference in days
+    days_difference=$(( (current_epoch - install_epoch) / 86400 ))
+
+    # Print in yellow
+    echo -e "\033[0;33mmacOS has been installed for $days_difference days (since $os_install_date)\033[0m"
+}
+birthday
