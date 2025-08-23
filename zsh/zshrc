@@ -86,3 +86,40 @@ function goo() {
     make install || return
     "$HOME/go/bin/go-pwr"
 }
+
+
+#!###############################################################
+#!#                       Navigation                           ##
+#!###############################################################
+printf "\033[0;35mNavigation Commands:\033[0m \033[0;34mhome/hm/~, downloads/dl, desktop/dt, documents/docs, ghub, bin, ......\033[0m\n"
+
+
+#Home
+alias home="cd ~/"
+alias hm="cd ~/"
+alias ~="cd ~/"
+
+#Downloads
+alias downloads="cd ~/Downloads"
+alias dl="cd ~/Downloads"
+
+#Desktop
+alias desktop="cd ~/Desktop"
+alias dt="cd ~/Desktop"
+
+#Documents
+alias documents="cd ~/Documents"
+alias docs="cd ~/Documents"
+
+#Github
+alias ghub="cd ~/Github"
+
+#User Bin
+alias bin="cd ~/.local/bin"
+
+#Directory Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
