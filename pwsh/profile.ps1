@@ -61,7 +61,7 @@ if ($IsWindows) {
   #*#         Admin            #
   #*############################
 
-  Write-Host "Admin Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " runas, shutdown, reboot, rebootbios, rebootsettings, test, edit, get-life, resource" -ForegroundColor Blue
+  Write-Host "Admin Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " runas, shutdown, reboot, rebootbios, rebootsettings, test, edit, resource" -ForegroundColor Blue
 
 
   function Test {
@@ -87,23 +87,6 @@ if ($IsWindows) {
   #* Source PWSH
   function resource { . $PROFILE.CurrentUserAllHosts }
   function fff { fastfetch -c all.jsonc }
-
-
-  function Get-Life {
-    # Get the OS installation date
-    $osInstallDate = (Get-WmiObject Win32_OperatingSystem).InstallDate
-    $osInstallDateParsed = [System.Management.ManagementDateTimeConverter]::ToDateTime($osInstallDate)
-
-    # Get the current date
-    $currentDate = Get-Date
-
-    # Calculate the difference in days
-    $daysDifference = ($currentDate - $osInstallDateParsed).Days
-
-    # Output the difference
-    Write-Output "Windows has been installed for $daysDifference days"
-  }
-
 
 
   function runas { Start-Process -Verb RunAs "wt.exe" -ArgumentList "--profile pwsh" }
@@ -355,6 +338,21 @@ if ($IsWindows) {
 
   function pyserver { python -m http.server 9999 } #*Starts a python server on port 9999 in current folder
 }
+
+function birthday {
+    # Get the OS installation date (converted to local time)
+    $osInstallDate = (Get-CimInstance Win32_OperatingSystem).InstallDate.ToLocalTime()
+
+    # Get the current date
+    $currentDate = Get-Date
+
+    # Calculate the difference in days
+    $daysDifference = ($currentDate - $osInstallDate).Days
+
+    # Output the result
+    Write-Output "Windows has been installed for $daysDifference days (since $osInstallDate)"
+}
+birthday
 
 ###################################################################################################
 #                       .888
