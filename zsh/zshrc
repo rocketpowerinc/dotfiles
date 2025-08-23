@@ -126,3 +126,14 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
+
+#!##########################################################
+#!#                      Recall                           ##
+#!##########################################################
+printf "\033[0;35mRecall Commands:\033[0m \033[0;34mshbang, ownership, executable, permission, bash-help\033[0m\n"
+
+alias shbang='echo -e "#!/usr/bin/env bash"'
+#Privilege
+alias executable='echo -e "chmod +x"'
+alias ownership='echo -e "sudo chown $USER foo"'
+alias permission='echo -e "chmod 777 foo"' #read write and execute for everyone

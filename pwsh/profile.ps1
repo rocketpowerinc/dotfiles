@@ -53,9 +53,9 @@ if ($IsWindows) {
 
 
   #!###############################
-  #!#         Remember            #
+  #!#         Recall            #
   #!###############################
-  Write-Host "Remembers:" -ForegroundColor Magenta -NoNewline; Write-Host '#!/usr/bin/env bash, echo $XDG_SESSION_TYPE, sudo nixos-rebuild switch, wsl --list --online' -ForegroundColor Blue
+  Write-Host "Recall Commands:" -ForegroundColor Magenta -NoNewline; Write-Host '#!/usr/bin/env bash, echo $XDG_SESSION_TYPE, sudo nixos-rebuild switch, wsl --list --online' -ForegroundColor Blue
 
   #*############################
   #*#         Admin            #

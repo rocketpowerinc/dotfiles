@@ -83,10 +83,6 @@ if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
 # Show auto-completion list automatically, without double tab
 if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 
-#!###############################
-#!#         Remember            #
-#!###############################
-echo -e "${MAGENTA}Install a .deb Command:${ENDCOLOR} ${BLUE}sudo dpkg -i package_name.deb${ENDCOLOR}"
 
 #!#####################################################
 #!#                       Admin                      ##
@@ -240,12 +236,16 @@ alias gerp='grep'
 #!##########################################################
 #!#                      Recall                           ##
 #!##########################################################
-echo -e "${MAGENTA}Recall Commands:${ENDCOLOR} ${BLUE}shbang, ownership, executable, permission, bash-help${ENDCOLOR}"
+echo -e "${MAGENTA}Recall Commands:${ENDCOLOR} ${BLUE}shbang, ownership, executable, permission, bash-help, deb_install${ENDCOLOR}"
 alias shbang='echo -e "#!/usr/bin/env bash"'
 #Privilege
 alias executable='echo -e "chmod +x"'
 alias ownership='echo -e "sudo chown $USER foo"'
 alias permission='echo -e "chmod 777 foo"' #read write and execute for everyone
+
+#Misc
+alias deb_install='echo -e "sudo dpkg -i package_name.deb"'
+
 
 #*What are my aliases and function
 function bash-help() {
