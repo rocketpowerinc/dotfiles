@@ -352,11 +352,10 @@ if ($IsWindows) {
     # Calculate the difference in days
     $daysDifference = ($currentDate - $osInstallDate).Days
 
-    # Output the result
-    Write-Output "Windows has been installed for $daysDifference days (since $osInstallDate)"
+    # Output in yellow
+    Write-Host "Windows has been installed for $daysDifference days (since $osInstallDate)" -ForegroundColor Yellow
   }
   birthday
-
 
 }
 
