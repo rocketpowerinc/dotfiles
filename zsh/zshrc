@@ -7,8 +7,9 @@ setopt interactivecomments
 # Enable colors
 autoload -Uz colors && colors
 
-# Example minimal prompt
-PROMPT='%F{cyan}%n@%m%f %F{yellow}%~%f %# '
+# Prompt with apple symbol, user@host, current directory, and a red arrow
+PROMPT='%F{250}%f %F{202}%n@%m%f %F{yellow}📂 %~%f %F{red}➜%f '
+
 
 # Tab-completion improvements
 autoload -Uz compinit && compinit
