@@ -1,0 +1,16 @@
+# Justfile for NixOS convenience commands
+
+# Show help when running `just` with no args
+
+default:
+@just --list
+
+# Rebuild the system configuration
+
+rebuild:
+sudo nixos-rebuild switch
+
+# Edit the system configuration
+
+edit:
+sudo gnome-text-editor /etc/nixos/configuration.nix
