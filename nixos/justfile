@@ -1,16 +1,135 @@
-# Justfile for NixOS convenience commands
+# Justfile for NixOS system management, packages, and cleanup
+
 
 # Show help when running `just` with no args
-
 default:
-@just --list
+    @just --list
 
-# Rebuild the system configuration
+# ╔═══════════════════╗
+# ║ Convenience Short ║
+# ╚═══════════════════╝
 
-rebuild:
-sudo nixos-rebuild switch
-
-# Edit the system configuration
-
+# Edit main configuration
 edit:
-sudo gnome-text-editor /etc/nixos/configuration.nix
+    if command -v gnome-text-editor >/dev/null 2>&1; then sudo gnome-text-editor /etc/nixos/configuration.nix; else sudo nano /etc/nixos/configuration.nix; fi
+
+# Rebuild and show logs
+rebuild-log:
+    sudo nixos-rebuild switch && journalctl -xe
+
+# ╔═════════════════╗
+# ║ System Commands ║
+# ╚═════════════════╝
+
+# Rebuild and apply the configuration
+rebuild:
+    sudo nixos-rebuild switch
+
+# Build without switching (dry build)
+build:
+    sudo nixos-rebuild build
+
+# Test rebuild (applies until reboot)
+test:
+    sudo nixos-rebuild test
+
+# Update channels & upgrade system
+upgrade:
+    sudo nix-channel --update
+    sudo nixos-rebuild switch --upgrade
+
+# ╔═════════════════════╗
+# ║ Rollback & Recovery ║
+# ╚═════════════════════╝
+
+# Roll back to previous generation
+rollback:
+    sudo nixos-rebuild switch --rollback
+
+# List available generations
+generations:
+    sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+
+# ╔════════════════════╗
+# ║ Package Management ║
+# ╚════════════════════╝
+
+# Search nixpkgs for a package
+search pkg:
+    nix search nixpkgs {{pkg}}
+
+# Install a package system-wide
+install pkg:
+    sudo nix-env -iA nixpkgs.{{pkg}}
+
+# Remove a system-wide package
+remove pkg:
+    sudo nix-env -e {{pkg}}
+
+# ╔═════════════════════╗
+# ║ Config & Diagnostics║
+# ╚═════════════════════╝
+
+# Check configuration syntax without applying
+check:
+    nixos-rebuild dry-run
+
+# Show system & nix info
+info:
+    nix-shell -p nix-info --run "nix-info -m"
+
+# Show current NixOS version
+version:
+    nixos-version
+
+# View system journal logs
+logs:
+    journalctl -xe
+
+# ╔═══════════════╗
+# ║ Cleanup Tasks ║
+# ╚═══════════════╝
+
+# Garbage collect unreferenced store paths
+gc:
+    sudo nix-collect-garbage
+
+# Aggressive GC: delete old generations (system-wide)
+gc-old:
+    sudo nix-collect-garbage -d
+
+# Remove user environment generations
+clean-user:
+    nix-env --delete-generations old
+
+# Remove system generations
+clean-system:
+    sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
+
+# Deduplicate files in the Nix store
+optimize:
+    sudo nix-store --optimise
+
+# Deep verify store integrity (slow)
+verify-store:
+    sudo nix-store --verify --check-contents
+
+# Quick disk report
+report-disk:
+    @echo "Disk usage:"
+    df -h /
+
+# ╔═════════════════════╗
+# ║ Maintenance Bundles ║
+# ╚═════════════════════╝
+
+# Daily maintenance: show disk, clean aggressively, dedupe, show disk again
+maintenance: report-disk gc-old clean-user clean-system optimize
+    @echo "Maintenance complete."
+    @echo "Disk usage after:"
+    df -h /
+
+# Deep maintenance: daily + verify store contents (slow)
+maintenance-deep: maintenance verify-store
+    @echo "Deep verification complete."
+    @echo "Done."
