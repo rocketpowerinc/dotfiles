@@ -39,7 +39,9 @@ if ($IsWindows) {
   #!#####################################
   #!#         Exported Paths            #
   #!#####################################
+  #See Path on seperate Lines
   Write-Host "Paths:" -ForegroundColor Magenta -NoNewline; Write-Host 'SeePath' -ForegroundColor Blue
+
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Templates' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Cross-Platform-Powershell' -ForegroundColor Blue

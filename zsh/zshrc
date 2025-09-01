@@ -25,6 +25,15 @@ alias fff="fastfetch -c all.jsonc" #See every available module
 #!######################################################################
 #!#                            Exports                                ##
 #!######################################################################
+
+# Admin Commands: SeePath
+printf "\033[0;35mAdmin Commands:\033[0m \033[0;34mSeePath\033[0m\n"
+
+SeePath() {
+    printf "%s\n" ${(s/:/)PATH}
+}
+
+
 printf "\033[0;35mExports:\033[0m \033[0;34m$HOME/go/bin\033[0m\n"
 
 export PATH="$HOME/go/bin:$PATH"
