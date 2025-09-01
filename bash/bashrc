@@ -90,7 +90,10 @@ if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 #!#####################################################
 #See Path on seperate Lines
 echo -e "${MAGENTA}Admin Commands:${ENDCOLOR} ${BLUE}SeePath${ENDCOLOR}"
-alias SeePath='echo "$PATH" | tr : '\n''
+
+function SeePath() {
+    echo "$PATH" | tr : '\n'
+}
 
 echo -e "${MAGENTA}Admin Commands:${ENDCOLOR} ${BLUE}resource, reboot, rebootsafe, rebootforce, shutdown, bios, test${ENDCOLOR}"
 
