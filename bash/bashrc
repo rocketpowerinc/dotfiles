@@ -27,6 +27,11 @@ ENDCOLOR="\e[0m"
 #!######################################################################
 #!#                            Exports                                ##
 #!######################################################################
+#See Path on seperate Lines
+echo -e "${MAGENTA}Admin Commands:${ENDCOLOR} ${BLUE}SeePath${ENDCOLOR}"
+alias SeePath='echo "$PATH" | tr : '\n''
+
+
 #*PATHS - Export all directories in $HOME/.local/bin/
 echo -e "${MAGENTA}Path Exports:${ENDCOLOR} ${BLUE}all directories in HOME/.local/bin/${ENDCOLOR}"
 for dir in $HOME/.local/bin/*; do
