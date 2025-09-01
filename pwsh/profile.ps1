@@ -39,10 +39,13 @@ if ($IsWindows) {
   #!#####################################
   #!#         Exported Paths            #
   #!#####################################
+  Write-Host "Paths:" -ForegroundColor Magenta -NoNewline; Write-Host 'SeePath' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Templates' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Cross-Platform-Powershell' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\go\bin' -ForegroundColor Blue
+
+  function SeePath { ($env:Path) -split ';'}
 
 
   $Env:Path += ";$env:USERPROFILE\Bin"
@@ -57,11 +60,12 @@ if ($IsWindows) {
   #!###############################
   Write-Host "Recall Commands:" -ForegroundColor Magenta -NoNewline; Write-Host '#!/usr/bin/env bash, echo $XDG_SESSION_TYPE, sudo nixos-rebuild switch, wsl --list --online' -ForegroundColor Blue
 
+
   #*############################
   #*#         Admin            #
   #*############################
 
-  Write-Host "Admin Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " runas, shutdown, reboot, rebootbios, rebootsettings, test, edit, resource" -ForegroundColor Blue
+  Write-Host "Admin Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " runas, shutdown, reboot, rebootbios, rebootsettings, test" -ForegroundColor Blue
 
 
   function Test {
@@ -77,8 +81,14 @@ if ($IsWindows) {
     Read-Host "Press Enter to Exit"
   }
 
+  Write-Host "Admin Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " WinVer, WinVerCli, WinKey" -ForegroundColor Blue
 
-  Write-Host "Dotfile Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " Edit (PROFILE.CurrentUserAllHosts), EditTitus" -ForegroundColor Blue
+  #function WinVer { *Is a Built in Command to Windows*}
+  function WinVerCli { (Get-WmiObject -Class Win32_OperatingSystem).Caption}
+  function Winkey { (Get-WmiObject -Query 'Select * from SoftwareLicensingService').OA3xOriginalProductKey}
+
+
+  Write-Host "Dotfile Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " Edit (PROFILE.CurrentUserAllHosts), EditTitus (Profile), resource" -ForegroundColor Blue
 
   #* Edit pwsh $Profile
   function Edit { notepad $PROFILE.CurrentUserAllHosts }
