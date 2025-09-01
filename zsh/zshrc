@@ -33,9 +33,7 @@ SeePath() {
     printf "%s\n" ${(s/:/)PATH}
 }
 
-
-printf "\033[0;35mExports:\033[0m \033[0;34m$HOME/go/bin\033[0m\n"
-
+# Exports
 export PATH="$HOME/go/bin:$PATH"
 
 #!######################################################################
