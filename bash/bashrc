@@ -29,7 +29,6 @@ ENDCOLOR="\e[0m"
 #!######################################################################
 
 #*PATHS - Export all directories in $HOME/.local/bin/
-echo -e "${MAGENTA}Path Exports:${ENDCOLOR} ${BLUE}all directories in HOME/.local/bin/${ENDCOLOR}"
 for dir in $HOME/.local/bin/*; do
     if [ -d "$dir" ]; then
         PATH="$dir:$PATH"
