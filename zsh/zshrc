@@ -53,7 +53,7 @@ updatemac() {
 #!###############################################################
 #!#                       Edit Dotfiles                        ##
 #!###############################################################
-echo -e "${MAGENTA}Edit Commands:${ENDCOLOR} ${BLUE}editfile${ENDCOLOR}"
+echo -e "${MAGENTA}Edit Commands:${ENDCOLOR} ${BLUE}zshrc or zshrcv${ENDCOLOR}"
 
 
 alias zshrc='nano $HOME/.zshrc'
