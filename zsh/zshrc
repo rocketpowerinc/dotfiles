@@ -50,7 +50,14 @@ updatemac() {
     echo "✅ macOS & Homebrew updated successfully"
 }
 
+#!###############################################################
+#!#                       Edit Dotfiles                        ##
+#!###############################################################
+echo -e "${MAGENTA}Edit Commands:${ENDCOLOR} ${BLUE}editfile${ENDCOLOR}"
 
+
+alias zshrc='nano $HOME/.zshrc'
+alias zshrcv='open -a TextEdit $HOME/.zshrc'
 
 #!#############################################################################
 #!#                                Misc                                      ##
@@ -269,3 +276,5 @@ birthday() {
     echo -e "\033[0;33mmacOS has been installed for $days_difference days (since $os_install_date)\033[0m"
 }
 birthday
+
+
