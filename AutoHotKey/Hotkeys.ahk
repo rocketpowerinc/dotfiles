@@ -1,5 +1,5 @@
 ﻿; Launch Help with Ctrl + Shift + H
-^+h::MsgBox("the AppHotKeys script is running")
+^+h::MsgBox("The Hotkeys script is active")
 
 ; Launch Notion with Ctrl + Shift + N
 ^+n::Run("C:\Users\rocket\AppData\Local\Programs\Notion\Notion.exe")
@@ -14,5 +14,5 @@
 ^+f::Run("C:\Windows\explorer.exe")
 
 ; Optional: Confirm script is running
-TrayTip("Hotkeys are active")
+TrayTip("The Hotkeys script is active")
 SoundBeep()
