@@ -1,5 +1,5 @@
 ﻿; Launch Help with Ctrl + Shift + H
-^+h::MsgBox("Ctrl+Shift+Q works")
+^+h::MsgBox("the AppHotKeys script is running")
 
 ; Launch Notion with Ctrl + Shift + N
 ^+n::Run("C:\Users\rocket\AppData\Local\Programs\Notion\Notion.exe")
