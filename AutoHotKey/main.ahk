@@ -1,4 +1,5 @@
-﻿;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+﻿;https://github.com/how-to-work-from-home/autohotkey/wiki/AutoHotkey-AHK-My-fav-scripts
+;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;! Description:    AutoHotkey scripts that make my daily life a bit easier :)   ;
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -11,23 +12,30 @@
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;      Reload main.ahk    ;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-::rscript::
-^+ScrollLock::          ; CTRL + ALT + Scroll Lock
-Run, "C:\Users\rocket\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\main.ahk"
-Return
+::rscript:: {
+  Reload
+}
 
+^+ScrollLock:: {
+  Reload
+}
 
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;      Text Expantions    ;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;*Servers
 ::]spooty.local::http://192.168.1.2:3013
 ::]glance.local::http://192.168.1.2:3002
+
+;*Websites
+::]pirate:: {
+  Run("firefox.exe https://www.rottentomatoes.com/ https://ext.to/ https://torrentgalaxy.one/")
+}
 
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;      HOTKEYS    ;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 ; Launch Help with Ctrl + Shift + H
 ^+h::MsgBox("Main.ahk script is active")
@@ -45,5 +53,5 @@ Return
 ^+f::Run("C:\Windows\explorer.exe")
 
 ; Optional: Confirm script is running
-TrayTip("Main.ahk  script is active")
+TrayTip("Main.ahk script is active")
 SoundBeep()
