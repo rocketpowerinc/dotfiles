@@ -12,7 +12,7 @@
 ;!;;;;;;;;;;;;;;;;;      Reload main.ahk    ;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ::rscript::
-^!ScrollLock::          ; CTRL + ALT + Scroll Lock
+^+ScrollLock::          ; CTRL + ALT + Scroll Lock
 Run, "C:\Users\rocket\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\main.ahk"
 Return
 
