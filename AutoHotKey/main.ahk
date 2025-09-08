@@ -1,4 +1,6 @@
-﻿;https://github.com/how-to-work-from-home/autohotkey/wiki/AutoHotkey-AHK-My-fav-scripts
+﻿#Requires AutoHotkey v2.0
+#SingleInstance Force
+
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;! Description:    AutoHotkey scripts that make my daily life a bit easier :)   ;
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
