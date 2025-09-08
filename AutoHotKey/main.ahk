@@ -114,45 +114,29 @@
 
   ToolTip("Setting up exactly 5 virtual desktops...")
 
-  ; Step 1: Go to the first desktop
-  Loop 20 {
-    Send("#^{Left}")
-    Sleep(25)
-  }
-
-  ; Step 2: Close all extra desktops by going right and closing everything beyond desktop 5
-  ; Move to desktop 6 (if it exists) and start closing
-  Loop 5 {
+  ; Move to last desktop and start closing
+  Loop 6 {
     Send("#^{Right}")
-    Sleep(50)
+    Sleep(200)
   }
 
   ; Now close any desktop we can (this will be desktop 6+)
-  Loop 15 {
+  Loop 6 {
     Send("#^{F4}") ; Close current desktop
-    Sleep(100)
+    Sleep(200)
   }
 
-  ; Step 3: Go back to desktop 1
-  Loop 20 {
-    Send("#^{Left}")
-    Sleep(25)
-  }
-
-  ; Step 4: Create exactly 4 more desktops (total of 5)
+  ; Create exactly 4 more desktops (total of 5)
   ToolTip("Creating desktops...")
   Loop 4 {
     Send("#^d") ; Create new desktop
     Sleep(200) ; Increased delay to ensure desktop creation
   }
 
-  ToolTip("Going back to desktop 1...")
-  Sleep(500) ; Brief pause before final navigation
-
   ; Step 5: Go back to desktop 1
-  Loop 20 {
+  Loop 6 {
     Send("#^{Left}")
-    Sleep(50) ; Increased delay for more reliable navigation
+    Sleep(200) ; Increased delay for more reliable navigation
   }
 
   ; Step 6: Launch Notion and Firefox on desktop 1 in split screen
@@ -209,16 +193,12 @@
   Send("#{Left}") ; Snap to left side
   Sleep(500)
 
+  ToolTip("Going back to desktop 1...")
+  Sleep(500) ; Brief pause before final navigation
   ; Go back to desktop 1
-  Loop 20 {
+  Loop 6 {
     Send("#^{Left}")
-    Sleep(30)
-  }
-
-  ; Step 5: Go back to desktop 1
-  Loop 20 {
-    Send("#^{Left}")
-    Sleep(50) ; Increased delay for more reliable navigation
+    Sleep(50)
   }
 
   ; Show confirmation
