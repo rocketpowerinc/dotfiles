@@ -1,3 +1,11 @@
+# Install AutoHotkey if it is not already installed already
+if (Test-Path "C:\Users\rocket\AppData\Local\Programs\AutoHotkey\UX\AutoHotkeyUX.exe") {
+    Write-Output "AutoHotkey is already installed."
+} else {
+    winget install -e --id AutoHotkey.AutoHotkey
+}
+
+
 ############ Temp Clone Repository Snippet ############
 # Config
 $RepoUrl = "https://github.com/rocketpowerinc/dotfiles.git"
@@ -23,5 +31,5 @@ Write-Host "Temp folder cloned/refreshed successfully!" -ForegroundColor Green
 
 
 Copy-Item -Path "C:\Users\rocket\Downloads\Temp\dotfiles\AutoHotKey\main.ahk" `
-  -Destination "C:\Users\rocket\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\main.ahk" `
-  -Force
+    -Destination "C:\Users\rocket\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\main.ahk" `
+    -Force
