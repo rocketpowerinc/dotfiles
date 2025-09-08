@@ -170,12 +170,12 @@ pages:
                 show-thumbnails: true
 
               - type: reddit
-                subreddit: AutoHotkey
+                subreddit: autohotkey
                 show-thumbnails: true
 
 
           - type: rss
-            limit: 10
+            limit: 20
             collapse-after: 3
             cache: 12h
             feeds:
