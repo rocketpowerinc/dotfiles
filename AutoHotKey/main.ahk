@@ -17,6 +17,9 @@
 }
 
 ^+F1:: {
+  ; Run setup script from GitHub before reloading
+  Run('powershell.exe -Command "Invoke-WebRequest -Uri ''https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/AutoHotKey/setup.ps1'' -OutFile ''$env:TEMP\\ahk-setup.ps1''; & ''$env:TEMP\\ahk-setup.ps1''"', , "Hide")
+  Sleep(2000) ; Wait for setup to complete
   Reload
 }
 
