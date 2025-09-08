@@ -169,6 +169,10 @@ pages:
                 subreddit: androidterminal
                 show-thumbnails: true
 
+              - type: reddit
+                subreddit: AutoHotkey
+                show-thumbnails: true
+
 
           - type: rss
             limit: 10
