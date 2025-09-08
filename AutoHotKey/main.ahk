@@ -44,7 +44,7 @@
   "https://archive.org/",
   "https://fmhy.net/torrenting"
   ]
-  Run("firefox.exe " . StrJoin(" ", urls*))
+  Run("firefox.exe", StrJoin(" ", urls*))
 }
 
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
