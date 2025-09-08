@@ -30,7 +30,21 @@
 
 ;*Websites
 ::]pirate:: {
-  Run("firefox.exe https://www.rottentomatoes.com/ https://ext.to/ https://torrentgalaxy.one/")
+  urls := [
+  "https://www.rottentomatoes.com/",
+  "https://ext.to/",
+  "https://torrentgalaxy.one/",
+  "https://pcgamestorrents.com/",
+  "https://www.ziperto.com/",
+  "https://dlpsgame.com/category/ps4/",
+  "https://getcomics.org/",
+  "https://yts.mx/",
+  "https://yts.hn/",
+  "https://thepiratebay10.xyz/",
+  "https://archive.org/",
+  "https://fmhy.net/torrenting"
+  ]
+  Run("firefox.exe " . StrJoin(" ", urls*))
 }
 
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
