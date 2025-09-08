@@ -80,6 +80,9 @@
 
 
 ;*#>>>>>>>  Actions
+;current window always ontop
+^+Up::WinSetAlwaysOnTop -1, "A"
+
 ; Launch Help with Ctrl + Shift + H
 ^+h::MsgBox("Main.ahk script is active")
 
