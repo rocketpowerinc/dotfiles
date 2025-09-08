@@ -37,8 +37,7 @@
 ;!;;;;;;;;;;;;;;;;;      HOTKEYS    ;;;;;;;;;;;;;;;;;;;;;;
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Launch Help with Ctrl + Shift + H
-^+h::MsgBox("Main.ahk script is active")
+;*#>>>>>>>  Launch Apps
 
 ; Launch Notion with Ctrl + Shift + N
 ^+n::Run("C:\Users\rocket\AppData\Local\Programs\Notion\Notion.exe")
@@ -67,9 +66,17 @@
 ; Launch Spotify with Ctrl + Shift + S
 ^+s::Run("C:\Users\rocket\AppData\Roaming\Spotify\Spotify.exe")
 
+;*#>>>>>>>  Actions
+; Launch Help with Ctrl + Shift + H
+^+h::MsgBox("Main.ahk script is active")
+
+; Minimize all windows with Ctrl + Shift + Space
+^+Space::WinMinimizeAll
+
 ; Empty Recycle Bin with Ctrl + Shift + F1
 ^+F2::Run('powershell.exe -Command "Clear-RecycleBin -Force; (New-Object Media.SoundPlayer \"$env:WINDIR\\Media\\Windows Recycle.wav\").PlaySync()"', , "Hide")
 
+;*#>>>>>>>  keep at bottom of script
 ; Optional: Confirm script is running
 TrayTip("Main.ahk script is active")
 SoundBeep()
