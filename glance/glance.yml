@@ -166,16 +166,18 @@ pages:
                 show-thumbnails: true
 
               - type: reddit
-                subreddit: androidterminal
-                show-thumbnails: true
-
-              - type: reddit
                 subreddit: autohotkey
                 show-thumbnails: true
 
+              - type: reddit
+                subreddit: androidterminal
+                show-thumbnails: true
+
+
+
 
           - type: rss
-            limit: 20
+            limit: 10
             collapse-after: 3
             cache: 12h
             feeds:
