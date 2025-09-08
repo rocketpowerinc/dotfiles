@@ -1,3 +1,5 @@
+#Todo: Must run with go-pwr app for it to refresh repo and grab latest glance.yml file.
+
 Clear-Host
 
 # Define source and destination paths
