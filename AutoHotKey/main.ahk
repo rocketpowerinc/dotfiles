@@ -47,8 +47,8 @@
 ; Launch Notion with Ctrl + Shift + N
 ^+n::Run("C:\Users\rocket\AppData\Local\Programs\Notion\Notion.exe")
 
-; Launch Todoist with Ctrl + Shift + T
-^+t::Run("C:\Users\rocket\AppData\Local\Programs\todoist\Todoist.exe")
+; Launch Todoist with Ctrl + Shift + O (T is used for new tabs in browsers)
+^+o::Run("C:\Users\rocket\AppData\Local\Programs\todoist\Todoist.exe")
 
 ; Launch Docker Desktop with Ctrl + Shift + D
 ^+d::{
