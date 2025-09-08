@@ -114,37 +114,48 @@
 
   ToolTip("Setting up exactly 5 virtual desktops...")
 
-  ; Move to last desktop and start closing
-  Loop 6 {
+  ; First, go to desktop 1 to establish a baseline
+  Loop 10 {
+    Send("#^{Left}")
+    Sleep(100)
+  }
+
+  ; Move to last desktop and start closing any extras
+  Loop 10 {
     Send("#^{Right}")
-    Sleep(200)
+    Sleep(100)
   }
 
   ; Now close any desktop we can (this will be desktop 6+)
-  Loop 6 {
+  Loop 10 {
     Send("#^{F4}") ; Close current desktop
     Sleep(200)
+  }
+
+  ; Go back to desktop 1 to start fresh
+  Loop 10 {
+    Send("#^{Left}")
+    Sleep(100)
   }
 
   ; Create exactly 4 more desktops (total of 5)
   ToolTip("Creating desktops...")
   Loop 4 {
-    Send("#^d") ; Create new desktop
-    Sleep(200) ; Increased delay to ensure desktop creation
+    Send("#^d") ; Create new desktop (this switches to the new desktop)
+    Sleep(300) ; Wait for desktop creation
+    ; Go back to desktop 1 after each creation
+    Loop 10 {
+      Send("#^{Left}")
+      Sleep(50)
+    }
   }
 
-  ; Step 5: Go back to desktop 1
-  Loop 6 {
-    Send("#^{Left}")
-    Sleep(200) ; Increased delay for more reliable navigation
-  }
-
-  ; Step 6: Launch Notion and Firefox on desktop 1 in split screen
-  ToolTip("Launching Notion and Firefox...")
+  ; Now we should be on desktop 1 - set up Notion and Firefox
+  ToolTip("Setting up Desktop 1: Notion and Firefox...")
 
   ; Launch Notion
   Run("C:\Users\rocket\AppData\Local\Programs\Notion\Notion.exe")
-  Sleep(2000) ; Wait for Notion to load
+  Sleep(2500) ; Wait for Notion to load
 
   ; Snap Notion to left side (Win + Left Arrow)
   Send("#{Left}")
@@ -152,53 +163,53 @@
 
   ; Launch Firefox
   Run("C:\Program Files\Mozilla Firefox\firefox.exe")
-  Sleep(2000) ; Wait for Firefox to load
+  Sleep(2500) ; Wait for Firefox to load
 
   ; Snap Firefox to right side (Win + Right Arrow)
   Send("#{Right}")
   Sleep(500)
 
-  ; Step 7: Set up VS Code on desktops 2-5
-  ToolTip("Setting up VS Code on other desktops...")
-
   ; Desktop 2: VS Code with scriptbin
+  ToolTip("Setting up Desktop 2: VS Code with scriptbin...")
   Send("#^{Right}") ; Go to desktop 2
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\scriptbin"')
-  Sleep(2000) ; Wait for VS Code to load
+  Sleep(2500) ; Wait for VS Code to load
   Send("#{Left}") ; Snap to left side
   Sleep(500)
 
   ; Desktop 3: VS Code with dotfiles
+  ToolTip("Setting up Desktop 3: VS Code with dotfiles...")
   Send("#^{Right}") ; Go to desktop 3
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\dotfiles"')
-  Sleep(2000) ; Wait for VS Code to load
+  Sleep(2500) ; Wait for VS Code to load
   Send("#{Left}") ; Snap to left side
   Sleep(500)
 
   ; Desktop 4: VS Code with docker
+  ToolTip("Setting up Desktop 4: VS Code with docker...")
   Send("#^{Right}") ; Go to desktop 4
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\docker"')
-  Sleep(2000) ; Wait for VS Code to load
+  Sleep(2500) ; Wait for VS Code to load
   Send("#{Left}") ; Snap to left side
   Sleep(500)
 
   ; Desktop 5: VS Code with appbundles
+  ToolTip("Setting up Desktop 5: VS Code with appbundles...")
   Send("#^{Right}") ; Go to desktop 5
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\appbundles"')
-  Sleep(2000) ; Wait for VS Code to load
+  Sleep(2500) ; Wait for VS Code to load
   Send("#{Left}") ; Snap to left side
   Sleep(500)
 
-  ToolTip("Going back to desktop 1...")
-  Sleep(500) ; Brief pause before final navigation
   ; Go back to desktop 1
-  Loop 6 {
+  ToolTip("Going back to desktop 1...")
+  Loop 4 {
     Send("#^{Left}")
-    Sleep(50)
+    Sleep(200)
   }
 
   ; Show confirmation
