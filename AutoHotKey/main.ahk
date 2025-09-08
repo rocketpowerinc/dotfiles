@@ -52,7 +52,7 @@
 
 ; Launch Docker Desktop with Ctrl + Shift + D
 ^+d::{
-  ; Try to activate Docker Desktop window if it exists
+  ; Try to activate Docker Desktop window if it exists but it must be a taskbar pin
   if WinExist("ahk_exe Docker Desktop.exe")
     WinActivate
   else
@@ -70,6 +70,14 @@
 
 ; Launch Spotify with Ctrl + Shift + S
 ^+s::Run("C:\Users\rocket\AppData\Roaming\Spotify\Spotify.exe")
+
+; Launch go-pwr with Ctrl + Shift + a
+^+a::Run("go-pwr")
+
+; Launch Steam with Ctrl + Shift + g
+^+g::Run("C:\Program Files (x86)\Steam\steam.exe")
+
+
 
 ;*#>>>>>>>  Actions
 ; Launch Help with Ctrl + Shift + H
