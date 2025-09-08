@@ -43,6 +43,9 @@
 ; Launch Notion with Ctrl + Shift + N
 ^+n::Run("C:\Users\rocket\AppData\Local\Programs\Notion\Notion.exe")
 
+; Launch Todoist with Ctrl + Shift + T
+^+t::Run("C:\Users\rocket\AppData\Local\Programs\todoist\Todoist.exe")
+
 ; Launch Firefox
 ^+b::Run("C:\Program Files\Mozilla Firefox\firefox.exe")
 
