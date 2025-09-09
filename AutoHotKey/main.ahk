@@ -118,7 +118,7 @@
     Send("#^{Left}")
     Sleep(50)
   }
-  SetTimer(() => ToolTip(), -1000)
+  ;SetTimer(() => ToolTip(), -1000)
 }
 
 ;*#>>>>>>>
