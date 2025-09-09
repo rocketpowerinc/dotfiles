@@ -111,13 +111,18 @@
 
 ; Go back to Virtual Desktop 1 with Ctrl + Shift + Left Arrow
 ^+Left:: {
-  ;ToolTip("Going to Desktop 1...")
-  ; Go far left to ensure we reach desktop 1
-  Loop 6 {
-    Send("#^{Left}")
-    Sleep(50)
+  ToolTip("Going to Desktop 1...")
+
+  ; Use a more conservative approach with proper delays
+  Loop 10 {
+    Send("{LWin down}{LCtrl down}{Left}{LCtrl up}{LWin up}")
+    Sleep(150) ; Longer delay to prevent overwhelming the system
   }
-  ;SetTimer(() => ToolTip(), -1000)
+
+  ; Clear any stuck modifier keys
+  Send("{LWin up}{LCtrl up}{Left up}")
+
+  SetTimer(() => ToolTip(), -1000)
 }
 
 ;*#>>>>>>>
