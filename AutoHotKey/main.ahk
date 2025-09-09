@@ -113,7 +113,6 @@
 ^+Left:: {
   ToolTip("Going to Desktop 1...")
 
-  ; Use a more conservative approach with proper delays
   Loop 10 {
     Send("{LWin down}{LCtrl down}{Left}{LCtrl up}{LWin up}")
     Sleep(150) ; Longer delay to prevent overwhelming the system
@@ -140,37 +139,37 @@
 
   ; First, go to desktop 1 to establish a baseline
   Loop 10 {
-    Send("#^{Left}")
-    Sleep(100)
+    Send("{LWin down}{LCtrl down}{Left}{LCtrl up}{LWin up}")
+    Sleep(150)
   }
 
   ; Move to last desktop and start closing any extras
   Loop 10 {
-    Send("#^{Right}")
-    Sleep(100)
+    Send("{LWin down}{LCtrl down}{Right}{LCtrl up}{LWin up}")
+    Sleep(150)
   }
 
   ; Now close any desktop we can (this will be desktop 6+)
   Loop 10 {
-    Send("#^{F4}") ; Close current desktop
-    Sleep(200)
+    Send("{LWin down}{LCtrl down}{F4}{LCtrl up}{LWin up}")
+    Sleep(250)
   }
 
   ; Go back to desktop 1 to start fresh
   Loop 10 {
-    Send("#^{Left}")
-    Sleep(100)
+    Send("{LWin down}{LCtrl down}{Left}{LCtrl up}{LWin up}")
+    Sleep(150)
   }
 
   ; Create exactly 4 more desktops (total of 5)
   ToolTip("Creating desktops...")
   Loop 4 {
-    Send("#^d") ; Create new desktop (this switches to the new desktop)
-    Sleep(300) ; Wait for desktop creation
+    Send("{LWin down}{LCtrl down}d{LCtrl up}{LWin up}")
+    Sleep(400) ; Wait for desktop creation
     ; Go back to desktop 1 after each creation
     Loop 10 {
-      Send("#^{Left}")
-      Sleep(50)
+      Send("{LWin down}{LCtrl down}{Left}{LCtrl up}{LWin up}")
+      Sleep(80)
     }
   }
 
@@ -195,46 +194,49 @@
 
   ; Desktop 2: VS Code with scriptbin
   ToolTip("Setting up Desktop 2: VS Code with scriptbin...")
-  Send("#^{Right}") ; Go to desktop 2
+  Send("{LWin down}{LCtrl down}{Right}{LCtrl up}{LWin up}")
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\scriptbin"')
   Sleep(2500) ; Wait for VS Code to load
-  Send("#{Left}") ; Snap to left side
+  Send("{LWin down}{Left}{LWin up}") ; Snap to left side
   Sleep(500)
 
   ; Desktop 3: VS Code with dotfiles
   ToolTip("Setting up Desktop 3: VS Code with dotfiles...")
-  Send("#^{Right}") ; Go to desktop 3
+  Send("{LWin down}{LCtrl down}{Right}{LCtrl up}{LWin up}")
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\dotfiles"')
   Sleep(2500) ; Wait for VS Code to load
-  Send("#{Left}") ; Snap to left side
+  Send("{LWin down}{Left}{LWin up}") ; Snap to left side
   Sleep(500)
 
   ; Desktop 4: VS Code with docker
   ToolTip("Setting up Desktop 4: VS Code with docker...")
-  Send("#^{Right}") ; Go to desktop 4
+  Send("{LWin down}{LCtrl down}{Right}{LCtrl up}{LWin up}")
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\docker"')
   Sleep(2500) ; Wait for VS Code to load
-  Send("#{Left}") ; Snap to left side
+  Send("{LWin down}{Left}{LWin up}") ; Snap to left side
   Sleep(500)
 
   ; Desktop 5: VS Code with appbundles
   ToolTip("Setting up Desktop 5: VS Code with appbundles...")
-  Send("#^{Right}") ; Go to desktop 5
+  Send("{LWin down}{LCtrl down}{Right}{LCtrl up}{LWin up}")
   Sleep(500)
   Run('C:\Users\rocket\vscode-profiles\pwr-vscode\Code.exe -n "C:\Users\rocket\GitHub-pwr\appbundles"')
   Sleep(2500) ; Wait for VS Code to load
-  Send("#{Left}") ; Snap to left side
+  Send("{LWin down}{Left}{LWin up}") ; Snap to left side
   Sleep(500)
 
   ; Go back to desktop 1
   ToolTip("Going back to desktop 1...")
   Loop 4 {
-    Send("#^{Left}")
+    Send("{LWin down}{LCtrl down}{Left}{LCtrl up}{LWin up}")
     Sleep(200)
   }
+
+  ; Clear any stuck modifier keys
+  Send("{LWin up}{LCtrl up}")
 
   ; Show confirmation
   ToolTip("All 5 Virtual Desktops Ready with Apps!")
