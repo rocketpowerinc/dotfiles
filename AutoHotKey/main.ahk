@@ -96,14 +96,19 @@
 ;*#>>>>>>>  Actions
 ;*#>>>>>>>
 
+; Empty Recycle Bin with Ctrl + Shift + F2
+^+F2::Run('powershell.exe -Command "Clear-RecycleBin -Force; (New-Object Media.SoundPlayer \"$env:WINDIR\\Media\\Windows Recycle.wav\").PlaySync()"', , "Hide")
+
+
+;*#>>>>>>>
+;*#>>>>>>>  Arrows
+;*#>>>>>>>
+
 ; Minimize all windows with Ctrl + Shift + Space
-^+Space::WinMinimizeAll
+^+Down::WinMinimizeAll
 
 ;current window always ontop
 ^+Up::WinSetAlwaysOnTop -1, "A"
-
-; Empty Recycle Bin with Ctrl + Shift + F1
-^+F2::Run('powershell.exe -Command "Clear-RecycleBin -Force; (New-Object Media.SoundPlayer \"$env:WINDIR\\Media\\Windows Recycle.wav\").PlaySync()"', , "Hide")
 
 ; Go back to Virtual Desktop 1 with Ctrl + Shift + Left Arrow
 ^+Left:: {
