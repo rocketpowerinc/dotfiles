@@ -99,7 +99,6 @@
 ; Empty Recycle Bin with Ctrl + Shift + F2
 ^+F2::Run('powershell.exe -Command "Clear-RecycleBin -Force; (New-Object Media.SoundPlayer \"$env:WINDIR\\Media\\Windows Recycle.wav\").PlaySync()"', , "Hide")
 
-
 ;*#>>>>>>>
 ;*#>>>>>>>  Arrows
 ;*#>>>>>>>
@@ -112,7 +111,7 @@
 
 ; Go back to Virtual Desktop 1 with Ctrl + Shift + Left Arrow
 ^+Left:: {
-  ToolTip("Going to Desktop 1...")
+  ;ToolTip("Going to Desktop 1...")
   ; Go far left to ensure we reach desktop 1
   Loop 6 {
     Send("#^{Left}")
