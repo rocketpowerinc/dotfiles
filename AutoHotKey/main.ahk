@@ -90,7 +90,100 @@
 ;*#>>>>>>>
 
 ; Launch Help with Ctrl + Shift + H
-^+h::MsgBox("Main.ahk script is active")
+^+h:: {
+  ; Create the Help GUI
+  HelpGUI := Gui("+Resize +MinSize600x500", "AutoHotkey Script Help - All Hotkeys & Text Expansions")
+  HelpGUI.SetFont("s10")
+
+  ; Add title
+  HelpGUI.Add("Text", "x20 y10 w560 Center", "🚀 Main.ahk Script - All Available Commands").SetFont("s14 Bold")
+
+  ; Create tabs for organization
+  TabControl := HelpGUI.Add("Tab3", "x10 y40 w580 h420", ["App Launchers", "Actions & Arrows", "Virtual Desktops", "Text Expansions", "System"])
+
+  ; Tab 1: App Launchers
+  TabControl.UseTab(1)
+  HelpGUI.Add("Text", "x20 y70 w560", "Launch Applications:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y95 w540", 
+  "Ctrl + Shift + N → Launch Notion`n" .
+  "Ctrl + Shift + O → Launch Todoist`n" .
+  "Ctrl + Shift + D → Launch Docker Desktop`n" .
+  "Ctrl + Shift + B → Launch Firefox`n" .
+  "Ctrl + Shift + Enter → Launch Windows Terminal`n" .
+  "Ctrl + Shift + F → Launch File Explorer`n" .
+  "Ctrl + Shift + S → Launch Spotify`n" .
+  "Ctrl + Shift + A → Launch go-pwr`n" .
+  "Ctrl + Shift + G → Launch Steam`n" .
+  "Ctrl + Shift + J → Launch JDownloader2`n" .
+  "Ctrl + Shift + Q → Launch qBittorrent")
+
+  ; Tab 2: Actions & Arrows
+  TabControl.UseTab(2)
+  HelpGUI.Add("Text", "x20 y70 w560", "Window Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y95 w540",
+  "Ctrl + Shift + Up → Toggle Always On Top`n" .
+  "Ctrl + Shift + Down → Minimize All Windows`n" .
+  "Ctrl + Shift + Left → Go to Virtual Desktop 1`n" .
+  "Ctrl + Shift + F2 → Empty Recycle Bin")
+
+  HelpGUI.Add("Text", "x20 y200 w560", "System Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y225 w540",
+  "Ctrl + Shift + H → Show This Help Menu`n" .
+  "Ctrl + Shift + F1 → Update Script from GitHub")
+
+  ; Tab 3: Virtual Desktops
+  TabControl.UseTab(3)
+  HelpGUI.Add("Text", "x20 y70 w560", "Virtual Desktop Setup:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y95 w540",
+  "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps`n`n" .
+  "This creates exactly 5 virtual desktops and launches:`n" .
+  "• Desktop 1: Notion + Firefox (split screen)`n" .
+  "• Desktop 2: VS Code with scriptbin project`n" .
+  "• Desktop 3: VS Code with dotfiles project`n" .
+  "• Desktop 4: VS Code with docker project`n" .
+  "• Desktop 5: VS Code with appbundles project`n`n" .
+  "Quick Navigation:`n" .
+  "• Ctrl + Shift + Left → Jump to Desktop 1 from anywhere")
+
+  ; Tab 4: Text Expansions
+  TabControl.UseTab(4)
+  HelpGUI.Add("Text", "x20 y70 w560", "Text Expansions (type these anywhere):").SetFont("s12 Bold")
+
+  HelpGUI.Add("Text", "x30 y95 w540", "Server Shortcuts:").SetFont("s11 Bold")
+  HelpGUI.Add("Text", "x40 y115 w520",
+  "]spooty.local → http://192.168.1.2:3013`n" .
+  "]glance.local → http://192.168.1.2:3002")
+
+  HelpGUI.Add("Text", "x30 y165 w540", "Quick Actions:").SetFont("s11 Bold")
+  HelpGUI.Add("Text", "x40 y185 w520",
+  "]pirate → Opens multiple piracy/media websites`n" .
+  "rscript → Reloads this AutoHotkey script")
+
+  ; Tab 5: System Info
+  TabControl.UseTab(5)
+  HelpGUI.Add("Text", "x20 y70 w560", "System Information:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y95 w540",
+  "Script Status: ✅ Active and Running`n`n" .
+  "AutoHotkey Version: v2.0`n" .
+  "Single Instance: Enabled`n`n" .
+  "Auto-Update: Ctrl + Shift + F1`n" .
+  "GitHub Source: rocketpowerinc/dotfiles`n`n" .
+  "Key Symbols:`n" .
+  "• # = Windows Key`n" .
+  "• ^ = Ctrl Key`n" .
+  "• + = Shift Key`n" .
+  "• ! = Alt Key")
+
+  ; Add Close button
+  CloseBtn := HelpGUI.Add("Button", "x260 y470 w80 h30", "&Close")
+  CloseBtn.OnEvent("Click", (*) => HelpGUI.Destroy())
+
+  ; Handle GUI close event
+  HelpGUI.OnEvent("Close", (*) => HelpGUI.Destroy())
+
+  ; Show the GUI
+  HelpGUI.Show("w600 h510")
+}
 
 ;*#>>>>>>>
 ;*#>>>>>>>  Actions
