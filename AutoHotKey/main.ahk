@@ -86,20 +86,35 @@
 ^+q::Run("C:\Program Files\qBittorrent\qbittorrent.exe")
 
 ;*#>>>>>>>
-;*#>>>>>>>  Actions
+;*#>>>>>>>  Help Menu
 ;*#>>>>>>>
-
-;current window always ontop
-^+Up::WinSetAlwaysOnTop -1, "A"
 
 ; Launch Help with Ctrl + Shift + H
 ^+h::MsgBox("Main.ahk script is active")
 
+;*#>>>>>>>
+;*#>>>>>>>  Actions
+;*#>>>>>>>
+
 ; Minimize all windows with Ctrl + Shift + Space
 ^+Space::WinMinimizeAll
 
+;current window always ontop
+^+Up::WinSetAlwaysOnTop -1, "A"
+
 ; Empty Recycle Bin with Ctrl + Shift + F1
 ^+F2::Run('powershell.exe -Command "Clear-RecycleBin -Force; (New-Object Media.SoundPlayer \"$env:WINDIR\\Media\\Windows Recycle.wav\").PlaySync()"', , "Hide")
+
+; Go back to Virtual Desktop 1 with Ctrl + Shift + Left Arrow
+^+Left:: {
+  ToolTip("Going to Desktop 1...")
+  ; Go far left to ensure we reach desktop 1
+  Loop 6 {
+    Send("#^{Left}")
+    Sleep(50)
+  }
+  SetTimer(() => ToolTip(), -1000)
+}
 
 ;*#>>>>>>>
 ;*#>>>>>>>  Virtual Desktops Setup
