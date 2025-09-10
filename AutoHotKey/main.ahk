@@ -1,5 +1,8 @@
 ﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
+#WinActivateForce
+KeyHistory 500              ; Max 500
+
 
 ;!;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;! Description:    AutoHotkey scripts that make my daily life a bit easier :)   ;
