@@ -212,9 +212,9 @@ lazyg() {
     git push
 }
 
-#!################################
-#!#         Docker-Compose       #
-#!################################
+#!#######################
+#!#         Docker      #
+#!#######################
 printf "\033[0;35mDocker-Compose Commands:\033[0m \033[0;34mdocker{up, down, pull, update, clean, ip}\033[0m\n"
 
 dockerup() {
@@ -256,7 +256,31 @@ dockerip() {
 
 alias lzd='lazydocker'
 
+function factory-reset-docker() {
+    # Stop all running Docker containers
+    sudo docker stop $(sudo docker ps -q)
 
+    # Remove all containers (running or stopped)
+    sudo docker rm -f $(sudo docker ps -aq)
+
+    # Remove all Docker images
+    sudo docker rmi $(sudo docker images -q)
+
+    # Remove all unused volumes
+    sudo docker volume prune -f
+
+    # Remove all unused networks
+    sudo docker network prune -f
+
+    # Delete any files/folders inside $HOME/Docker (cleanup custom Docker data dir)
+    sudo rm -rf $HOME/Docker/*/
+
+    # Delete any remaining files in $HOME/Docker
+    sudo rm -f $HOME/Docker/*
+
+    # Perform a deep clean: remove all unused containers, networks, images, and volumes
+    sudo docker system prune -a --volumes -f
+}
 #!################################
 #!#           Birthday           #
 #!################################
