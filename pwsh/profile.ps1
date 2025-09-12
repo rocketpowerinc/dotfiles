@@ -47,7 +47,7 @@ if ($IsWindows) {
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\Bin\Cross-Platform-Powershell' -ForegroundColor Blue
   Write-Host "Path Exports:" -ForegroundColor Magenta -NoNewline; Write-Host '$env:USERPROFILE\go\bin' -ForegroundColor Blue
 
-  function SeePath { ($env:Path) -split ';'}
+  function SeePath { ($env:Path) -split ';' }
 
 
   $Env:Path += ";$env:USERPROFILE\Bin"
@@ -86,8 +86,8 @@ if ($IsWindows) {
   Write-Host "Admin Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " WinVer, WinVerCli, WinKey" -ForegroundColor Blue
 
   #function WinVer { *Is a Built in Command to Windows*}
-  function WinVerCli { (Get-WmiObject -Class Win32_OperatingSystem).Caption}
-  function Winkey { (Get-WmiObject -Query 'Select * from SoftwareLicensingService').OA3xOriginalProductKey}
+  function WinVerCli { (Get-WmiObject -Class Win32_OperatingSystem).Caption }
+  function Winkey { (Get-WmiObject -Query 'Select * from SoftwareLicensingService').OA3xOriginalProductKey }
 
 
   Write-Host "Dotfile Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " Edit (PROFILE.CurrentUserAllHosts), EditTitus (Profile), resource" -ForegroundColor Blue
@@ -151,6 +151,29 @@ if ($IsWindows) {
 
   Set-Alias lzd lazydocker
 
+  function Reset-Docker {
+    # Stop all containers
+    docker stop $(docker ps -q) 2>$null
+
+    # Remove all containers
+    docker rm -f $(docker ps -aq) 2>$null
+
+    # Remove all images
+    docker rmi $(docker images -q) 2>$null
+
+    # Prune volumes and networks
+    docker volume prune -f
+    docker network prune -f
+
+    # Remove everything inside $HOME\Docker
+    $dockerPath = Join-Path $HOME "Docker"
+    if (Test-Path $dockerPath) {
+      Get-ChildItem -Path $dockerPath -Recurse -Force | Remove-Item -Recurse -Force
+    }
+
+    # Full system prune
+    docker system prune -a --volumes -f
+  }
 
   #*################################
   #*#         Docker-Compose       #
