@@ -215,6 +215,7 @@ lazyg() {
 #!#######################
 #!#         Docker      #
 #!#######################
+printf "\033[0;35mDocker Commands:\033[0m \033[0;34mfactory-reset-docker, lzd (lazydocker)\033[0m\n"
 printf "\033[0;35mDocker-Compose Commands:\033[0m \033[0;34mdocker{up, down, pull, update, clean, ip}\033[0m\n"
 
 dockerup() {
