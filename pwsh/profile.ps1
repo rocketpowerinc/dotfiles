@@ -147,11 +147,11 @@ if ($IsWindows) {
   #*#             Docker                 #
   #*######################################
 
-  Write-Host "Docker Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " lzd {lazydocker}" -ForegroundColor Blue
+  Write-Host "Docker Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " Factory_Reset_Docker, lzd {lazydocker}" -ForegroundColor Blue
 
   Set-Alias lzd lazydocker
 
-  function Reset-Docker {
+  function Factory_Reset_Docker {
     # Stop all containers
     docker stop $(docker ps -q) 2>$null
 

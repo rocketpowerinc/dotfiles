@@ -870,9 +870,10 @@ if [ -n "${ZSH_VERSION-}" ]; then
     }
 fi
 
-#!################################
-#!#         Docker-Compose       #
-#!################################
+#!########################
+#!#         Docker       #
+#!########################
+echo -e "${MAGENTA}Docker Commands:${ENDCOLOR} ${BLUE}factory-reset-docker, lzd (lazydocker) ${ENDCOLOR}"
 echo -e "${MAGENTA}Docker-Compose Commands:${ENDCOLOR} ${BLUE}docker{up, down, pull, update, clean, ip}${ENDCOLOR}"
 
 dockerup() {
@@ -912,7 +913,7 @@ dockerip() {
     done
 }
 
-########### LazyDocker
+########### LazyDocker (this version works with the lazydocker container I made not if lazydocker is installed on host)
 lazydocker() {
     sudo docker exec -it lazydocker lazydocker
 }
@@ -921,7 +922,7 @@ alias lzd='lazydocker'
 
 
 
-function reset_docker() {
+function factory-reset-docker() {
     # Stop all running Docker containers
     sudo docker stop $(sudo docker ps -q)
 
