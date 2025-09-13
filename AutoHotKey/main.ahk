@@ -101,7 +101,7 @@ KeyHistory 500 ; Max 500
   HelpGUI.Add("Text", "x10 y10 w580 h30 Center", "🚀 Main.ahk Script - All Available Commands").SetFont("s14 Bold")
 
   ; Create tabs for organization
-  TabControl := HelpGUI.Add("Tab3", "x10 y50 w580 h410", ["Hotkeys", "Virtual Desktops", "Text Expansions", "System"])
+  TabControl := HelpGUI.Add("Tab3", "x10 y50 w580 h450", ["Hotkeys", "Virtual Desktops", "Text Expansions", "System"])
 
   ; Tab 1: Hotkeys (Combined App Launchers and Actions)
   TabControl.UseTab(1)
@@ -174,14 +174,14 @@ KeyHistory 500 ; Max 500
   "• ! = Alt Key")
 
   ; Add Close button
-  CloseBtn := HelpGUI.Add("Button", "x260 y490 w80 h30", "&Close")
+  CloseBtn := HelpGUI.Add("Button", "x260 y510 w80 h30", "&Close")
   CloseBtn.OnEvent("Click", (*) => HelpGUI.Destroy())
 
   ; Handle GUI close event
   HelpGUI.OnEvent("Close", (*) => HelpGUI.Destroy())
 
   ; Show the GUI
-  HelpGUI.Show("w600 h530")
+  HelpGUI.Show("w600 h550")
 }
 
 ;*#>>>>>>>
