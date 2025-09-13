@@ -94,7 +94,7 @@ KeyHistory 500 ; Max 500
 ; Launch Help with Ctrl + Shift + H
 ^+h:: {
   ; Create the Help GUI with scroll bars
-  HelpGUI := Gui("+Resize +MinSize600x500 +VScroll +HScroll", "AutoHotkey Script Help - All Hotkeys & Text Expansions")
+  HelpGUI := Gui("+Resize +MinSize600x500", "AutoHotkey Script Help - All Hotkeys & Text Expansions")
   HelpGUI.SetFont("s10")
 
   ; Add title
