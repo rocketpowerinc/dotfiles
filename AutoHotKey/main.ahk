@@ -105,8 +105,8 @@ KeyHistory 500 ; Max 500
 
   ; Tab 1: App Launchers
   TabControl.UseTab(1)
-  HelpGUI.Add("Text", "x20 y80 w560", "Launch Applications:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540", 
+  HelpGUI.Add("Text", "x20 y80 w560 h20", "Launch Applications:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y105 w540 h280", 
   "Ctrl + Shift + N → Launch Notion`n" .
   "Ctrl + Shift + O → Launch Todoist`n" .
   "Ctrl + Shift + D → Launch Docker Desktop`n" .
@@ -121,22 +121,22 @@ KeyHistory 500 ; Max 500
 
   ; Tab 2: Actions & Arrows
   TabControl.UseTab(2)
-  HelpGUI.Add("Text", "x20 y80 w560", "Window Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540",
+  HelpGUI.Add("Text", "x20 y80 w560 h20", "Window Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y105 w540 h80",
   "Ctrl + Shift + Up → Toggle Always On Top`n" .
   "Ctrl + Shift + Down → Minimize All Windows`n" .
   "Ctrl + Shift + Left → Go to Virtual Desktop 1`n" .
   "Ctrl + Shift + F2 → Empty Recycle Bin")
 
-  HelpGUI.Add("Text", "x20 y210 w560", "System Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y235 w540",
+  HelpGUI.Add("Text", "x20 y210 w560 h20", "System Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y235 w540 h40",
   "Ctrl + Shift + H → Show This Help Menu`n" .
   "Ctrl + Shift + F1 → Update Script from GitHub")
 
   ; Tab 3: Virtual Desktops
   TabControl.UseTab(3)
-  HelpGUI.Add("Text", "x20 y80 w560", "Virtual Desktop Setup:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540",
+  HelpGUI.Add("Text", "x20 y80 w560 h20", "Virtual Desktop Setup:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y105 w540 h300",
   "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps`n`n" .
   "This creates exactly 5 virtual desktops and launches:`n" .
   "• Desktop 1: Notion + Firefox (split screen)`n" .
@@ -149,22 +149,22 @@ KeyHistory 500 ; Max 500
 
   ; Tab 4: Text Expansions
   TabControl.UseTab(4)
-  HelpGUI.Add("Text", "x20 y80 w560", "Text Expansions (type these anywhere):").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x20 y80 w560 h20", "Text Expansions (type these anywhere):").SetFont("s12 Bold")
 
-  HelpGUI.Add("Text", "x30 y105 w540", "Server Shortcuts:").SetFont("s11 Bold")
-  HelpGUI.Add("Text", "x40 y125 w520",
+  HelpGUI.Add("Text", "x30 y105 w540 h18", "Server Shortcuts:").SetFont("s11 Bold")
+  HelpGUI.Add("Text", "x40 y125 w520 h40",
   "]spooty.local → http://192.168.1.2:3013`n" .
   "]glance.local → http://192.168.1.2:3002")
 
-  HelpGUI.Add("Text", "x30 y175 w540", "Quick Actions:").SetFont("s11 Bold")
-  HelpGUI.Add("Text", "x40 y195 w520",
+  HelpGUI.Add("Text", "x30 y175 w540 h18", "Quick Actions:").SetFont("s11 Bold")
+  HelpGUI.Add("Text", "x40 y195 w520 h40",
   "]pirate → Opens multiple piracy/media websites`n" .
   "]reload → Reloads this AutoHotkey script")
 
   ; Tab 5: System Info
   TabControl.UseTab(5)
-  HelpGUI.Add("Text", "x20 y80 w560", "System Information:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540",
+  HelpGUI.Add("Text", "x20 y80 w560 h20", "System Information:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y105 w540 h280",
   "Script Status: ✅ Active and Running`n`n" .
   "AutoHotkey Version: v2.0`n" .
   "Single Instance: Enabled`n`n" .
