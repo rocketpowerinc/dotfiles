@@ -323,7 +323,13 @@ pages:
                 subreddit: kiwix
                 show-thumbnails: true
 
+              - type: reddit
+                subreddit: BugOut
+                show-thumbnails: true
 
+              - type: reddit
+                subreddit: JoeRogan
+                show-thumbnails: true
 
 #!###############################  Page 3 #######################################
   - name: FamilyOS
