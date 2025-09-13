@@ -101,12 +101,12 @@ KeyHistory 500 ; Max 500
   HelpGUI.Add("Text", "x10 y10 w580 h30 Center", "🚀 Main.ahk Script - All Available Commands").SetFont("s14 Bold")
 
   ; Create tabs for organization
-  TabControl := HelpGUI.Add("Tab3", "x10 y50 w580 h410", ["App Launchers", "Actions & Arrows", "Virtual Desktops", "Text Expansions", "System"])
+  TabControl := HelpGUI.Add("Tab3", "x10 y50 w580 h410", ["Hotkeys", "Virtual Desktops", "Text Expansions", "System"])
 
-  ; Tab 1: App Launchers
+  ; Tab 1: Hotkeys (Combined App Launchers and Actions)
   TabControl.UseTab(1)
-  HelpGUI.Add("Text", "x20 y80 w560 h20", "Launch Applications:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540 h280", 
+  HelpGUI.Add("Text", "x20 y80 w560 h20", "Application Launchers:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y105 w540 h180", 
   "Ctrl + Shift + N → Launch Notion`n" .
   "Ctrl + Shift + O → Launch Todoist`n" .
   "Ctrl + Shift + D → Launch Docker Desktop`n" .
@@ -119,22 +119,17 @@ KeyHistory 500 ; Max 500
   "Ctrl + Shift + J → Launch JDownloader2`n" .
   "Ctrl + Shift + Q → Launch qBittorrent")
 
-  ; Tab 2: Actions & Arrows
-  TabControl.UseTab(2)
-  HelpGUI.Add("Text", "x20 y80 w560 h20", "Window Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540 h80",
+  HelpGUI.Add("Text", "x20 y295 w560 h20", "Window & System Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y320 w540 h100",
   "Ctrl + Shift + Up → Toggle Always On Top`n" .
   "Ctrl + Shift + Down → Minimize All Windows`n" .
   "Ctrl + Shift + Left → Go to Virtual Desktop 1`n" .
-  "Ctrl + Shift + F2 → Empty Recycle Bin")
-
-  HelpGUI.Add("Text", "x20 y210 w560 h20", "System Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y235 w540 h40",
+  "Ctrl + Shift + F2 → Empty Recycle Bin`n" .
   "Ctrl + Shift + H → Show This Help Menu`n" .
   "Ctrl + Shift + F1 → Update Script from GitHub")
 
-  ; Tab 3: Virtual Desktops
-  TabControl.UseTab(3)
+  ; Tab 2: Virtual Desktops
+  TabControl.UseTab(2)
   HelpGUI.Add("Text", "x20 y80 w560 h20", "Virtual Desktop Setup:").SetFont("s12 Bold")
   HelpGUI.Add("Text", "x30 y105 w540 h300",
   "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps`n`n" .
@@ -147,8 +142,8 @@ KeyHistory 500 ; Max 500
   "Quick Navigation:`n" .
   "• Ctrl + Shift + Left → Jump to Desktop 1 from anywhere")
 
-  ; Tab 4: Text Expansions
-  TabControl.UseTab(4)
+  ; Tab 3: Text Expansions
+  TabControl.UseTab(3)
   HelpGUI.Add("Text", "x20 y80 w560 h20", "Text Expansions (type these anywhere):").SetFont("s12 Bold")
 
   HelpGUI.Add("Text", "x30 y105 w540 h18", "Server Shortcuts:").SetFont("s11 Bold")
@@ -161,8 +156,8 @@ KeyHistory 500 ; Max 500
   "]pirate → Opens multiple piracy/media websites`n" .
   "]reload → Reloads this AutoHotkey script")
 
-  ; Tab 5: System Info
-  TabControl.UseTab(5)
+  ; Tab 4: System Info
+  TabControl.UseTab(4)
   HelpGUI.Add("Text", "x20 y80 w560 h20", "System Information:").SetFont("s12 Bold")
   HelpGUI.Add("Text", "x30 y105 w540 h280",
   "Script Status: ✅ Active and Running`n`n" .
