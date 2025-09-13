@@ -98,10 +98,10 @@ KeyHistory 500 ; Max 500
   HelpGUI.SetFont("s10")
 
   ; Add title
-  HelpGUI.Add("Text", "x10 y10 w580 Center", "🚀 Main.ahk Script - All Available Commands").SetFont("s14 Bold")
+  HelpGUI.Add("Text", "x10 y10 w580 h30 Center", "🚀 Main.ahk Script - All Available Commands").SetFont("s14 Bold")
 
   ; Create tabs for organization
-  TabControl := HelpGUI.Add("Tab3", "x10 y40 w580 h420", ["App Launchers", "Actions & Arrows", "Virtual Desktops", "Text Expansions", "System"])
+  TabControl := HelpGUI.Add("Tab3", "x10 y50 w580 h410", ["App Launchers", "Actions & Arrows", "Virtual Desktops", "Text Expansions", "System"])
 
   ; Tab 1: App Launchers
   TabControl.UseTab(1)
