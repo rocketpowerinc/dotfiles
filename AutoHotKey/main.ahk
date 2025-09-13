@@ -105,28 +105,33 @@ KeyHistory 500 ; Max 500
 
   ; Tab 1: Hotkeys (Combined App Launchers and Actions)
   TabControl.UseTab(1)
-  HelpGUI.Add("Text", "x20 y80 w560 h20", "Application Launchers:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x20 y80 w560 h20", "Alpha Keys Actions:").SetFont("s12 Bold")
   HelpGUI.Add("Text", "x30 y105 w540 h180",
   "Ctrl + Shift + Enter → Launch Windows Terminal`n" .
+  "Ctrl + Shift + A → Launch go-pwr`n" .
+  "Ctrl + Shift + B → Launch Firefox`n" .
+  "Ctrl + Shift + D → Launch Docker Desktop`n" .
+  "Ctrl + Shift + F → Launch File Explorer`n" .
+  "Ctrl + Shift + G → Launch Steam`n" .
+  "Ctrl + Shift + H → Show This Help Menu`n" .
+  "Ctrl + Shift + J → Launch JDownloader2`n" .
   "Ctrl + Shift + N → Launch Notion`n" .
   "Ctrl + Shift + O → Launch Todoist`n" .
-  "Ctrl + Shift + D → Launch Docker Desktop`n" .
-  "Ctrl + Shift + B → Launch Firefox`n" .
-  "Ctrl + Shift + F → Launch File Explorer`n" .
-  "Ctrl + Shift + S → Launch Spotify`n" .
-  "Ctrl + Shift + A → Launch go-pwr`n" .
-  "Ctrl + Shift + G → Launch Steam`n" .
-  "Ctrl + Shift + J → Launch JDownloader2`n" .
-  "Ctrl + Shift + Q → Launch qBittorrent")
+  "Ctrl + Shift + Q → Launch qBittorrent`n" .
+  "Ctrl + Shift + S → Launch Spotify")
 
-  HelpGUI.Add("Text", "x20 y295 w560 h20", "Window & System Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y320 w540 h100",
+  HelpGUI.Add("Text", "x20 y295 w560 h20", "Arrow Keys Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y320 w540 h60",
   "Ctrl + Shift + Up → Toggle Always On Top`n" .
   "Ctrl + Shift + Down → Minimize All Windows`n" .
-  "Ctrl + Shift + Left → Go to Virtual Desktop 1`n" .
-  "Ctrl + Shift + F2 → Empty Recycle Bin`n" .
-  "Ctrl + Shift + H → Show This Help Menu`n" .
-  "Ctrl + Shift + F1 → Update Script from GitHub")
+  "Ctrl + Shift + Left → Go to Virtual Desktop 1")
+
+  HelpGUI.Add("Text", "x20 y390 w560 h20", "F Keys Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y415 w540 h40",
+  "Ctrl + Shift + F1 → Update Script from GitHub`n" .
+  "Ctrl + Shift + F2 → Empty Recycle Bin"
+  "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps`n`n" .)
+
 
   ; Tab 2: Virtual Desktops
   TabControl.UseTab(2)
@@ -163,8 +168,6 @@ KeyHistory 500 ; Max 500
   "Script Status: ✅ Active and Running`n`n" .
   "AutoHotkey Version: v2.0`n" .
   "Single Instance: Enabled`n`n" .
-  "Auto-Update: Ctrl + Shift + F1`n" .
-  "GitHub Source: rocketpowerinc/dotfiles`n`n" .
   "Key Symbols:`n" .
   "• # = Windows Key`n" .
   "• ^ = Ctrl Key`n" .
