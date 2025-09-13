@@ -106,7 +106,7 @@ KeyHistory 500 ; Max 500
   ; Tab 1: Hotkeys (Combined App Launchers and Actions)
   TabControl.UseTab(1)
   HelpGUI.Add("Text", "x20 y80 w560 h20", "Alpha Keys Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540 h180",
+  HelpGUI.Add("Text", "x30 y105 w540 h240",
   "Ctrl + Shift + Enter → Launch Windows Terminal`n" .
   "Ctrl + Shift + A → Launch go-pwr`n" .
   "Ctrl + Shift + B → Launch Firefox`n" .
@@ -120,14 +120,14 @@ KeyHistory 500 ; Max 500
   "Ctrl + Shift + Q → Launch qBittorrent`n" .
   "Ctrl + Shift + S → Launch Spotify")
 
-  HelpGUI.Add("Text", "x20 y295 w560 h20", "Arrow Keys Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y320 w540 h60",
+  HelpGUI.Add("Text", "x20 y355 w560 h20", "Arrow Keys Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y380 w540 h60",
   "Ctrl + Shift + Up → Toggle Always On Top`n" .
   "Ctrl + Shift + Down → Minimize All Windows`n" .
   "Ctrl + Shift + Left → Go to Virtual Desktop 1")
 
-  HelpGUI.Add("Text", "x20 y390 w560 h20", "F Keys Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y415 w540 h60",
+  HelpGUI.Add("Text", "x20 y450 w560 h20", "F Keys Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y475 w540 h60",
   "Ctrl + Shift + F1 → Reloads this AutoHotkey script`n" .
   "Ctrl + Shift + F2 → Empty Recycle Bin`n" .
   "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps")
