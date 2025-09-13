@@ -160,7 +160,7 @@ KeyHistory 500              ; Max 500
   HelpGUI.Add("Text", "x30 y165 w540", "Quick Actions:").SetFont("s11 Bold")
   HelpGUI.Add("Text", "x40 y185 w520",
   "]pirate → Opens multiple piracy/media websites`n" .
-  "rscript → Reloads this AutoHotkey script")
+  "]reload → Reloads this AutoHotkey script")
 
   ; Tab 5: System Info
   TabControl.UseTab(5)
