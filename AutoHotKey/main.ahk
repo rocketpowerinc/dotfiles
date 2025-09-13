@@ -126,12 +126,11 @@ KeyHistory 500 ; Max 500
   "Ctrl + Shift + Down → Minimize All Windows`n" .
   "Ctrl + Shift + Left → Go to Virtual Desktop 1")
 
-  HelpGUI.Add("Text", "x20 y390 w560 h20", "F Keys Actions:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y415 w540 h40",
+  HelpGUI.Add("Text", "x20 y390 w560 h20", "F-Key Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x30 y415 w540 h60",
   "Ctrl + Shift + F1 → Update Script from GitHub`n" .
-  "Ctrl + Shift + F2 → Empty Recycle Bin"
-  "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps`n`n" .)
-
+  "Ctrl + Shift + F2 → Empty Recycle Bin`n" .
+  "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps")
 
   ; Tab 2: Virtual Desktops
   TabControl.UseTab(2)
