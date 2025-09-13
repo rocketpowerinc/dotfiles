@@ -126,9 +126,9 @@ KeyHistory 500 ; Max 500
   "Ctrl + Shift + Down → Minimize All Windows`n" .
   "Ctrl + Shift + Left → Go to Virtual Desktop 1")
 
-  HelpGUI.Add("Text", "x20 y390 w560 h20", "F-Key Actions:").SetFont("s12 Bold")
+  HelpGUI.Add("Text", "x20 y390 w560 h20", "F Keys Actions:").SetFont("s12 Bold")
   HelpGUI.Add("Text", "x30 y415 w540 h60",
-  "Ctrl + Shift + F1 → Update Script from GitHub`n" .
+  "Ctrl + Shift + F1 → Reloads this AutoHotkey script`n" .
   "Ctrl + Shift + F2 → Empty Recycle Bin`n" .
   "Ctrl + Shift + F3 → Setup 5 Virtual Desktops with Apps")
 
@@ -174,14 +174,14 @@ KeyHistory 500 ; Max 500
   "• ! = Alt Key")
 
   ; Add Close button
-  CloseBtn := HelpGUI.Add("Button", "x260 y470 w80 h30", "&Close")
+  CloseBtn := HelpGUI.Add("Button", "x260 y490 w80 h30", "&Close")
   CloseBtn.OnEvent("Click", (*) => HelpGUI.Destroy())
 
   ; Handle GUI close event
   HelpGUI.OnEvent("Close", (*) => HelpGUI.Destroy())
 
   ; Show the GUI
-  HelpGUI.Show("w600 h510")
+  HelpGUI.Show("w600 h530")
 }
 
 ;*#>>>>>>>
