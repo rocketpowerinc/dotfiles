@@ -106,12 +106,12 @@ KeyHistory 500 ; Max 500
   ; Tab 1: Hotkeys (Combined App Launchers and Actions)
   TabControl.UseTab(1)
   HelpGUI.Add("Text", "x20 y80 w560 h20", "Application Launchers:").SetFont("s12 Bold")
-  HelpGUI.Add("Text", "x30 y105 w540 h180", 
+  HelpGUI.Add("Text", "x30 y105 w540 h180",
+  "Ctrl + Shift + Enter → Launch Windows Terminal`n" .
   "Ctrl + Shift + N → Launch Notion`n" .
   "Ctrl + Shift + O → Launch Todoist`n" .
   "Ctrl + Shift + D → Launch Docker Desktop`n" .
   "Ctrl + Shift + B → Launch Firefox`n" .
-  "Ctrl + Shift + Enter → Launch Windows Terminal`n" .
   "Ctrl + Shift + F → Launch File Explorer`n" .
   "Ctrl + Shift + S → Launch Spotify`n" .
   "Ctrl + Shift + A → Launch go-pwr`n" .
