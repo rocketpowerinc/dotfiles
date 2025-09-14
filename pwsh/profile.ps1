@@ -373,6 +373,16 @@ if ($IsWindows) {
 
   function pyserver { python -m http.server 9999 } #*Starts a python server on port 9999 in current folder
 
+
+  #*###############################################################
+  #*#                       Misc                                 ##
+  #*###############################################################
+
+  #Mimic MacOS Clipboard Commands to keep things consistent
+  Set-Alias pbcopy Set-Clipboard
+  Set-Alias pbpaste Get-Clipboard
+
+
   #*############################
   #*#         Birthday         #
   #*############################
