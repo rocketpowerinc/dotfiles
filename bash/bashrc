@@ -691,6 +691,11 @@ lazyg() {
 #!###############################################################
 #!#                       Misc                                 ##
 #!###############################################################
+
+#Mimic MacOS copy and paste commands with xclip to keep things consistent but xclip has to be installed and might be only x11
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
 alias df='df -h'               # human-readable sizes
 alias free='free -m'           # show sizes in MB
 alias grep='grep --color=auto' # colorize output (good for log files)
