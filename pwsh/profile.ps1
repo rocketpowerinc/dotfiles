@@ -379,6 +379,8 @@ if ($IsWindows) {
   #*###############################################################
 
   #Mimic MacOS Clipboard Commands to keep things consistent
+  #Example usage: Get-Process | pbcopy -> then just pbpaste
+  #Another example usage: Write-Output "Hello World" | pbcopy
   Set-Alias pbcopy Set-Clipboard
   Set-Alias pbpaste Get-Clipboard
 
