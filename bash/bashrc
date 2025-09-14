@@ -693,7 +693,7 @@ lazyg() {
 #!###############################################################
 
 #Mimic MacOS copy and paste commands with xclip to keep things consistent but xclip has to be installed and might be only x11
-# example usage: ls | pbcopy -> then just pbpaste 
+# example usage: ls | pbcopy -> then just pbpaste
 # another example usage: echo "hello" | pbcopy -> then just pbpaste
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
