@@ -151,6 +151,9 @@ if ($IsWindows) {
 
   Set-Alias lzd lazydocker
 
+  # If I have  lazy docker container running, this will open it
+  function lzdcontainer {docker exec -it lazydocker lazydocker}
+
   function Factory_Reset_Docker {
     # Stop all containers
     docker stop $(docker ps -q) 2>$null
