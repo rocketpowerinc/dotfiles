@@ -152,7 +152,7 @@ if ($IsWindows) {
   Set-Alias lzd lazydocker
 
   # If I have  lazy docker container running, this will open it
-  function lzdcontainer {docker exec -it lazydocker lazydocker}
+  function lzdcontainer { docker exec -it lazydocker lazydocker }
 
   function Factory_Reset_Docker {
     # Stop all containers
@@ -285,6 +285,45 @@ if ($IsWindows) {
       $_.FullName -notlike "$destination\*"
     } | Move-Item -Destination $destination
   }
+
+  function doomsorthere {
+    # Use the current working directory
+    $currentDir = Get-Location
+
+    Write-Host "Running in: $currentDir" -ForegroundColor Yellow
+
+    # Define the destination folder
+    $destination = Join-Path $currentDir "DELETE"
+
+    # Create the DELETE folder if it doesn’t exist
+    if (-not (Test-Path -Path $destination)) {
+      New-Item -ItemType Directory -Path $destination | Out-Null
+    }
+
+    # Move all files from subfolders to the current folder
+    Get-ChildItem -Path $currentDir -Recurse -File | ForEach-Object {
+      if ($_.DirectoryName -ne $currentDir) {
+        Move-Item -LiteralPath $_.FullName -Destination $currentDir -Force
+      }
+    }
+
+    # Move all files that are NOT .mp4 to DELETE
+    Get-ChildItem -Path $currentDir -File | Where-Object {
+      $_.Extension -ne ".mp4"
+    } | Move-Item -Destination $destination -Force
+
+    # Move any remaining empty folders to DELETE (excluding DELETE itself)
+    Get-ChildItem -Path $currentDir -Directory -Recurse | Where-Object {
+      $_.FullName -ne $destination -and
+      $_.FullName -notlike "$destination\*" -and
+      $_.GetFileSystemInfos().Count -eq 0
+    } | ForEach-Object {
+      Move-Item -LiteralPath $_.FullName -Destination $destination -Force
+    }
+
+    Write-Host "doomsort complete." -ForegroundColor Green
+  }
+
 
   #*############################
   #*#         Titus            #
