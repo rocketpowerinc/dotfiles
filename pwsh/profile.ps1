@@ -252,7 +252,7 @@ if ($IsWindows) {
   #*###############################
   #*#         Doomsday            #
   #*###############################
-  Write-Host "Doomsday Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " doomsort" -ForegroundColor Blue
+  Write-Host "Doomsday Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " doomsort doomsorthere" -ForegroundColor Blue
   function doomsort {
     # Change Directory
     Set-Location "D:\New Downloads\JDownloader"
