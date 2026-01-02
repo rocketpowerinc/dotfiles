@@ -255,7 +255,7 @@ if ($IsWindows) {
   Write-Host "Doomsday Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " doomsort doomsorthere" -ForegroundColor Blue
   function doomsort {
     # Change Directory
-    Set-Location "D:\New Downloads\JDownloader"
+    Set-Location "D:\PrepperOS-Data-Master\New Downloads\JDownloader"
 
     # Move all files to the current directory
     Get-ChildItem -Path . -Recurse -File | Move-Item -Destination .
