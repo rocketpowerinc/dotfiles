@@ -91,13 +91,13 @@
     isNormalUser = true;
     description = "rocket";
     extraGroups = [ "networkmanager" "wheel" ];
-    createDirectories = true;
+    createHome = true;
+    home = "/home/rocket";
     packages = with pkgs; [
     #  thunderbird
     ];
   };
 
-  #xdg.userDirs.enable = true;
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
