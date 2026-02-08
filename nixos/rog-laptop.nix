@@ -13,6 +13,9 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # VM Bootloader
+  #boot.loader.grub.enable = true;
+  #boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -110,12 +113,12 @@
   ##############################################################
   programs.dconf.enable = true;
 
-  services.desktopManager.gnome.extraGSettingsOverrides = ''
-  [org.gnome.desktop.interface]
-  color-scheme='prefer-dark'
-  gtk-theme='Adwaita-dark'
-  icon-theme='Adwaita'
-  '';
+  #services.desktopManager.gnome.extraGSettingsOverrides = ''
+  #[org.gnome.desktop.interface]
+  #color-scheme='prefer-dark'
+  #gtk-theme='Adwaita-dark'
+  #icon-theme='Adwaita'
+  #'';
 
 
 
