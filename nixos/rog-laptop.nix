@@ -98,7 +98,7 @@
 
 
   # Enable automatic login for the user.
-  #services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.enable = false;
   #services.displayManager.autoLogin.user = "rocket";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
