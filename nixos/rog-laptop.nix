@@ -104,15 +104,75 @@
   # Enable flakes and nix-command
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+
+  ##############################################################
+  ################### GNOME DARK MODE ##########################
+  ##############################################################
+  programs.dconf.enable = true;
+
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
+  [org.gnome.desktop.interface]
+  color-scheme='prefer-dark'
+  gtk-theme='Adwaita-dark'
+  icon-theme='Adwaita'
+  '';
+
+
+
+  ####################################################################
+  ### --- FLATPAK ----------------------------------------------
+  ####################################################################
+
+  # Enable Flatpak support (native NixOS module)
+  services.flatpak.enable = true;
+
+  # Enable XDG portals for proper GNOME + Flatpak integration
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+
+  # Automatically add Flathub repo on boot
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    script = ''
+      ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
+  ####################################################################
+  ####################################################################
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
     deskflow
-    gnomeExtensions.dash-to-dock
     blackbox-terminal
-    gnome-tweaks
+    curl
+    wget
+    yad
+    git
     just
+    dconf-editor
+    gnome-tweaks
+    gnome-extension-manager
+    gnomeExtensions.open-bar
+    gnomeExtensions.gsconnect
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.accent-gtk-theme
+    gnomeExtensions.accent-icons-theme
+    gnomeExtensions.arcmenu
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.gtk4-desktop-icons-ng-ding
+    gnomeExtensions.media-controls
+    gnomeExtensions.network-stats
+    gnomeExtensions.removable-drive-menu
+    gnomeExtensions.simpleweather
+    gnomeExtensions.tiling-assistant
+    gnomeExtensions.user-themes
+    gnomeExtensions.appindicator
+    gnomeExtensions.burn-my-windows
+    gnomeExtensions.compiz-windows-effect
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
