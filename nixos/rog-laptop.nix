@@ -160,6 +160,8 @@
     yad
     git
     just
+
+    # Gnome Extensions
     dconf-editor
     gnome-tweaks
     gnome-extension-manager
