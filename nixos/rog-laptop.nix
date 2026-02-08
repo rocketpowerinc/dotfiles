@@ -157,9 +157,21 @@ in
         rebuild = "sudo nixos-rebuild switch";
 
         pull-rebuild = ''
-          sudo curl -fsSL https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/nixos/rog-laptop.nix \
-          | sudo tee /etc/nixos/configuration.nix > /dev/null && sudo nixos-rebuild switch
+          set -e
+
+          TMPDIR=$(mktemp -d)
+
+          git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
+
+          sudo install -m 644 \
+            "$TMPDIR/nixos/rog-laptop.nix" \
+            /etc/nixos/configuration.nix
+
+          rm -rf "$TMPDIR"
+
+          sudo nixos-rebuild switch
         '';
+
 
         edit = ''
           sudo nano /etc/nixos/configuration.nix
