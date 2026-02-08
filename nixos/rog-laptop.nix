@@ -123,7 +123,12 @@
   #icon-theme='Adwaita'
   #'';
 
-
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.desktop.interface]
+    color-scheme='prefer-dark'
+    gtk-theme='Adwaita-dark'
+    icon-theme='Adwaita'
+  '';
 
   ####################################################################
   ### --- FLATPAK ----------------------------------------------
