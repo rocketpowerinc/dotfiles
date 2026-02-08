@@ -187,13 +187,6 @@
     gnomeExtensions.burn-my-windows
     gnomeExtensions.compiz-windows-effect
 
-    # ClipCascade
-      python3
-      python3Packages.pip
-      python3Packages.pygobject3
-      gtk3
-      wl-clipboard
-      dunst
   ];
 
 
