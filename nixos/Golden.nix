@@ -13,9 +13,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # VM Bootloader
-  #boot.loader.grub.enable = true;
-  #boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -28,7 +25,7 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/Toronto";
+  time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -48,9 +45,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  #services.displayManager.gdm.enable = true;
-  #services.desktopManager.gnome.enable = true;
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -110,75 +104,15 @@
   # Enable flakes and nix-command
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-
-  ##############################################################
-  ################### GNOME DARK MODE ##########################
-  ##############################################################
-  programs.dconf.enable = true;
-
-  #services.desktopManager.gnome.extraGSettingsOverrides = ''
-  #[org.gnome.desktop.interface]
-  #color-scheme='prefer-dark'
-  #gtk-theme='Adwaita-dark'
-  #icon-theme='Adwaita'
-  #'';
-
-
-
-  ####################################################################
-  ### --- FLATPAK ----------------------------------------------
-  ####################################################################
-
-  # Enable Flatpak support (native NixOS module)
-  services.flatpak.enable = true;
-
-  # Enable XDG portals for proper GNOME + Flatpak integration
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-
-  # Automatically add Flathub repo on boot
-  systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    script = ''
-      ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-
-  ####################################################################
-  ####################################################################
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    deskflow
-    blackbox-terminal
-    curl
     wget
-    yad
-    git
-    just
-    dconf-editor
-    gnome-tweaks
-    gnome-extension-manager
-    #gnomeExtensions.open-bar
-    gnomeExtensions.gsconnect
+    deskflow
     gnomeExtensions.dash-to-dock
-    gnomeExtensions.dash-to-panel
-    #gnomeExtensions.accent-gtk-theme
-    #gnomeExtensions.accent-icons-theme
-    gnomeExtensions.arcmenu
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.gtk4-desktop-icons-ng-ding
-    gnomeExtensions.media-controls
-    gnomeExtensions.network-stats
-    gnomeExtensions.removable-drive-menu
-    #gnomeExtensions.simpleweather
-    gnomeExtensions.tiling-assistant
-    gnomeExtensions.user-themes
-    gnomeExtensions.appindicator
-    #gnomeExtensions.burn-my-windows
-    #gnomeExtensions.compiz-windows-effect
+    blackbox-terminal
+    gnome-tweaks
+    just
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
