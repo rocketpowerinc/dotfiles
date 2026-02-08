@@ -182,7 +182,17 @@
     gnomeExtensions.appindicator
     gnomeExtensions.burn-my-windows
     gnomeExtensions.compiz-windows-effect
+
+    # ClipCascade
+      python3
+      python3Packages.pip
+      python3Packages.pygobject3
+      gtk3
+      wl-clipboard
+      dunst
   ];
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
