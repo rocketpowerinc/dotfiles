@@ -45,14 +45,17 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  #services.xserver.displayManager.gdm.wayland = false; #!old
-  services.displayManager.gdm.wayland = false;
 
-  # Enable the GNOME Desktop Environment.
+  ########################################
+  ## WAYLAND-ONLY GNOME SETUP
+  ########################################
+
   services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;
+
   services.desktopManager.gnome.enable = true;
+
+  ########################################
 
 
   # Configure keymap in X11
