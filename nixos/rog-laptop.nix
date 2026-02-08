@@ -91,6 +91,8 @@
     isNormalUser = true;
     description = "rocket";
     extraGroups = [ "networkmanager" "wheel" ];
+    createHome = true;
+    home = "/home/rocket";
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -98,12 +100,12 @@
 
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = false;
-  #services.displayManager.autoLogin.user = "rocket";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "rocket";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  #systemd.services."getty@tty1".enable = false;
-  #systemd.services."autovt@tty1".enable = false;
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   # Install firefox.
   programs.firefox.enable = true;
