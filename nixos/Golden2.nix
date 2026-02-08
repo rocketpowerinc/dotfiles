@@ -49,9 +49,11 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
+  #services.displayManager.gdm.enable = true;
+  #services.desktopManager.gnome.enable = true;
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -114,14 +116,19 @@
   ##############################################################
   programs.dconf.enable = true;
 
-  services.desktopManager.gnome.extraGSettingsOverrides = ''
-  [org.gnome.desktop.interface]
-  color-scheme='prefer-dark'
-  gtk-theme='Adwaita-dark'
-  icon-theme='Adwaita'
+  #services.desktopManager.gnome.extraGSettingsOverrides = ''
+  #[org.gnome.desktop.interface]
+  #color-scheme='prefer-dark'
+  #gtk-theme='Adwaita-dark'
+  #icon-theme='Adwaita'
+  #'';
+
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.desktop.interface]
+    color-scheme='prefer-dark'
+    gtk-theme='Adwaita-dark'
+    icon-theme='Adwaita'
   '';
-
-
 
   ####################################################################
   ### --- FLATPAK ----------------------------------------------
@@ -158,12 +165,12 @@
     dconf-editor
     gnome-tweaks
     gnome-extension-manager
-    gnomeExtensions.open-bar
+    #gnomeExtensions.open-bar
     gnomeExtensions.gsconnect
     gnomeExtensions.dash-to-dock
     gnomeExtensions.dash-to-panel
-    gnomeExtensions.accent-gtk-theme
-    gnomeExtensions.accent-icons-theme
+    #gnomeExtensions.accent-gtk-theme
+    #gnomeExtensions.accent-icons-theme
     gnomeExtensions.arcmenu
     gnomeExtensions.blur-my-shell
     gnomeExtensions.clipboard-indicator
@@ -171,12 +178,12 @@
     gnomeExtensions.media-controls
     gnomeExtensions.network-stats
     gnomeExtensions.removable-drive-menu
-    gnomeExtensions.simpleweather
+    #gnomeExtensions.simpleweather
     gnomeExtensions.tiling-assistant
     gnomeExtensions.user-themes
     gnomeExtensions.appindicator
-    gnomeExtensions.burn-my-windows
-    gnomeExtensions.compiz-windows-effect
+    #gnomeExtensions.burn-my-windows
+    #gnomeExtensions.compiz-windows-effect
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
