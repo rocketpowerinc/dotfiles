@@ -1,1 +1,1 @@
-sudo curl -fsSL https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/nixos/rog-laptop.nix | sudo tee -a /etc/nixos/configuration.nix > /dev/null && sudo nixos-rebuild switch
+sudo curl -fsSL https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/nixos/rog-laptop.nix | sudo tee /etc/nixos/configuration.nix > /dev/null && sudo nixos-rebuild switch
