@@ -143,6 +143,11 @@ in
   home-manager.users.rocket = { pkgs, ... }: {
     home.stateVersion = "25.11";
 
+  # This creates the standard folders on login
+    xdg.userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
 #    # Git Config
 #    programs.git = {
 #      enable = true;
