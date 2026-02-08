@@ -154,9 +154,9 @@ in
     programs.bash = {
       enable = true;
       shellAliases = {
-        ll = "ls -l";
-        update = "sudo nixos-rebuild switch";
-        conf = "sudo nano /etc/nixos/configuration.nix";
+        rebuild = "sudo nixos-rebuild switch";
+        pull-rebuild ="sudo curl -fsSL https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/nixos/rog-laptop.nix | sudo tee /etc/nixos/configuration.nix > /dev/null && sudo nixos-rebuild switch"
+        edit = "sudo nano /etc/nixos/configuration.nix";
       };
     };
 
