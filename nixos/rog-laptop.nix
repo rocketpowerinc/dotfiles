@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 let
@@ -81,12 +77,6 @@ in
     home = "/home/rocket";
   };
 
-  # Home Manager Configuration for 'rocket'
-  home-manager.users.rocket = { pkgs, ... }: {
-    home.stateVersion = "25.11";
-    # You can add user-specific home-manager settings here
-  };
-
   # Automatic login
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "rocket";
@@ -95,12 +85,10 @@ in
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  # GNOME Customization
+  # System-wide GNOME Customization
   services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.desktop.interface]
     color-scheme='prefer-dark'
-    gtk-theme='Adwaita-dark'
-    icon-theme='Adwaita'
   '';
 
   # Flatpak
@@ -118,7 +106,7 @@ in
 
   # System Packages
   environment.systemPackages = with pkgs; [
-    #Deskflow
+    deskflow
     blackbox-terminal
     curl
     wget
@@ -149,6 +137,64 @@ in
     gnomeExtensions.compiz-windows-effect
   ];
 
-  # State Version
-  system.stateVersion = "25.11"; 
+  ####################################################################
+  ### HOME MANAGER SETTINGS (User specific)
+  ####################################################################
+  home-manager.users.rocket = { pkgs, ... }: {
+    home.stateVersion = "25.11";
+
+#    # Git Config
+#    programs.git = {
+#      enable = true;
+#      userName = "rocket";
+#      userEmail = "rocket@example.com"; # Change this to your actual email
+#    };
+
+    # Bash Aliases
+    programs.bash = {
+      enable = true;
+      shellAliases = {
+        ll = "ls -l";
+        update = "sudo nixos-rebuild switch";
+        conf = "sudo nano /etc/nixos/configuration.nix";
+      };
+    };
+
+    # GNOME Dconf settings
+    dconf.settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        # Automatically enables these extensions on login
+        enabled-extensions = [
+          "openbar@openbar.org"
+          "gsconnect@andyholmes.github.io"
+          "dash-to-dock@micxgx.gmail.com"
+          "dash-to-panel@jderose9.github.com"
+          "accent-gtk-theme@pavel-v-p.github.io"
+          "accent-icons-theme@pavel-v-p.github.io"
+          "arcmenu@arcmenu.com"
+          "blur-my-shell@aunetx"
+          "clipboard-indicator@tudmotu.com"
+          "ding@rastersoft.com"
+          "mediacontrols@cliffniff.github.com"
+          "netstats@mivoligo.org"
+          "removable-drive-menu@gnome-shell-extensions.gcampax.github.com"
+          "simpleweather@mivoligo.org"
+          "tiling-assistant@leleat-on-github"
+          "user-theme@gnome-shell-extensions.gcampax.github.com"
+          "appindicatorsupport@rgcjonas.gmail.com"
+          "burn-my-windows@tomaszgasior.pl"
+          "compiz-windows-effect@hermes81"
+        ];
+      };
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        clock-show-weekday = true;
+        clock-show-seconds = false;
+      };
+    };
+  };
+
+  # System State Version
+  system.stateVersion = "25.11";
 }
