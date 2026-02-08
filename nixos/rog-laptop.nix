@@ -171,7 +171,7 @@ in
     # These appear in the left sidebar of your file manager
     gtk.gtk3.bookmarks = [
       "file:///home/rocket/Downloads"
-      "file:///etc/nixos
+      "file:///etc/nixos"
     ];
 
     # GNOME Dconf settings
