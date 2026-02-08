@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-cd ~
+mkdir -p $HOME/Downloads
+cd $HOME
 git clone https://github.com/Sathvik-Rao/ClipCascade.git
 cd ClipCascade
 python3 -m venv .venv
