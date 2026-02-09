@@ -198,12 +198,12 @@ in
       };
     };
 
-    # --- NAUTILUS BOOKMARKS ---
-    # These appear in the left sidebar of your file manager
-    gtk.gtk3.bookmarks = [
-      "file:///home/rocket/Downloads"
-      "file:///etc/nixos Nix Config"
-    ];
+#    # --- NAUTILUS BOOKMARKS ---
+#    # These appear in the left sidebar of your file manager
+#    gtk.gtk3.bookmarks = [
+#      "file:///home/rocket/Downloads"
+#      "file:///etc/nixos Nix Config"
+#    ];
 
     # GNOME Dconf settings
     dconf.settings = {
