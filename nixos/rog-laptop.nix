@@ -106,15 +106,19 @@ in
 
   # System Packages
   environment.systemPackages = with pkgs; [
-    deskflow
     blackbox-terminal
     curl
     wget
     yad
     git
     just
-    xclip
-    wl-clipboard
+
+    # Deskflow
+    deskflow
+    xclip #for ClipCascade
+    wl-clipboard #for ClipCascade
+
+    #Gnome
     dconf-editor
     gnome-tweaks
     gnome-extension-manager
