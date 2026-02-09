@@ -144,6 +144,9 @@ in
     home.stateVersion = "25.11";
 
   # This creates the standard folders in $HOME on login
+  # XDG system must be enabled first or the directories won’t be created.
+    xdg.enable = true;
+
     xdg.userDirs = {
       enable = true;
       createDirectories = true;
