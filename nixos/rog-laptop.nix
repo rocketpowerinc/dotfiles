@@ -113,6 +113,8 @@ in
     yad
     git
     just
+    xclip
+    wl-clipboard
     dconf-editor
     gnome-tweaks
     gnome-extension-manager

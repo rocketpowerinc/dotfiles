@@ -15,6 +15,7 @@ nix-shell -p \
   python3 \
   python3Packages.virtualenv \
   python3Packages.pip \
+  python3Packages.tkinter \
   wget \
   unzip \
   --run "$(cat << 'EOF'
@@ -43,7 +44,7 @@ REAL_ROOT=$(dirname "$REQ_PATH")
 cd "$REAL_ROOT"
 
 echo "==> Setting up Python Virtualenv..."
-python3 -m venv .venv
+python3 -m venv .venv --system-site-packages
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
@@ -53,24 +54,15 @@ echo "==> Creating NixOS-compatible systemd service..."
 # Create a wrapper script that loads the Nix environment
 WRAPPER_SCRIPT="$REAL_ROOT/start-clipcascade.sh"
 cat > "$WRAPPER_SCRIPT" <<'WRAPPER_EOF'
-#!/usr/bin/env bash
-# Wrapper script to run ClipCascade with proper Nix dependencies
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p python3 python3Packages.tkinter stdenv.cc.cc.lib ffmpeg xorg.libX11 xorg.libXcursor xorg.libXrandr xorg.libXinerama xorg.libXi xorg.libXfixes wayland libxkbcommon tk
 
-# Activate virtual environment
-source "$(dirname "$0")/.venv/bin/activate"
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 
-# Run with nix-shell to ensure GUI libraries are available
-exec nix-shell -p \
-  python3 \
-  xorg.libX11 \
-  xorg.libXcursor \
-  xorg.libXrandr \
-  xorg.libXinerama \
-  xorg.libXi \
-  xorg.libXfixes \
-  wayland \
-  libxkbcommon \
-  --run "python $(dirname "$0")/main.py"
+# Ensure LD_LIBRARY_PATH includes necessary libraries
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$(nix-build --no-out-link '<nixpkgs>' -A stdenv.cc.cc.lib)/lib"
+
+exec "$SCRIPT_DIR/.venv/bin/python" "$SCRIPT_DIR/main.py"
 WRAPPER_EOF
 
 chmod +x "$WRAPPER_SCRIPT"
@@ -88,6 +80,7 @@ ExecStart=$WRAPPER_SCRIPT
 Restart=always
 RestartSec=5
 Environment="PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin:$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin"
+Environment="DISPLAY=:0"
 
 [Install]
 WantedBy=default.target
