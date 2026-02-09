@@ -199,6 +199,13 @@ in
           rm -rf "$TMPDIR"
         '';
 
+        justfile-install = ''
+          set -e
+
+          curl -fsSL https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/nixos/justfile \
+            | tee -a "$HOME/justfile" > /dev/null
+        '';
+
 
         edit = ''
           sudo nano /etc/nixos/configuration.nix
