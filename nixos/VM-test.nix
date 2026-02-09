@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  # Fetching the 25.11 compatible Home Manager
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
 in
 {
@@ -10,20 +9,15 @@ in
     (import "${home-manager}/nixos")
   ];
 
-  # Bootloader.
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
-  # VM Bootloader
+  # Bootloader (VM Grub)
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/Toronto";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -42,16 +36,13 @@ in
   services.displayManager.gdm.wayland = true;
   services.desktopManager.gnome.enable = true;
 
-  # Keymap
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Printing
   services.printing.enable = true;
 
-  # Sound with pipewire
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -61,15 +52,12 @@ in
     pulse.enable = true;
   };
 
-  # Programs
   programs.firefox.enable = true;
   programs.dconf.enable = true;
 
-  # Nix Settings
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # User Account
   users.users.rocket = {
     isNormalUser = true;
     description = "rocket";
@@ -77,21 +65,16 @@ in
     home = "/home/rocket";
   };
 
-  # Automatic login
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "rocket";
-
-  # Workaround for GNOME autologin
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  # System-wide GNOME Customization
   services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.desktop.interface]
     color-scheme='prefer-dark'
   '';
 
-  # Flatpak
   services.flatpak.enable = true;
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
@@ -104,110 +87,92 @@ in
     '';
   };
 
-  # System Packages
   environment.systemPackages = with pkgs; [
-    curl
-    wget
-    yad
-    git
-    just
-    gnome-tweaks
-    gnome-extension-manager
+    curl wget yad git just gnome-tweaks gnome-extension-manager
     gnomeExtensions.dash-to-dock
+    wl-clipboard xclip # Clipboard tools needed by the app
   ];
 
   ####################################################################
-  ### HOME MANAGER SETTINGS (User specific)
+  ### HOME MANAGER SETTINGS
   ####################################################################
-  home-manager.users.rocket = { pkgs, ... }: {
+  home-manager.users.rocket = { pkgs, ... }: 
+  let
+    # Build ClipCascade directly in Nix
+    clipcascade = pkgs.python3Packages.buildPythonApplication {
+      pname = "clipcascade";
+      version = "latest";
+      src = pkgs.fetchFromGitHub {
+        owner = "Sathvik-Rao";
+        repo = "ClipCascade";
+        rev = "main";
+        # RERUN REBUILD: Change this to the hash Nix gives you in the error message
+        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
+      };
+      propagatedBuildInputs = with pkgs.python3Packages; [
+        pyqt5
+        requests
+        pynput
+      ];
+      doCheck = false;
+      # This fixes the "no entry point" issue
+      format = "other";
+      installPhase = ''
+        mkdir -p $out/bin $out/share/clipcascade
+        cp -r * $out/share/clipcascade
+        makeWrapper ${pkgs.python3}/bin/python $out/bin/clipcascade \
+          --add-flags "$out/share/clipcascade/main.py" \
+          --prefix PYTHONPATH : "$PYTHONPATH:$out/share/clipcascade"
+      '';
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+    };
+  in {
     home.stateVersion = "25.11";
-
-  # This creates the standard folders in $HOME on login
-  #XDG system must be enabled first or the directories won’t be created.
     xdg.enable = true;
-
     xdg.userDirs = {
       enable = true;
       createDirectories = true;
     };
-#    # Git Config
-#    programs.git = {
-#      enable = true;
-#      userName = "rocket";
-#      userEmail = "rocket@example.com"; # Change this to your actual email
-#    };
 
-    # Bash Aliases
+    # Systemd service defined inside Home Manager
+    systemd.user.services.clipcascade = {
+      Unit = {
+        Description = "ClipCascade Clipboard Sync";
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${clipcascade}/bin/clipcascade";
+        Restart = "always";
+        RestartSec = 5;
+        Environment = "PATH=${pkgs.lib.makeBinPath [ pkgs.wl-clipboard pkgs.xclip ]}";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+
     programs.bash = {
       enable = true;
       shellAliases = {
         rebuild = "sudo nixos-rebuild switch";
-
-        pull-rebuild = ''
-          set -e
-
-          TMPDIR=$(mktemp -d)
-
-          git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
-
-          sudo install -m 644 \
-            "$TMPDIR/nixos/rog-laptop.nix" \
-            /etc/nixos/configuration.nix
-
-          rm -rf "$TMPDIR"
-
-          sudo nixos-rebuild switch
-        '';
-
-
-        edit = ''
-          sudo nano /etc/nixos/configuration.nix
-        '';
+        edit = "sudo nano /etc/nixos/configuration.nix";
       };
     };
 
-    # --- NAUTILUS BOOKMARKS ---
-    # These appear in the left sidebar of your file manager
     gtk.gtk3.bookmarks = [
       "file:///home/rocket/Downloads"
       "file:///etc/nixos Nix Config"
     ];
 
-    # GNOME Dconf settings
     dconf.settings = {
       "org/gnome/shell" = {
         disable-user-extensions = false;
-        # Automatically enables these extensions on login
         enabled-extensions = [
-          "openbar@openbar.org"
-          "gsconnect@andyholmes.github.io"
           "dash-to-dock@micxgx.gmail.com"
-          "dash-to-panel@jderose9.github.com"
-          "accent-gtk-theme@pavel-v-p.github.io"
-          "accent-icons-theme@pavel-v-p.github.io"
-          "arcmenu@arcmenu.com"
-          "blur-my-shell@aunetx"
           "clipboard-indicator@tudmotu.com"
-          "ding@rastersoft.com"
-          "mediacontrols@cliffniff.github.com"
-          "netstats@mivoligo.org"
-          "removable-drive-menu@gnome-shell-extensions.gcampax.github.com"
-          "simpleweather@mivoligo.org"
-          "tiling-assistant@leleat-on-github"
-          "user-theme@gnome-shell-extensions.gcampax.github.com"
           "appindicatorsupport@rgcjonas.gmail.com"
-          "burn-my-windows@tomaszgasior.pl"
-          "compiz-windows-effect@hermes81"
         ];
-      };
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-        clock-show-weekday = true;
-        clock-show-seconds = false;
       };
     };
   };
 
-  # System State Version
   system.stateVersion = "25.11";
 }
