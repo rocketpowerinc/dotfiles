@@ -186,6 +186,11 @@ in
           sudo nixos-rebuild switch
         '';
 
+      clipcascade-install = ''
+        set -e
+        bash <(curl -fsSL https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/nixos/clipcascade-install.sh)
+      '';
+
 
         edit = ''
           sudo nano /etc/nixos/configuration.nix
