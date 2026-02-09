@@ -193,12 +193,10 @@ in
 
           git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
 
-          cp "$TMPDIR/nixos/clipcascade-install.sh" "$HOME/Downloads/clipcascade-install.sh"
+          chmod +x "$TMPDIR/nixos/clipcascade-install.sh"
+          bash "$TMPDIR/nixos/clipcascade-install.sh"
 
           rm -rf "$TMPDIR"
-
-          chmod +x "$HOME/Downloads/clipcascade-install.sh"
-          bash "$HOME/Downloads/clipcascade-install.sh"
         '';
 
 
