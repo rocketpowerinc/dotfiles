@@ -186,10 +186,20 @@ in
           sudo nixos-rebuild switch
         '';
 
-      clipcascade-install = ''
-        set -e
-        bash <(curl -fsSL https://raw.githubusercontent.com/rocketpowerinc/dotfiles/refs/heads/main/nixos/clipcascade-install.sh)
-      '';
+        clipcascade-install = ''
+          set -e
+
+          TMPDIR=$(mktemp -d)
+
+          git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
+
+          cp "$TMPDIR/nixos/clipcascade-install.sh" "$HOME/Downloads/clipcascade-install.sh"
+
+          rm -rf "$TMPDIR"
+
+          chmod +x "$HOME/Downloads/clipcascade-install.sh"
+          bash "$HOME/Downloads/clipcascade-install.sh"
+        '';
 
 
         edit = ''
