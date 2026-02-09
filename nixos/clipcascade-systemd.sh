@@ -15,3 +15,5 @@ EOF
 
 systemctl --user daemon-reload && \
 systemctl --user enable --now clipcascade.service
+
+#todo See if it worked with systemctl --user status clipcascade.service
