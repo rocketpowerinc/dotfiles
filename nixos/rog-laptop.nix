@@ -164,7 +164,7 @@ in
 #      userEmail = "rocket@example.com"; # Change this to your actual email
 #    };
 
-    #Export Paths
+    #Export Paths ($HOME/.local/bin is for go-pwr app)
     home.sessionPath = [
       "$HOME/.local/bin"
     ];
