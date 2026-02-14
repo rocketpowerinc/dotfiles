@@ -94,7 +94,8 @@ update:
     @echo "System Updated"
 
 upgrade:
-    sudo apt update && sudo apt upgrade -y
+    do_anduinos_upgrade
+    @echo "System Upgraded"
 
 factory-reset:
     do-anduinos-autorepair
