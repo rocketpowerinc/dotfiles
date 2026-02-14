@@ -107,7 +107,7 @@ factory-reset:
 # ==================================================
 
 search pkg:
-    apt search {{pkg}}
+    apt-cache policy {{pkg}}
 
 install pkg:
     sudo apt install -y {{pkg}}
