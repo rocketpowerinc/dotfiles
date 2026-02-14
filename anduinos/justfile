@@ -44,14 +44,14 @@ default:
     @printf "\033[1;94m📦 APT PACKAGES\033[0m\n"
     @printf "  search <pkg>            \033[96mSearch apt packages\033[0m\n"
     @printf "  install <pkg>           \033[92mInstall apt package\033[0m\n"
-    @printf "  remove <pkg>            \033[91mRemove apt package\033[0m\n"
+    @printf "  remove <pkg>            \033[91mRemove apt package\033[0m\n\n"
 
 
     @printf "\033[1;94m🧊 FLATPAK\033[0m\n"
     @printf "  flatpak-search          \033[96mSearch flatpaks\033[0m\n"
     @printf "  flatpak-list            \033[96mList flatpaks\033[0m\n"
     @printf "  flatpak-remotes         \033[96mList remotes\033[0m\n"
-    @printf "  flatpak-remove-remote   \033[91mRemove remote <name>\033[0m\n"
+    @printf "  flatpak-remove-remote   \033[91mRemove remote <name>\033[0m\n\n"
 
 
     @printf "\033[1;94m📊 SYSTEM INFO\033[0m\n"
@@ -62,7 +62,7 @@ default:
     @printf "\033[1;94m🌐 EXTERNAL TOOLS\033[0m\n"
     @printf "  tuxmate                 \033[96mOpen TuxMate Website\033[0m\n"
     @printf "  linux-toys              \033[96mLinux Toys installer\033[0m\n"
-    @printf "  linutil                 \033[96mChris Titus LinUtil\033[0m\n"
+    @printf "  linutil                 \033[96mChris Titus LinUtil\033[0m\n\n"
 
 
     @printf "\033[1;94m🔗 WEBSITES\033[0m\n"
