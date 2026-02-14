@@ -70,7 +70,7 @@ default:
     @printf "  rocket-dashboard        \033[96mRocket dashboard\033[0m\n\n"
 
     @printf "\033[1;94m📎 DESKFLOW & CLIPCASCADE\033[0m\n"
-    @printf "  install-df              \033[92mInstall ClipCascade\033[0m\n"
+    @printf "  install-df              \033[92mInstall Deskflow\033[0m\n"
     @printf "  install-cc              \033[92mInstall ClipCascade\033[0m\n"
     @printf "  restart-cc              \033[93mRestart ClipCascade service\033[0m\n"
     @printf "  status-cc               \033[96mCheck ClipCascade status\033[0m\n\n"
