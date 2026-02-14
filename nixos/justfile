@@ -52,6 +52,10 @@ default:
     @printf "  maintenance             Standard maintenance\n"
     @printf "  maintenance-deep        Maintenance + verification\n\n"
 
+    @printf "WEBSITES\n"
+    @printf "  packages-site           Open NixOS package search\n"
+    @printf "  rocket-dashboard        Open RocketPowerInc dashboard\n\n"
+
 
 # ==================================================
 # Convenience
@@ -184,3 +188,14 @@ maintenance:
 maintenance-deep:
     just maintenance
     just verify-store
+
+
+# ==================================================
+# Websites
+# ==================================================
+
+packages-site:
+    xdg-open https://search.nixos.org/packages >/dev/null 2>&1 &
+
+rocket-dashboard:
+    xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
