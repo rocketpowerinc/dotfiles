@@ -36,7 +36,7 @@ default:
     @printf "  refresh-justfile        \033[95mPull latest toolkit\033[0m\n\n"
 
     @printf "\033[1;94m⚙ SYSTEM\033[0m\n"
-    @printf "  update                  \033[92mUpdate & Upgrade apt and flatpaks\033[0m\n"
+    @printf "  update                  \033[92mUpdate & Upgrade apt and Flatpaks\033[0m\n"
     @printf "  upgrade                 \033[92mFull upgrade\033[0m\n"
     @printf "  factory-reset           \033[91mAuto repair\033[0m\n\n"
 
