@@ -119,6 +119,7 @@ in
     wl-clipboard #for ClipCascade
 
     #Gnome
+    gnome-terminal
     dconf-editor
     gnome-tweaks
     gnome-extension-manager
