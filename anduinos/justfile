@@ -228,7 +228,6 @@ restart-cc:
     systemctl --user restart clipcascade
     @printf "\033[92m✔ ClipCascade restarted.\033[0m\n"
     sleep 4s
-    @printf "\033[96mℹ Check status:\033[0m systemctl --user status clipcascade\n"
     systemctl --user status clipcascade
 
 status-cc:
