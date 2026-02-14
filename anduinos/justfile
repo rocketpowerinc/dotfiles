@@ -220,7 +220,7 @@ install-cc:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
     chmod +x "$TMPDIR/bash/linux/ubuntu-clipcascade-install.sh" && \
-    bash "$TMPDIR/nixos/ubuntu-clipcascade-install.sh" && \
+    bash "$TMPDIR/bash/ubuntu-clipcascade-install.sh" && \
     rm -rf "$TMPDIR"
 
 restart-cc:
