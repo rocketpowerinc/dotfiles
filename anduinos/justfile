@@ -234,33 +234,25 @@ status-cc:
 # Tools
 # ==================================================
 change-hostname:
-    bash <<'EOF'
+    #!/usr/bin/env bash
     set -e
-
     current=$(hostname)
 
-    echo ""
-    echo "🖥 Current hostname: $current"
-    echo ""
+    echo -e "\n🖥 Current hostname: $current\n"
 
-    printf "Enter new hostname: "
-    read -r host_input
+    read -p "Enter new hostname: " host_input
 
     if [ -z "$host_input" ]; then
         echo "Aborted."
         exit 1
     fi
 
-    echo ""
-    printf "Change hostname to '%s'? (y/N): " "$host_input"
-    read -r confirm
+    read -p "Change hostname to '$host_input'? (y/N): " confirm
 
     case "$confirm" in
-        y|Y) ;;
+        [yY]*) ;;
         *) echo "Cancelled."; exit 1 ;;
     esac
 
     sudo hostnamectl set-hostname "$host_input"
-
     echo "✔ Hostname changed."
-    EOF
