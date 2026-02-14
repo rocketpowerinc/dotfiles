@@ -73,7 +73,7 @@ edit:
         sudo nano /etc/nixos/configuration.nix; \
     fi
 
-justfile-refresh:
+file-refresh:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
     install -m 644 "$TMPDIR/nixos/justfile" "$HOME/justfile" && \
