@@ -13,7 +13,7 @@ default:
 
     @printf "CONVENIENCE\n"
     @printf "  edit                    Edit configuration.nix\n"
-    @printf "  file-refresh        Pull latest justfile from RocketPowerInc repo\n"
+    @printf "  file-refresh            Pull latest justfile from RocketPowerInc repo\n"
     @printf "  clipcascade-install     Install ClipCascade via RocketPowerInc script\n\n"
 
     @printf "SYSTEM\n"
