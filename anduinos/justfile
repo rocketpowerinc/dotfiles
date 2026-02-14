@@ -233,6 +233,8 @@ status-cc:
 # ==================================================
 # Tools
 # ==================================================
+
+# Change the system hostname and update /etc/hosts
 change-hostname:
     #!/usr/bin/env bash
     set -e
@@ -254,5 +256,20 @@ change-hostname:
         *) echo "Cancelled."; exit 1 ;;
     esac
 
+    # 1. Change the system hostname
     sudo hostnamectl set-hostname "$host_input"
-    echo "✔ Hostname changed."
+
+    # 2. Update the hosts file to prevent sudo lag/resolution errors
+    sudo sed -i "s/$current/$host_input/g" /etc/hosts
+
+    echo "✔ Hostname changed and /etc/hosts updated."
+
+    # 3. Recommendation to restart
+    echo -e "\n⚠️  A reboot is recommended to ensure all services use the new hostname."
+    read -p "Restart system now? (y/N): " reboot_confirm
+
+    if [[ "$reboot_confirm" =~ ^[yY] ]]; then
+        sudo reboot
+    else
+        echo "Done. Please remember to restart later for changes to fully take effect."
+    fi
