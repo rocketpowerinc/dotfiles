@@ -13,6 +13,7 @@ default:
 
     @printf "CONVENIENCE\n"
     @printf "  edit                    Edit configuration.nix\n"
+    @printf "  justfile-refresh        Pull latest justfile from RocketPowerInc repo\n"
     @printf "  clipcascade-install     Install ClipCascade via RocketPowerInc script\n\n"
 
     @printf "SYSTEM\n"
@@ -72,6 +73,12 @@ edit:
         sudo nano /etc/nixos/configuration.nix; \
     fi
 
+justfile-refresh:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
+    install -m 644 "$TMPDIR/nixos/justfile" "$HOME/justfile" && \
+    rm -rf "$TMPDIR"
+    just
 
 clipcascade-install:
     TMPDIR=$(mktemp -d) && \
