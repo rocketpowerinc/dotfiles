@@ -218,9 +218,9 @@ install-df:
 
 install-cc:
     TMPDIR=$(mktemp -d) && \
-    git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
-    chmod +x "$TMPDIR/nixos/clipcascade-install.sh" && \
-    bash "$TMPDIR/nixos/clipcascade-install.sh" && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    chmod +x "$TMPDIR/bash/linux/ubuntu-clipcascade-install.sh" && \
+    bash "$TMPDIR/nixos/ubuntu-clipcascade-install.sh" && \
     rm -rf "$TMPDIR"
 
 restart-cc:
