@@ -10,6 +10,10 @@ trap cleanup ERR
 
 echo "==> ClipCascade NixOS installer starting..."
 
+# Install Dependencies if they don't exist
+nix-env -q xclip >/dev/null 2>&1 || nix-env -iA nixos.xclip && \
+nix-env -q wl-clipboard >/dev/null 2>&1 || nix-env -iA nixos.wl-clipboard
+
 # Requirements for the installer environment
 nix-shell -p \
   python3 \

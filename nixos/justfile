@@ -1,4 +1,6 @@
 set positional-arguments := true
+set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
+set export := true
 
 # ==================================================
 # NixOS System Toolkit
@@ -10,10 +12,12 @@ default:
     @printf "════════════════════════════\n\n"
 
     @printf "CONVENIENCE\n"
-    @printf "  edit                    Edit configuration.nix\n\n"
+    @printf "  edit                    Edit configuration.nix\n"
+    @printf "  clipcascade-install     Install ClipCascade via RocketPowerInc script\n\n"
 
     @printf "SYSTEM\n"
     @printf "  upgrade                 Update channels + upgrade\n"
+    @printf "  rog-laptop-pull         Pull and apply ROG laptop config\n"
     @printf "  rebuild                 sudo nixos-rebuild switch\n"
     @printf "  rebuild-trace           Rebuild with --show-trace\n"
     @printf "  rebuild-verbose         Rebuild with --verbose\n"
@@ -68,6 +72,13 @@ edit:
         sudo nano /etc/nixos/configuration.nix; \
     fi
 
+
+clipcascade-install:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
+    chmod +x "$TMPDIR/nixos/clipcascade-install.sh" && \
+    bash "$TMPDIR/nixos/clipcascade-install.sh" && \
+    rm -rf "$TMPDIR"
 # ==================================================
 # System
 # ==================================================
@@ -75,6 +86,13 @@ edit:
 upgrade:
     sudo nix-channel --update
     sudo nixos-rebuild switch --upgrade
+
+rog-laptop-pull:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
+    sudo install -m 644 "$TMPDIR/nixos/rog-laptop.nix" /etc/nixos/configuration.nix && \
+    rm -rf "$TMPDIR" && \
+    sudo nixos-rebuild switch
 
 rebuild:
     sudo nixos-rebuild switch
