@@ -60,10 +60,10 @@ default:
     @printf "  report-cpu              \033[93mCPU info\033[0m\n\n"
 
     @printf "\033[1;94m🌐 EXTERNAL TOOLS\033[0m\n"
-    @printf "  tuxmate                 \033[96mOpen TuxMate\033[0m\n"
+    @printf "  tuxmate                 \033[96mOpen TuxMate Website\033[0m\n"
     @printf "  linux-toys              \033[96mLinux Toys installer\033[0m\n"
     @printf "  linutil                 \033[96mChris Titus LinUtil\033[0m\n"
-    @printf "  docker-setup            \033[93mInstall Docker\033[0m\n\n"
+
 
     @printf "\033[1;94m🔗 WEBSITES\033[0m\n"
     @printf "  packages-site           \033[96mUbuntu packages\033[0m\n"
