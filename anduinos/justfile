@@ -234,15 +234,32 @@ status-cc:
 # Tools
 # ==================================================
 change-hostname:
-    @current=$$(hostname)
-    @echo ""
-    @echo "Current hostname: $$current"
-    @echo ""
-    @read -p "Enter new hostname: " newname; \
-    [ -z "$$newname" ] && { echo "Aborted."; exit 1; }; \
-    echo ""; \
-    read -p "Change hostname to '$$newname'? (y/N): " confirm; \
-    [[ "$$confirm" =~ ^[Yy]$$ ]] || { echo "Cancelled."; exit 1; }; \
-    sudo hostnamectl set-hostname "$$newname"; \
-    sudo sed -i "s/127.0.1.1.*/127.0.1.1   $$newname/" /etc/hosts 2>/dev/null || true; \
-    echo "✔ Hostname changed to '$$newname'. Reboot recommended."
+	@bash -c '\
+	current=$$(hostname); \
+	echo ""; \
+	echo "Current hostname: $$current"; \
+	echo ""; \
+	printf "Enter new hostname: "; \
+	read -r newname; \
+	if [ -z "$$newname" ]; then \
+		echo "Aborted."; \
+		exit 1; \
+	fi; \
+	echo ""; \
+	printf "Change hostname to '\''%s'\''? (y/N): " "$$newname"; \
+	read -r confirm; \
+	case "$$confirm" in \
+		y|Y) ;; \
+		*) echo "Cancelled."; exit 1 ;; \
+	esac; \
+	echo "Changing hostname..."; \
+	sudo hostnamectl set-hostname "$$newname"; \
+	if grep -q "^127.0.1.1" /etc/hosts; then \
+		sudo sed -i "s/^127.0.1.1.*/127.0.1.1   $$newname/" /etc/hosts; \
+	else \
+		echo "127.0.1.1   $$newname" | sudo tee -a /etc/hosts > /dev/null; \
+	fi; \
+	echo ""; \
+	echo "✔ Hostname changed to '\''$$newname'\''."; \
+	echo "Reboot recommended."; \
+	'
