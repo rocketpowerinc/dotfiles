@@ -197,10 +197,10 @@ in
 
           TMPDIR=$(mktemp -d)
 
-          git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
+          git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR"
 
-          chmod +x "$TMPDIR/nixos/clipcascade-install.sh"
-          bash "$TMPDIR/nixos/clipcascade-install.sh"
+          chmod +x "$TMPDIR/bash/linux/clipcascade-install-nixos.sh"
+          bash "$TMPDIR/bash/linux/clipcascade-install-nixos.sh"
 
           rm -rf "$TMPDIR"
         '';
