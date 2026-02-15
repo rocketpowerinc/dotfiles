@@ -48,7 +48,7 @@ default:
 
     @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n"
     @printf "{{BOLD}}             🚀 AnduinOS System Toolkit 🚀{{RESET}}\n"
-    @printf "{{SUBTLE}}                Powered by RocketPowerInc{{RESET}}\n"
+    @printf "{{SUBTLE}}               Powered by RocketPowerInc{{RESET}}\n"
     @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n\n"
 
     @printf "{{SECTION}}🧰 CONVENIENCE{{RESET}}\n"
