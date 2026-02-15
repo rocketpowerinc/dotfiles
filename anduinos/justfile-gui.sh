@@ -20,14 +20,12 @@ run_task() {
     local recipe=$1
     local args=""
 
-    # Recipe Translation Layer
     case "$recipe" in
         "search")  recipe="apt-search" ;;
         "install") recipe="apt-install" ;;
         "remove")  recipe="apt-remove" ;;
     esac
 
-    # Input dialog for specific tasks
     if [[ "$recipe" =~ ^(apt-search|apt-install|apt-remove|flatpak-search|flatpak-remove-remote)$ ]]; then
         args=$(yad --entry --title="Input Required" --text="Enter package name:" --width=300 --center)
         [[ -z "$args" ]] && return
@@ -42,65 +40,80 @@ export JUST_FILE
 
 [ -f "$ICON_PATH" ] || curl -fsSL "$ICON_URL" -o "$ICON_PATH"
 
-# 3. GUI Definition
+# 3. New Styling Variables (No Grey Blocks)
+# This uses 'blue' for headers. You can use 'orange', '#3498db', etc.
+HEADER="<span color='#3498db' size='large'><b>          "
+FOOTER="          </b></span>"
+# A simple dashed line for separation
+SEP="<span color='#555555'>──────────────────────────────────────────</span>:LBL"
+
+# 4. GUI Definition
 ARGS=(
-  --title=""
+  --title="AnduinOS Toolkit"
   --window-icon="$ICON_PATH"
   --image="$ICON_PATH"
   --image-on-top
   --width=400
-  --height=800
+  --height=850
   --center
   --form
   --columns=1
   --scroll
   --text="<b><big>AnduinOS Toolkit</big></b>\n"
 
-  --field="🧰 CONVENIENCE:LBL" ""
+  --field="${HEADER}CONVENIENCE${FOOTER}:LBL" ""
   --field="Refresh Justfile:BTN" "bash -c 'run_task refresh-justfile'"
+  --field="$SEP" ""
 
-  --field="\n⚙ SYSTEM:LBL" ""
+  --field="${HEADER}SYSTEM${FOOTER}:LBL" ""
   --field="Update:BTN" "bash -c 'run_task update'"
   --field="Upgrade:BTN" "bash -c 'run_task upgrade'"
   --field="Care:BTN" "bash -c 'run_task care'"
   --field="Factory Reset:BTN" "bash -c 'run_task factory-reset'"
+  --field="$SEP" ""
 
-  --field="\n📦 APT PACKAGES:LBL" ""
+  --field="${HEADER}APT PACKAGES${FOOTER}:LBL" ""
   --field="Search Package:BTN" "bash -c 'run_task search'"
   --field="Install Package:BTN" "bash -c 'run_task install'"
   --field="Remove Package:BTN" "bash -c 'run_task remove'"
+  --field="$SEP" ""
 
-  --field="\n🧊 FLATPAK PACKAGES:LBL" ""
+  --field="${HEADER}FLATPAK PACKAGES${FOOTER}:LBL" ""
   --field="Flatpak Search:BTN" "bash -c 'run_task flatpak-search'"
   --field="Flatpak List:BTN" "bash -c 'run_task flatpak-list'"
   --field="Flatpak Remotes:BTN" "bash -c 'run_task flatpak-remotes'"
   --field="Flatpak Remove Remote:BTN" "bash -c 'run_task flatpak-remove-remote'"
+  --field="$SEP" ""
 
-  --field="\n🚀 BOOTSTRAP:LBL" ""
+  --field="${HEADER}BOOTSTRAP${FOOTER}:LBL" ""
   --field="Bootload Apps:BTN" "bash -c 'run_task bootload-apps'"
   --field="Tune GNOME:BTN" "bash -c 'run_task tune-gnome'"
+  --field="$SEP" ""
 
-  --field="\n📊 SYSTEM INFO:LBL" ""
+  --field="${HEADER}SYSTEM INFO${FOOTER}:LBL" ""
   --field="Report Disk:BTN" "bash -c 'run_task report-disk'"
   --field="Report Memory:BTN" "bash -c 'run_task report-memory'"
   --field="Report CPU:BTN" "bash -c 'run_task report-cpu'"
+  --field="$SEP" ""
 
-  --field="\n🌐 EXTERNAL TOOLS:LBL" ""
+  --field="${HEADER}EXTERNAL TOOLS${FOOTER}:LBL" ""
   --field="TuxMate:BTN" "bash -c 'run_task tuxmate'"
   --field="Linux Toys:BTN" "bash -c 'run_task linux-toys'"
   --field="LinUtil:BTN" "bash -c 'run_task linutil'"
+  --field="$SEP" ""
 
-  --field="\n🔗 WEBSITES:LBL" ""
+  --field="${HEADER}WEBSITES${FOOTER}:LBL" ""
   --field="Rocket Dashboard:BTN" "bash -c 'run_task rocket-dashboard'"
+  --field="$SEP" ""
 
-  # Fixed label below (replaced & with AND)
-  --field="\n📎 DESKFLOW AND CLIPCASCADE:LBL" ""
+  --field="${HEADER}DESKFLOW &amp; CLIPCASCADE${FOOTER}:LBL" ""
   --field="Install Deskflow:BTN" "bash -c 'run_task install-df'"
   --field="Install ClipCascade:BTN" "bash -c 'run_task install-cc'"
   --field="Restart ClipCascade:BTN" "bash -c 'run_task restart-cc'"
   --field="Status ClipCascade:BTN" "bash -c 'run_task status-cc'"
+  --field="$SEP" ""
 
-  --field="\n🔨 TOOLS:LBL" ""
+  --field="${HEADER}TOOLS${FOOTER}:LBL" ""
   --field="Change Hostname:BTN" "bash -c 'run_task change-hostname'"
 
   --button="Exit Toolkit:1"
