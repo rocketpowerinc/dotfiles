@@ -61,7 +61,7 @@ default:
     @printf "  factory-reset           {{ERROR}}Auto repair{{RESET}}\n\n"
 
     @printf "{{SECTION}}📦 PACKAGES{{RESET}}\n"
-    @printf "  aptsearch <pkg>         {{INFO}}Search apt packages{{RESET}}\n"
+    @printf "  apt-search <pkg>         {{INFO}}Search apt packages{{RESET}}\n"
     @printf "  apt-install <pkg>       {{SUCCESS}}Install apt package{{RESET}}\n"
     @printf "  apt-remove <pkg>        {{ERROR}}Remove apt package{{RESET}}\n"
     @printf "  flatpak-search <pkg>    {{INFO}}Search flatpaks{{RESET}}\n"
