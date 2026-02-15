@@ -180,7 +180,7 @@ bootload-apps:
     @printf "\033[93m📦 Installing Essential APT CLI Tools...\033[0m\n"
     sudo apt update
     sudo apt install -y \
-        exa \
+        fastfetch \
         gh \
         git \
         jq \
