@@ -63,18 +63,18 @@ default:
     @printf "{{SECTION}}📦 APT PACKAGES{{RESET}}\n"
     @printf "  search <pkg>            {{INFO}}Search apt packages{{RESET}}\n"
     @printf "  install <pkg>           {{SUCCESS}}Install apt package{{RESET}}\n"
-    @printf "  remove <pkg>            {{ERROR}}Remove apt package{{RESET}}\n"
+    @printf "  remove <pkg>            {{ERROR}}Remove apt package{{RESET}}\n\n"
 
     @printf "{{SECTION}}🧊 FLATPAK PACKAGES{{RESET}}\n"
     @printf "  flatpak-search <pkg>    {{INFO}}Search flatpaks{{RESET}}\n"
     @printf "  flatpak-list            {{INFO}}List flatpaks{{RESET}}\n"
     @printf "  flatpak-remotes         {{INFO}}List remotes{{RESET}}\n"
-    @printf "  flatpak-remove-remote   {{ERROR}}Remove remote <name>{{RESET}}\n"
+    @printf "  flatpak-remove-remote   {{ERROR}}Remove remote <name>{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
-    @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n\n"
-    @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
+    @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n"
+    @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
