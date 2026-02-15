@@ -61,15 +61,14 @@ default:
     @printf "  factory-reset           {{ERROR}}Auto repair{{RESET}}\n\n"
 
     @printf "{{SECTION}}📦 APT PACKAGES{{RESET}}\n"
-    @printf "  search <pkg>            {{INFO}}Search apt packages{{RESET}}\n"
-    @printf "  install <pkg>           {{SUCCESS}}Install apt package{{RESET}}\n"
-    @printf "  remove <pkg>            {{ERROR}}Remove apt package{{RESET}}\n\n"
-
-    @printf "{{SECTION}}🧊 FLATPAK{{RESET}}\n"
+    @printf "  aptsearch <pkg>         {{INFO}}Search apt packages{{RESET}}\n"
+    @printf "  apt-install <pkg>       {{SUCCESS}}Install apt package{{RESET}}\n"
+    @printf "  apt-remove <pkg>        {{ERROR}}Remove apt package{{RESET}}\n\n"
     @printf "  flatpak-search <pkg>    {{INFO}}Search flatpaks{{RESET}}\n"
     @printf "  flatpak-list            {{INFO}}List flatpaks{{RESET}}\n"
     @printf "  flatpak-remotes         {{INFO}}List remotes{{RESET}}\n"
-    @printf "  flatpak-remove-remote   {{ERROR}}Remove remote <name>{{RESET}}\n\n"
+    @printf "  flatpak-remove-remote   {{ERROR}}Remove remote <name>{{RESET}}\n"
+    @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n\n"
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
     @printf "  report-disk             {{WARNING}}Disk usage{{RESET}}\n"
@@ -142,22 +141,19 @@ factory-reset:
 
 
 # ==================================================
-# Packages (APT)
+# Packages (APT + Flatpak)
 # ==================================================
 
-search pkg:
+apt-search pkg:
     apt-cache policy {{pkg}}
 
-install pkg:
+apt-install pkg:
     sudo apt install -y {{pkg}}
 
-remove pkg:
+apt-remove pkg:
     sudo apt remove -y {{pkg}}
 
 
-# ==================================================
-# Flatpak
-# ==================================================
 flatpak-search pkg:
     flatpak search {{pkg}}
 
@@ -173,6 +169,72 @@ flatpak-remove-remote remote:
     @printf "\033[91m🗑 Removing Flatpak remote: {{remote}}...\033[0m\n"
     flatpak remote-delete {{remote}}
     @printf "\033[92m✔ Remote removed successfully.\033[0m\n"
+
+
+bootload-apps:
+    @printf "\033[1;96m🚀 Cool Bootload Apps - Installing Essentials...\033[0m\n\n"
+
+    # --------------------------------------------------
+    # APT CLI Tools
+    # --------------------------------------------------
+    @printf "\033[93m📦 Installing Essential APT CLI Tools...\033[0m\n"
+    sudo apt update
+    sudo apt install -y \
+        exa \
+        gh \
+        git \
+        jq \
+        nala \
+        yad \
+        zenity \
+        whiptail \
+        just \
+        xclip \
+        wl-clipboard
+    @printf "\033[92m✔ APT tools installed.\033[0m\n\n"
+
+    # --------------------------------------------------
+    # Flatpak Setup
+    # --------------------------------------------------
+    @printf "\033[96m🧊 Ensuring Flathub remote exists...\033[0m\n"
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    # --------------------------------------------------
+    # Essential Flatpaks
+    # --------------------------------------------------
+    @printf "\033[93m📦 Installing Essential Flatpaks...\033[0m\n"
+    flatpak install -y flathub \
+        com.raggesilver.BlackBox \
+        com.github.tchx84.Flatseal \
+        com.mattjakeman.ExtensionManager \
+        org.deskflow.deskflow \
+        io.github.flattool.Warehouse \
+        com.google.AndroidStudio \
+        org.localsend.localsend_app \
+        net.nokyan.Resources \
+        io.github.shiftey.Desktop \
+        org.videolan.VLC \
+        org.mozilla.Thunderbird \
+        com.visualstudio.code \
+        com.valvesoftware.Steam \
+        com.todoist.Todoist \
+        org.standardnotes.standardnotes \
+        md.obsidian.Obsidian \
+        io.ente.auth \
+        com.bitwarden.desktop \
+        com.protonvpn.www \
+        me.proton.Mail \
+        io.github.brunofin.Cohesion \
+        chat.simplex.simplex \
+        io.unobserved.espansoGUI \
+        org.virt_manager.virt-viewer \
+        org.flameshot.Flameshot \
+        org.cryptomator.Cryptomator \
+        io.github.flattool.Ignition \
+        io.github.giantpinkrobots.flatsweep
+
+    @printf "\n\033[92m✨ Cool Bootload Complete! System Fully Loaded.\033[0m\n"
+
 
 # ==================================================
 # Info & Diagnostics
