@@ -48,18 +48,21 @@ mkdir -p ~/.config/systemd/user
 cat <<EOF > ~/.config/systemd/user/anduinos-toolkit.service
 [Unit]
 Description=AnduinOS Toolkit GUI
-After=graphical-session.target
-Wants=graphical-session.target
+After=graphical-session.target network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/bash /home/$USER/justfile-gui.sh
-Restart=on-failure
-Environment=DISPLAY=:0
+ExecStartPre=/usr/bin/bash -c 'until ping -c1 github.com >/dev/null 2>&1; do sleep 2; done'
+ExecStart=%h/justfile-gui.sh
 
 [Install]
 WantedBy=default.target
 EOF
+
+systemctl --user daemon-reload
+systemctl --user enable anduinos-toolkit.service
+
 
 
 
