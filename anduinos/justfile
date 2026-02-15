@@ -91,7 +91,7 @@ default:
     @printf "  status-cc               {{INFO}}Check ClipCascade status{{RESET}}\n\n"
 
     @printf "{{SECTION}}🔨 TOOLS{{RESET}}\n"
-    @printf "  tune-gnome              {{ACCENT}}Apply GNOME desktop performance tweaks{{RESET}}\n"
+    @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
     @printf "  change-hostname         {{ERROR}}Change the Machine's Hostname{{RESET}}\n\n"
 
 # ==================================================
