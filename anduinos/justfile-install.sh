@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-
-
 set -e
+
+
+# Install Dependencies
+sudo apt update && sudo apt install just
 
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
