@@ -21,8 +21,46 @@ install -m 777 \
   "$HOME/justfile-gui.sh"
 chmod +x "$HOME/justfile-gui.sh"
 
-# Start the Yad GUI
-bash "$HOME/justfile-gui.sh"
+
+# Download Icon
+mkdir -p ~/.local/share/icons && \
+curl -L "https://raw.githubusercontent.com/Anduin2017/AnduinOS/47ef341b4ab9119905e3abcfd1949d718698ac14/src/mods/30-gnome-extension-arcmenu-patch/logo.svg" \
+-o ~/.local/share/icons/anduinos-logo.svg
 
 
-echo "✔ justfile installed to $HOME/justfile"
+# Make a Desktop Icon
+cat <<EOF > ~/Desktop/Anduinos-Toolkit.desktop
+[Desktop Entry]
+Version=1.0
+Name=AnduinOS Toolkit
+Exec=/usr/bin/bash /home/$USER/justfile-gui.sh
+Icon=/home/$USER/.local/share/icons/anduinos-logo.svg
+Terminal=false
+Type=Application
+Categories=Utility;System;
+Comment=Manage your system with Justfile
+StartupNotify=true
+EOF
+
+# SystemD At Boot
+mkdir -p ~/.config/systemd/user
+
+cat <<EOF > ~/.config/systemd/user/anduinos-toolkit.service
+[Unit]
+Description=AnduinOS Toolkit GUI
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash /home/$USER/justfile-gui.sh
+Restart=on-failure
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target
+EOF
+
+
+
+echo "✔ justfile + gui + desktop icon + systemd job have been installed"
