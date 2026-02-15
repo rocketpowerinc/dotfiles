@@ -26,13 +26,13 @@ run_task() {
         "install") recipe="apt-install" ;;
         "remove")  recipe="apt-remove" ;;
     esac
-    
+
     # Input dialog for specific tasks
     if [[ "$recipe" =~ ^(apt-search|apt-install|apt-remove|flatpak-search|flatpak-remove-remote)$ ]]; then
         args=$(yad --entry --title="Input Required" --text="Enter package name:" --width=300 --center)
         [[ -z "$args" ]] && return
     fi
-    
+
     $TERM_CMD bash -c "just -f '$JUST_FILE' $recipe $args; echo; echo '-----------------------'; read -p 'Press any key to close...' -n1" &
 }
 
@@ -44,17 +44,17 @@ export JUST_FILE
 
 # 3. GUI Definition
 ARGS=(
-  --title="🚀 AnduinOS Toolkit"
+  --title=""
   --window-icon="$ICON_PATH"
   --image="$ICON_PATH"
   --image-on-top
-  --width=850
+  --width=400
   --height=800
   --center
   --form
   --columns=1
   --scroll
-  --text="<b><big>AnduinOS Management Center</big></b>\n"
+  --text="<b><big>AnduinOS Toolkit</big></b>\n"
 
   --field="🧰 CONVENIENCE:LBL" ""
   --field="Refresh Justfile:BTN" "bash -c 'run_task refresh-justfile'"
