@@ -328,7 +328,7 @@ tune-gnome:
     @printf "\033[93m🔕 Disabling Lock Screen Notifications...\033[0m\n"
     gsettings set org.gnome.desktop.notifications show-in-lock-screen false
 
-    @printf "\n\033[92m✔ GNOME Tweaks Applied Successfully!\033[0m\n"
+    @printf "\n\033[92m✔ GNOME Gsettings Tweaks Applied Successfully!\033[0m\n"
 
 
 # Change the system hostname and update /etc/hosts
