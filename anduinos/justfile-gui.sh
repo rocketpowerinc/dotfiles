@@ -91,7 +91,6 @@ ARGS=(
   --field="LinUtil:BTN" "bash -c 'run_task linutil'"
 
   --field="\n🔗 WEBSITES:LBL" ""
-  --field="Packages Site:BTN" "bash -c 'run_task packages-site'"
   --field="Rocket Dashboard:BTN" "bash -c 'run_task rocket-dashboard'"
 
   # Fixed label below (replaced & with AND)

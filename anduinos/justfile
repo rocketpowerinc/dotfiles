@@ -88,7 +88,6 @@ default:
     @printf "  linutil                 {{INFO}}Chris Titus LinUtil{{RESET}}\n\n"
 
     @printf "{{SECTION}}🔗 WEBSITES{{RESET}}\n"
-    @printf "  packages-site           {{INFO}}Ubuntu packages{{RESET}}\n"
     @printf "  rocket-dashboard        {{INFO}}Rocket dashboard{{RESET}}\n\n"
 
     @printf "{{SECTION}}📎 DESKFLOW & CLIPCASCADE{{RESET}}\n"
@@ -295,9 +294,6 @@ linutil:
 # ==================================================
 # Websites
 # ==================================================
-
-packages-site:
-    xdg-open https://packages.ubuntu.com/ >/dev/null 2>&1 &
 
 rocket-dashboard:
     xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
