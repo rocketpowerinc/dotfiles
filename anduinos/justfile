@@ -60,15 +60,22 @@ default:
     @printf "  care                    {{WARNING}}Full system maintenance (APT + Flatpak){{RESET}}\n"
     @printf "  factory-reset           {{ERROR}}Auto repair{{RESET}}\n\n"
 
-    @printf "{{SECTION}}📦 PACKAGES{{RESET}}\n"
-    @printf "  apt-search <pkg>         {{INFO}}Search apt packages{{RESET}}\n"
-    @printf "  apt-install <pkg>       {{SUCCESS}}Install apt package{{RESET}}\n"
-    @printf "  apt-remove <pkg>        {{ERROR}}Remove apt package{{RESET}}\n"
+    @printf "{{SECTION}}📦 APT PACKAGES{{RESET}}\n"
+    @printf "  search <pkg>            {{INFO}}Search apt packages{{RESET}}\n"
+    @printf "  install <pkg>           {{SUCCESS}}Install apt package{{RESET}}\n"
+    @printf "  remove <pkg>            {{ERROR}}Remove apt package{{RESET}}\n"
+
+    @printf "{{SECTION}}🧊 FLATPAK PACKAGES{{RESET}}\n"
     @printf "  flatpak-search <pkg>    {{INFO}}Search flatpaks{{RESET}}\n"
     @printf "  flatpak-list            {{INFO}}List flatpaks{{RESET}}\n"
     @printf "  flatpak-remotes         {{INFO}}List remotes{{RESET}}\n"
     @printf "  flatpak-remove-remote   {{ERROR}}Remove remote <name>{{RESET}}\n"
+
+
+    @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
     @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n\n"
+    @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
+
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
     @printf "  report-disk             {{WARNING}}Disk usage{{RESET}}\n"
@@ -91,7 +98,6 @@ default:
     @printf "  status-cc               {{INFO}}Check ClipCascade status{{RESET}}\n\n"
 
     @printf "{{SECTION}}🔨 TOOLS{{RESET}}\n"
-    @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
     @printf "  change-hostname         {{ERROR}}Change the Machine's Hostname{{RESET}}\n\n"
 
 # ==================================================
@@ -142,7 +148,7 @@ factory-reset:
 
 
 # ==================================================
-# Packages (APT + Flatpak)
+# Packages (APT)
 # ==================================================
 
 apt-search pkg:
@@ -154,6 +160,9 @@ apt-install pkg:
 apt-remove pkg:
     sudo apt remove -y {{pkg}}
 
+# ==================================================
+# Packages (Flatpak)
+# ==================================================
 
 flatpak-search pkg:
     flatpak search {{pkg}}
@@ -171,7 +180,9 @@ flatpak-remove-remote remote:
     flatpak remote-delete {{remote}}
     @printf "\033[92m✔ Remote removed successfully.\033[0m\n"
 
-
+# ==================================================
+# Bootstrap
+# ==================================================
 bootload-apps:
     @printf "\033[1;96m🚀 Cool Bootload Apps - Installing Essentials...\033[0m\n\n"
 
@@ -236,7 +247,23 @@ bootload-apps:
 
     @printf "\n\033[92m✨ Cool Bootload Complete! System Fully Loaded.\033[0m\n"
 
+tune-gnome:
+    @printf "\033[1;96m🎛 Applying GNOME Desktop Tweaks...\033[0m\n\n"
 
+    @printf "\033[93m🌙 Enabling Night Light...\033[0m\n"
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
+
+    @printf "\033[93m🖥 Setting Blank Screen Delay (25 minutes)...\033[0m\n"
+    gsettings set org.gnome.desktop.session idle-delay 1500
+
+    @printf "\033[93m🔒 Disabling Lock Screen...\033[0m\n"
+    gsettings set org.gnome.desktop.screensaver lock-enabled false
+
+    @printf "\033[93m🔕 Disabling Lock Screen Notifications...\033[0m\n"
+    gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+
+    @printf "\n\033[92m✔ GNOME Gsettings Tweaks Applied Successfully!\033[0m\n"
 # ==================================================
 # Info & Diagnostics
 # ==================================================
@@ -312,23 +339,6 @@ status-cc:
 # Tools
 # ==================================================
 
-tune-gnome:
-    @printf "\033[1;96m🎛 Applying GNOME Desktop Tweaks...\033[0m\n\n"
-
-    @printf "\033[93m🌙 Enabling Night Light...\033[0m\n"
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
-
-    @printf "\033[93m🖥 Setting Blank Screen Delay (25 minutes)...\033[0m\n"
-    gsettings set org.gnome.desktop.session idle-delay 1500
-
-    @printf "\033[93m🔒 Disabling Lock Screen...\033[0m\n"
-    gsettings set org.gnome.desktop.screensaver lock-enabled false
-
-    @printf "\033[93m🔕 Disabling Lock Screen Notifications...\033[0m\n"
-    gsettings set org.gnome.desktop.notifications show-in-lock-screen false
-
-    @printf "\n\033[92m✔ GNOME Gsettings Tweaks Applied Successfully!\033[0m\n"
 
 
 # Change the system hostname and update /etc/hosts
