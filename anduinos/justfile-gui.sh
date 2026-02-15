@@ -40,12 +40,11 @@ export JUST_FILE
 
 [ -f "$ICON_PATH" ] || curl -fsSL "$ICON_URL" -o "$ICON_PATH"
 
-# 3. New Styling Variables (No Grey Blocks)
-# This uses 'blue' for headers. You can use 'orange', '#3498db', etc.
-HEADER="<span color='#3498db' size='large'><b>          "
-FOOTER="          </b></span>"
-# A simple dashed line for separation
-SEP="<span color='#555555'>──────────────────────────────────────────</span>:LBL"
+# 3. Styling Logic (Optimized for 400px width)
+# We use a shorter separator (32 chars) to ensure no horizontal scroll triggers.
+HEADER="<span color='#3498db' size='large'><b>"
+FOOTER="</b></span>"
+SEP="<span color='#444444'>────────────────────────────────</span>:LBL"
 
 # 4. GUI Definition
 ARGS=(
@@ -53,12 +52,13 @@ ARGS=(
   --window-icon="$ICON_PATH"
   --image="$ICON_PATH"
   --image-on-top
-  --width=400
+  --width=500
   --height=850
   --center
   --form
   --columns=1
   --scroll
+  --text-align=center
   --text="<b><big>AnduinOS Toolkit</big></b>\n"
 
   --field="${HEADER}CONVENIENCE${FOOTER}:LBL" ""
