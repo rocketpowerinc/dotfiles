@@ -74,8 +74,8 @@ default:
 
     @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
     @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n"
-    @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n\n"
-    @printf "  nautilus-bookmarks   {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
+    @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
+    @printf "  nautilus-bookmarks      {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
