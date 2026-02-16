@@ -269,16 +269,17 @@ tune-gnome:
 tune-nautilus:
     @printf "{{INFO}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
 
-    @mkdir -p "$HOME/.config/gtk-3.0"
+    @mkdir -p "$$HOME/.config/gtk-3.0"
 
-    @cat << 'EOF' > "$HOME/.config/gtk-3.0/bookmarks"
-    file:///home/rocket/.config/autostart Auto Start
-    file:///home/rocket/.local/share/applications App Drawer
-    file:///home/rocket/.config/gtk-3.0/bookmarks Nautilus Bookmarks
-    file:///home/rocket/.config/systemd/user Systemctl Services
-    EOF
+    @printf "%s\n" \
+        "file://$$HOME/.config/autostart Auto Start" \
+        "file://$$HOME/.local/share/applications App Drawer" \
+        "file://$$HOME/.config/gtk-3.0/bookmarks Nautilus Bookmarks" \
+        "file://$$HOME/.config/systemd/user Systemctl Services" \
+        > "$$HOME/.config/gtk-3.0/bookmarks"
 
     @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
+
 
 # ==================================================
 # Info & Diagnostics
