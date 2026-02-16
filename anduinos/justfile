@@ -75,7 +75,7 @@ default:
     @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
     @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n"
     @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
-    @printf "  nautilus-bookmarks      {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
+    @printf "  tune-nautilus           {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
@@ -266,7 +266,7 @@ tune-gnome:
     @printf "\n\033[92m✔ GNOME Gsettings Tweaks Applied Successfully!\033[0m\n"
 
 # Reset GTK (Nautilus) bookmarks
-nautilus-bookmarks:
+tune-nautilus:
     @printf "{{INFO}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
 
     @mkdir -p "$HOME/.config/gtk-3.0"
