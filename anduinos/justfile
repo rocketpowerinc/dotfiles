@@ -77,7 +77,8 @@ default:
     @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n"
     @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
     @printf "  tune-nautilus           {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n"
-    @printf "  set-wallpapers          {{ACCENT}}Shuffle Wallpapers every 10 min{{RESET}}\n\n"
+    @printf "  start-wallpapers        {{ACCENT}}Shuffle Wallpapers every 10 min{{RESET}}\n"
+    @printf "  start-wallpapers        {{ACCENT}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
@@ -293,13 +294,19 @@ tune-nautilus:
 # Wallpaper Slideshow
 # ==================================================
 
-set-wallpapers:
+start-wallpaper-shuffle:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
     chmod +x "$TMPDIR/bash/linux/wallpaper-shuffle.sh" && \
     bash "$TMPDIR/bash/linux/wallpaper-shuffle.sh" && \
     rm -rf "$TMPDIR"
 
+stop-wallpaper-shuffle:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    chmod +x "$TMPDIR/bash/linux/wallpaper-shuffle.sh" && \
+    bash "$TMPDIR/bash/linux/wallpaper-shuffle.sh stop" && \
+    rm -rf "$TMPDIR"
 
 
 
