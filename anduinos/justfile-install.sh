@@ -28,12 +28,29 @@ curl -L "https://raw.githubusercontent.com/Anduin2017/AnduinOS/47ef341b4ab911990
 -o ~/.local/share/icons/anduinos-logo.svg
 
 
-# Make a Desktop Icon
-cat <<EOF > ~/Desktop/Anduinos-Toolkit.desktop
+#!####################################################
+#! Desktop icon + start at boot + add to app drawer  #
+#!####################################################
+
+
+# 1. Define the target paths
+DESKTOP_DIR="$HOME/Desktop"
+APPS_DIR="$HOME/.local/share/applications"
+AUTOSTART_DIR="$HOME/.config/autostart"
+FILE_NAME="Anduinos-Toolkit.desktop"
+SCRIPT_PATH="/home/$USER/justfile-gui.sh"
+LOG_PATH="/home/$USER/toolkit_debug.log"
+
+# 2. Create directories if they don't exist
+mkdir -p "$APPS_DIR"
+mkdir -p "$AUTOSTART_DIR"
+
+# 3. Create the standard .desktop file (for Desktop and App Menu)
+cat <<EOF > "/tmp/$FILE_NAME"
 [Desktop Entry]
 Version=1.0
 Name=AnduinOS Toolkit
-Exec=/usr/bin/bash /home/$USER/justfile-gui.sh
+Exec=/usr/bin/bash $SCRIPT_PATH
 Icon=/home/$USER/.local/share/icons/anduinos-logo.svg
 Terminal=false
 Type=Application
@@ -42,28 +59,36 @@ Comment=Manage your system with Justfile
 StartupNotify=true
 EOF
 
-# SystemD At Boot
-mkdir -p ~/.config/systemd/user
-
-cat <<EOF > ~/.config/systemd/user/anduinos-toolkit.service
-[Unit]
-Description=AnduinOS Toolkit GUI
-After=graphical-session.target network-online.target
-Wants=network-online.target
-
-[Service]
-Type=simple
-ExecStartPre=/usr/bin/bash -c 'until ping -c1 github.com >/dev/null 2>&1; do sleep 2; done'
-ExecStart=%h/justfile-gui.sh
-
-[Install]
-WantedBy=default.target
+# 4. Create a specific Autostart version with a delay and debug logging
+# This uses 'sh -c' to allow the sleep and redirection to work
+cat <<EOF > "/tmp/autostart-$FILE_NAME"
+[Desktop Entry]
+Version=1.0
+Name=AnduinOS Toolkit (Autostart)
+Exec=/usr/bin/sh -c "sleep 5 && /usr/bin/bash $SCRIPT_PATH > $LOG_PATH 2>&1"
+Icon=/home/$USER/.local/share/icons/anduinos-logo.svg
+Terminal=false
+Type=Application
+Categories=Utility;System;
+Comment=Launch Toolkit at boot
+StartupNotify=false
 EOF
 
-systemctl --user daemon-reload
-systemctl --user enable anduinos-toolkit.service
+# 5. Copy files to their specific locations
+cp "/tmp/$FILE_NAME" "$DESKTOP_DIR/$FILE_NAME"
+cp "/tmp/$FILE_NAME" "$APPS_DIR/$FILE_NAME"
+cp "/tmp/autostart-$FILE_NAME" "$AUTOSTART_DIR/$FILE_NAME"
 
+# 6. Make them all executable
+chmod +x "$DESKTOP_DIR/$FILE_NAME"
+chmod +x "$APPS_DIR/$FILE_NAME"
+chmod +x "$AUTOSTART_DIR/$FILE_NAME"
+chmod +x "$SCRIPT_PATH"
 
-
-
-echo "✔ justfile + gui + desktop icon + systemd job have been installed"
+echo "Installation complete!"
+echo "------------------------------------------------"
+echo "1. Desktop Icon: Created"
+echo "2. App Menu Icon: Created"
+echo "3. Autostart: Set with 5s delay and debug log"
+echo "------------------------------------------------"
+echo "If it fails on next reboot, check: cat $LOG_PATH"
