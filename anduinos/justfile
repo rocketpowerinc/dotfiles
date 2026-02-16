@@ -77,10 +77,13 @@ default:
     @printf "  bootload-apps                {{ACCENT}}Install all essential apps (APT + Flatpak){{RESET}}\n"
     @printf "  tune-gnome                   {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
     @printf "  tune-nautilus                {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n"
+
+    @printf "{{SECTION}}🖼️ WALLPAPER{{RESET}}\n"
     @printf "  install-wallpaper-shuffle    {{ACCENT}}Gets Wallpapers and installs script{{RESET}}\n"
     @printf "  start-wallpaper-shuffle      {{SUCCESS}}Shuffle Wallpapers every 10 min{{RESET}}\n"
     @printf "  stop-wallpaper-shuffle       {{ERROR}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n"
-    @printf "  status-wallpaper-shuffle     {{ERROR}}Is Wallpaper Shuffle Running?{{RESET}}\n\n"
+    @printf "  status-wallpaper-shuffle     {{ERROR}}Is Wallpaper Shuffle Running?{{RESET}}\n"
+    @printf "  change-wallpaper-folder      {{ERROR}}Is Wallpaper Shuffle Running?{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
@@ -292,9 +295,9 @@ tune-nautilus:
     @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
 
 
-# ==================================================
-# Wallpaper Slideshow
-# ==================================================
+#! ==================================================
+#! Wallpaper
+#! ==================================================
 
 install-wallpaper-shuffle:
     TMPDIR=$(mktemp -d) && \
@@ -313,7 +316,12 @@ stop-wallpaper-shuffle:
 status-wallpaper-shuffle:
     systemctl --user status wallpaper-shuffle
 
-
+change-wallpaper-folder:
+    # 1. Run the script with the new --select flag to trigger gum
+    ~/.local/bin/wallpaper-shuffle --select
+    # 2. Restart the service to pick up the new folder from the cache
+    systemctl --user restart wallpaper-shuffle
+    @echo "✅ Switched to new wallpaper folder!"
 
 
 #! ==================================================
