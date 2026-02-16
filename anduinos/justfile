@@ -325,6 +325,7 @@ rocket-dashboard:
     xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
 
 
+#todo Keep it so it does not overwrite repos if they exist
 clone-rocketpowerinc:
 	TARGET_DIR="$HOME/Github/rocketpowerinc"; \
 	printf "📦 Fetching public repositories for rocketpowerinc...\n"; \
