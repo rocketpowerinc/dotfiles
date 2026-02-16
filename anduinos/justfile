@@ -297,37 +297,28 @@ tune-nautilus:
 # ==================================================
 
 install-wallpaper-shuffle:
-    bash -c '
-        set -e
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
+    rm -rf "$TMPDIR" && \
+    mkdir -p "$HOME/.config/systemd/user" && \
+    cat > "$HOME/.config/systemd/user/wallpaper-shuffle.service" << 'EOF'
+    [Unit]
+    Description=Wallpaper Shuffle Slideshow
+    After=graphical-session.target
+    Wants=graphical-session.target
 
-        TMPDIR=$(mktemp -d)
-        git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR"
-        install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle"
-        rm -rf "$TMPDIR"
+    [Service]
+    Type=simple
+    ExecStart=%h/.local/bin/wallpaper-shuffle
+    Restart=on-failure
+    RestartSec=5
 
-        mkdir -p "$HOME/.config/systemd/user"
-
-        cat > "$HOME/.config/systemd/user/wallpaper-shuffle.service" <<EOF
-[Unit]
-Description=Wallpaper Shuffle Slideshow
-After=graphical-session.target
-Wants=graphical-session.target
-
-[Service]
-Type=simple
-ExecStart=%h/.local/bin/wallpaper-shuffle
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=graphical-session.target
-EOF
-
-        systemctl --user daemon-reload
-        echo "✅ Installed systemd user service"
-    '
-
-
+    [Install]
+    WantedBy=graphical-session.target
+    EOF
+    systemctl --user daemon-reload && \
+    echo "✅ Installed systemd user service"
 
 
 start-wallpaper-shuffle:
