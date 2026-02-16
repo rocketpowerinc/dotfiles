@@ -90,10 +90,14 @@ ARGS=(
     --field="Bootload Apps:BTN" "bash -c 'run_task bootload-apps'"
     --field="Tune Gnome:BTN" "bash -c 'run_task tune-gnome'"
     --field="Tune Nautilus:BTN" "bash -c 'run_task tune-nautilus'"
+    --field="$SEP" ""
+
+    --field="${HEADER}WALLPAPERS${FOOTER}:LBL" ""
     --field="Install Wallpaper Shuffle:BTN" "bash -c 'run_task install-wallpaper-shuffle'"
     --field="Start Wallpaper Shuffle:BTN" "bash -c 'run_task start-wallpaper-shuffle'"
     --field="Stop Wallpaper Shuffle:BTN" "bash -c 'run_task stop-wallpaper-shuffle'"
     --field="Status Wallpaper Shuffle:BTN" "bash -c 'run_task status-wallpaper-shuffle'"
+    --field="Change Wallpaper Directory:BTN" "bash -c 'run_task change-wallpaper-folder'"
     --field="$SEP" ""
 
     --field="${HEADER}SYSTEM INFO${FOOTER}:LBL" ""
