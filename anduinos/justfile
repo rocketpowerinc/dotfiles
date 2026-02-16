@@ -89,8 +89,9 @@ default:
     @printf "  linux-toys              {{INFO}}Linux Toys installer{{RESET}}\n"
     @printf "  linutil                 {{INFO}}Chris Titus LinUtil{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🔗 WEBSITES{{RESET}}\n"
-    @printf "  rocket-dashboard        {{INFO}}Rocket dashboard{{RESET}}\n\n"
+    @printf "{{SECTION}}🔗 ROCKETPOWERINC{{RESET}}\n"
+    @printf "  rocket-dashboard        {{INFO}}Rocket dashboard{{RESET}}\n"
+    @printf "  clone-repos             {{INFO}}Rocket dashboard{{RESET}}\n\n"
 
     @printf "{{SECTION}}📎 DESKFLOW & CLIPCASCADE{{RESET}}\n"
     @printf "  install-df              {{SUCCESS}}Install Deskflow{{RESET}}\n"
@@ -317,11 +318,33 @@ linutil:
 
 
 # ==================================================
-# Websites
+# RocketPowerInc
 # ==================================================
 
 rocket-dashboard:
     xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
+
+
+clone-repos:
+    @printf "📦 Fetching public repositories for {{GITHUB_USER}}...\n"
+
+    TARGET_DIR="$HOME/Github/{{GITHUB_USER}}"
+    mkdir -p "$TARGET_DIR"
+
+    curl -s "https://api.github.com/users/{{GITHUB_USER}}/repos?per_page=100" \
+    | jq -r '.[] | "\(.name) \(.clone_url)"' \
+    | while read -r repo_name clone_url; do \
+        repo_path="$TARGET_DIR/$repo_name"; \
+        if [ ! -d "$repo_path/.git" ]; then \
+            echo "Cloning $repo_name..."; \
+            git clone "$clone_url" "$repo_path"; \
+        else \
+            echo "$repo_name already exists. Skipping..."; \
+        fi; \
+    done
+
+    @printf "✅ All public repositories cloned to: $TARGET_DIR\n"
+
 
 
 # ==================================================

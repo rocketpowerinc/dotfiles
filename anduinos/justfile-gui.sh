@@ -104,7 +104,7 @@ ARGS=(
   --field="LinUtil:BTN" "bash -c 'run_task linutil'"
   --field="$SEP" ""
 
-  --field="${HEADER}WEBSITES${FOOTER}:LBL" ""
+  --field="${HEADER}ROCKETPOWERINC${FOOTER}:LBL" ""
   --field="Rocket Dashboard:BTN" "bash -c 'run_task rocket-dashboard'"
   --field="$SEP" ""
 
