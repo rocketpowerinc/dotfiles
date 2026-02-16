@@ -116,7 +116,7 @@ refresh-justfile-gui:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
     install -m 777 "$TMPDIR/anduinos/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
-    rm -rf "$TMPDIR" && \
+    rm -rf "$TMPDIR"
 
 
 
