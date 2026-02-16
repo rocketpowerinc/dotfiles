@@ -325,9 +325,9 @@ rocket-dashboard:
     xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
 
 
-clone-repos:
-    GITHUB_USER ?= "rocketpowerinc"
+clone-repos GITHUB_USER="rocketpowerinc":
     @printf "📦 Fetching public repositories for {{GITHUB_USER}}...\n"
+
     TARGET_DIR="$HOME/Github/{{GITHUB_USER}}"
     mkdir -p "$TARGET_DIR"
 
