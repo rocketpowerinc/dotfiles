@@ -107,14 +107,15 @@ default:
 #! Convenience
 #! ==================================================
 
-refresh-justfile:
+# Pull Latest Justfile
+plj:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
     install -m 777 "$TMPDIR/anduinos/justfile" "$HOME/justfile" && \
     rm -rf "$TMPDIR"
     just
-
-refresh-justfile-gui:
+# Pull Latest Justfile GUI
+pljg:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
     install -m 777 "$TMPDIR/anduinos/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
