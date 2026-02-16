@@ -79,7 +79,8 @@ default:
     @printf "  tune-nautilus                {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n"
     @printf "  install-wallpaper-shuffle    {{ACCENT}}Gets Wallpapers and installs script{{RESET}}\n"
     @printf "  start-wallpaper-shuffle      {{SUCCESS}}Shuffle Wallpapers every 10 min{{RESET}}\n"
-    @printf "  stop-wallpaper-shuffle       {{ERROR}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n\n"
+    @printf "  stop-wallpaper-shuffle       {{ERROR}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n"
+    @printf "  status-wallpaper-shuffle     {{ERROR}}Is Wallpaper Shuffle Running?{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
@@ -307,6 +308,9 @@ start-wallpaper-shuffle:
 
 stop-wallpaper-shuffle:
     wallpaper-shuffle stop
+
+status-wallpaper-shuffle:
+    wallpaper-shuffle status
 
 
 

@@ -93,6 +93,7 @@ ARGS=(
     --field="Install Wallpaper Shuffle:BTN" "bash -c 'run_task install-wallpaper-shuffle'"
     --field="Start Wallpaper Shuffle:BTN" "bash -c 'run_task start-wallpaper-shuffle'"
     --field="Stop Wallpaper Shuffle:BTN" "bash -c 'run_task stop-wallpaper-shuffle'"
+    --field="Status Wallpaper Shuffle:BTN" "bash -c 'run_task status-wallpaper-shuffle'"
     --field="$SEP" ""
 
     --field="${HEADER}SYSTEM INFO${FOOTER}:LBL" ""
