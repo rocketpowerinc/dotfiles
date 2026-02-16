@@ -268,17 +268,15 @@ tune-gnome:
 # Reset GTK (Nautilus) bookmarks
 tune-nautilus:
     @printf "{{INFO}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
-
-    @user_home=$$(getent passwd $$SUDO_USER | cut -d: -f6 || echo $$HOME); \
-    mkdir -p "$$user_home/.config/gtk-3.0"; \
-    printf "%s\n" \
-        "file://$$user_home/.config/autostart Auto Start" \
-        "file://$$user_home/.local/share/applications App Drawer" \
-        "file://$$user_home/.config/gtk-3.0/bookmarks Nautilus Bookmarks" \
-        "file://$$user_home/.config/systemd/user Systemctl Services" \
-        > "$$user_home/.config/gtk-3.0/bookmarks"
-
+    @mkdir -p "$$HOME/.config/gtk-3.0"
+    @printf "%s\n" \
+        "file://$$HOME/.config/autostart Auto Start" \
+        "file://$$HOME/.local/share/applications App Drawer" \
+        "file://$$HOME/.config/gtk-3.0/bookmarks Nautilus Bookmarks" \
+        "file://$$HOME/.config/systemd/user Systemctl Services" \
+        > "$$HOME/.config/gtk-3.0/bookmarks"
     @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
+
 
 
 # ==================================================
