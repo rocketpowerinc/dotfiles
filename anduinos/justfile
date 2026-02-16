@@ -91,7 +91,7 @@ default:
 
     @printf "{{SECTION}}🔗 ROCKETPOWERINC{{RESET}}\n"
     @printf "  rocket-dashboard        {{INFO}}Rocket dashboard{{RESET}}\n"
-    @printf "  clone-repos             {{INFO}}Rocket dashboard{{RESET}}\n\n"
+    @printf "  clone-rocketpowerinc    {{INFO}}Clone all public repos{{RESET}}\n\n"
 
     @printf "{{SECTION}}📎 DESKFLOW & CLIPCASCADE{{RESET}}\n"
     @printf "  install-df              {{SUCCESS}}Install Deskflow{{RESET}}\n"
@@ -325,13 +325,13 @@ rocket-dashboard:
     xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
 
 
-clone-repos GITHUB_USER="rocketpowerinc":
-    @printf "📦 Fetching public repositories for {{GITHUB_USER}}...\n"
+clone-rocketpowerinc:
+    @printf "📦 Fetching public repositories for rocketpowerinc...\n"
 
-    TARGET_DIR="$HOME/Github/{{GITHUB_USER}}"
+    TARGET_DIR="$HOME/Github/rocketpowerinc"
     mkdir -p "$TARGET_DIR"
 
-    curl -s "https://api.github.com/users/{{GITHUB_USER}}/repos?per_page=100" \
+    curl -s "https://api.github.com/users/rocketpowerinc/repos?per_page=100" \
     | jq -r '.[] | "\(.name) \(.clone_url)"' \
     | while read -r repo_name clone_url; do \
         repo_path="$TARGET_DIR/$repo_name"; \
@@ -344,6 +344,7 @@ clone-repos GITHUB_USER="rocketpowerinc":
     done
 
     @printf "✅ All public repositories cloned to: $TARGET_DIR\n"
+
 
 
 
