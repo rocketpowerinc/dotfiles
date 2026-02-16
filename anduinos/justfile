@@ -329,24 +329,23 @@ set-wallpapers:
 	\
 	echo ""; \
 	echo "🎨 Choose a wallpaper category:"; \
-	mapfile -t SUBFOLDERS < <(find "$DEST" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort); \
-	if [ "$${#SUBFOLDERS[@]}" -eq 0 ]; then \
+	SUBFOLDERS=$$(find "$DEST" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort); \
+	if [ -z "$$SUBFOLDERS" ]; then \
 		echo "❌ No subfolders found."; \
 		exit 1; \
 	fi; \
-	SELECTED=$$(printf "%s\n" "$${SUBFOLDERS[@]}" | gum choose --header="Select Wallpaper Folder"); \
-	DIR="$DEST/$SELECTED"; \
+	SELECTED=$$(printf "%s\n" "$$SUBFOLDERS" | gum choose --header="Select Wallpaper Folder"); \
+	DIR="$DEST/$$SELECTED"; \
 	echo ""; \
-	echo "🖼️ Selected: $SELECTED"; \
+	echo "🖼️ Selected: $$SELECTED"; \
 	echo "🚀 Starting slideshow..."; \
-	\
-	( while true; do \
-		img=$$(find "$DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n 1); \
+	while true; do \
+		img=$$(find "$$DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n 1); \
 		[ -n "$$img" ] || continue; \
 		gsettings set org.gnome.desktop.background picture-uri "file://$$img"; \
 		gsettings set org.gnome.desktop.background picture-uri-dark "file://$$img"; \
-		sleep "$SLIDESHOW_DELAY"; \
-	done ) > /dev/null 2>&1 & \
+		sleep "$$SLIDESHOW_DELAY"; \
+	done > /dev/null 2>&1 & \
 	echo $$! > "$PID_FILE"; \
 	disown; \
 	echo "✅ Wallpaper shuffle running."
