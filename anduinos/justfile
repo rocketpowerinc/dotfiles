@@ -78,8 +78,8 @@ default:
     @printf "  tune-gnome                   {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
     @printf "  tune-nautilus                {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n"
     @printf "  install-wallpaper-shuffle    {{ACCENT}}Gets Wallpapers and installs script{{RESET}}\n"
-    @printf "  start-wallpaper-shuffle      {{ACCENT}}Shuffle Wallpapers every 10 min{{RESET}}\n"
-    @printf "  stop-wallpaper-shuffle       {{ACCENT}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n\n"
+    @printf "  start-wallpaper-shuffle      {{WARNING}}Shuffle Wallpapers every 10 min{{RESET}}\n"
+    @printf "  stop-wallpaper-shuffle       {{ERROR}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
