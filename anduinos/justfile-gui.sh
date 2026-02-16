@@ -88,6 +88,7 @@ ARGS=(
   --field="${HEADER}BOOTSTRAP${FOOTER}:LBL" ""
   --field="Bootload Apps:BTN" "bash -c 'run_task bootload-apps'"
   --field="Tune GNOME:BTN" "bash -c 'run_task tune-gnome'"
+  --field="Tune Nautilus:BTN" "bash -c 'run_task tune-nautilus'"
   --field="$SEP" ""
 
   --field="${HEADER}SYSTEM INFO${FOOTER}:LBL" ""
