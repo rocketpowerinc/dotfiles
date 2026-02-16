@@ -343,24 +343,6 @@ clone-rocketpowerinc:
 	done; \
 	printf "✅ All public repositories cloned to: %s\n" "$TARGET_DIR"
 
-#todo Keep it so it does not overwrite repos if they exist
-clone-rocketpowerinc:
-	TARGET_DIR="$HOME/Github/rocketpowerinc"; \
-	printf "📦 Fetching public repositories for rocketpowerinc...\n"; \
-	mkdir -p "$TARGET_DIR"; \
-	curl -s "https://api.github.com/users/rocketpowerinc/repos?per_page=100" \
-	| jq -r '.[] | "\(.name) \(.clone_url)"' \
-	| while read -r repo_name clone_url; do \
-		repo_path="$TARGET_DIR/$repo_name"; \
-		if [ ! -d "$repo_path/.git" ]; then \
-			echo "Cloning $repo_name..."; \
-			git clone "$clone_url" "$repo_path"; \
-		else \
-			echo "$repo_name already exists. Skipping..."; \
-		fi; \
-	done; \
-	printf "✅ All public repositories cloned to: %s\n" "$TARGET_DIR"
-
 
 # ==================================================
 # Deskflow and ClipCascade
