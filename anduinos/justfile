@@ -108,16 +108,16 @@ default:
 refresh-justfile:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
-    install -m 644 "$TMPDIR/anduinos/justfile" "$HOME/justfile" && \
+    install -m 777 "$TMPDIR/anduinos/justfile" "$HOME/justfile" && \
     rm -rf "$TMPDIR"
     just
 
 refresh-justfile-gui:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
-    install -m 644 "$TMPDIR/anduinos/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
-    rm -rf "$TMPDIR"
-    ./$HOME/justfile-gui.sh
+    install -m 777 "$TMPDIR/anduinos/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
+    rm -rf "$TMPDIR" && \
+    "$HOME/justfile-gui.sh"
 
 
 # ==================================================
