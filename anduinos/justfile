@@ -326,8 +326,8 @@ rocket-dashboard:
 
 
 clone-repos:
+    GITHUB_USER ?= "rocketpowerinc"
     @printf "📦 Fetching public repositories for {{GITHUB_USER}}...\n"
-
     TARGET_DIR="$HOME/Github/{{GITHUB_USER}}"
     mkdir -p "$TARGET_DIR"
 
