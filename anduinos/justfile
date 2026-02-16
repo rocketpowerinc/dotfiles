@@ -304,7 +304,7 @@ install-wallpaper-shuffle:
     echo "✅ Installed to ~/.local/bin/wallpaper-shuffle"
 
 start-wallpaper-shuffle:
-    wallpaper-shuffle
+    nohup wallpaper-shuffle >/dev/null 2>&1 &
 
 stop-wallpaper-shuffle:
     wallpaper-shuffle stop
