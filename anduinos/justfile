@@ -77,6 +77,7 @@ default:
     @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n"
     @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
     @printf "  tune-nautilus           {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n"
+    @printf "  install-wallpaper-shuffle {{ACCENT}}Gets Wallpapers and installs script{{RESET}}\n"
     @printf "  start-wallpaper-shuffle {{ACCENT}}Shuffle Wallpapers every 10 min{{RESET}}\n"
     @printf "  stop-wallpaper-shuffle  {{ACCENT}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n\n"
 
