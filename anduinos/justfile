@@ -2,9 +2,9 @@ set positional-arguments := true
 set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
 set export := true
 
-# ==================================================
-# Color System (Reusable & Clean)
-# ==================================================
+#! ==================================================
+#! Color System (Reusable & Clean)
+#! ==================================================
 
 ESC    := `printf "\033"`
 RESET  := ESC + "[0m"
@@ -30,9 +30,9 @@ ERROR   := RED
 INFO    := BLUE
 SUBTLE  := DIM
 
-# ==================================================
-# AnduinOS System Toolkit
-# ==================================================
+#! ==================================================
+#! AnduinOS System Toolkit
+#! ==================================================
 default:
     @clear
     @printf "\n"
@@ -76,7 +76,8 @@ default:
     @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
     @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n"
     @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
-    @printf "  tune-nautilus           {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
+    @printf "  tune-nautilus           {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n"
+    @printf "  set-wallpapers          {{ACCENT}}Shuffle Wallpapers every 10 min{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
@@ -102,9 +103,9 @@ default:
     @printf "{{SECTION}}🔨 TOOLS{{RESET}}\n"
     @printf "  change-hostname         {{ERROR}}Change the Machine's Hostname{{RESET}}\n\n"
 
-# ==================================================
-# Convenience
-# ==================================================
+#! ==================================================
+#! Convenience
+#! ==================================================
 
 refresh-justfile:
     TMPDIR=$(mktemp -d) && \
@@ -121,9 +122,9 @@ refresh-justfile-gui:
 
 
 
-# ==================================================
-# System
-# ==================================================
+#! ==================================================
+#! System
+#! ==================================================
 
 update:
     sudo apt update && sudo apt upgrade -y
@@ -156,9 +157,9 @@ factory-reset:
     @echo "Factory Reset / Repair Complete"
 
 
-# ==================================================
-# Packages (APT)
-# ==================================================
+#! ==================================================
+#! Packages (APT)
+#! ==================================================
 
 apt-search pkg:
     apt-cache policy {{pkg}}
@@ -169,9 +170,9 @@ apt-install pkg:
 apt-remove pkg:
     sudo apt remove -y {{pkg}}
 
-# ==================================================
-# Packages (Flatpak)
-# ==================================================
+#! ==================================================
+#! Packages (Flatpak)
+#! ==================================================
 
 flatpak-search pkg:
     flatpak search {{pkg}}
@@ -189,9 +190,9 @@ flatpak-remove-remote remote:
     flatpak remote-delete {{remote}}
     @printf "\033[92m✔ Remote removed successfully.\033[0m\n"
 
-# ==================================================
-# Bootstrap
-# ==================================================
+#! ==================================================
+#! Bootstrap
+#! ==================================================
 bootload-apps:
     @printf "\033[1;96m🚀 Cool Bootload Apps - Installing Essentials...\033[0m\n\n"
 
@@ -287,11 +288,72 @@ tune-nautilus:
     @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
 
 
+# ==================================================
+# Wallpaper Slideshow
+# ==================================================
+
+set-wallpapers:
+	BASE_DIR="$HOME/Pictures/Wallpapers"; \
+	RESOLUTION="3840x2160"; \
+	DEST="$BASE_DIR/$RESOLUTION"; \
+	REPO_URL="https://github.com/rocketpowerinc/assets.git"; \
+	BRANCH="main"; \
+	SPARSE_PATH="wallpapers/$RESOLUTION"; \
+	PID_FILE="$HOME/.cache/wallpaper-shuffle.pid"; \
+	SLIDESHOW_DELAY=5; \
+	\
+	if [ -f "$PID_FILE" ] && kill -0 "$$(cat "$PID_FILE")" 2>/dev/null; then \
+		echo "🛑 Stopping existing wallpaper shuffle..."; \
+		kill "$$(cat "$PID_FILE")" || true; \
+		rm -f "$PID_FILE"; \
+	fi; \
+	\
+	if [ ! -d "$DEST" ]; then \
+		echo "📦 $RESOLUTION not found. Cloning..."; \
+		mkdir -p "$BASE_DIR"; \
+		cd "$BASE_DIR"; \
+		git init temp-assets; \
+		cd temp-assets; \
+		git remote add origin "$REPO_URL"; \
+		git config core.sparseCheckout true; \
+		echo "$SPARSE_PATH/*" >> .git/info/sparse-checkout; \
+		git pull origin "$BRANCH"; \
+		mv "$SPARSE_PATH" "$BASE_DIR/"; \
+		cd "$BASE_DIR"; \
+		rm -rf temp-assets; \
+		echo "✅ Clone complete."; \
+	else \
+		echo "✔ Wallpapers already exist."; \
+	fi; \
+	\
+	echo ""; \
+	echo "🎨 Choose a wallpaper category:"; \
+	mapfile -t SUBFOLDERS < <(find "$DEST" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort); \
+	if [ "$${#SUBFOLDERS[@]}" -eq 0 ]; then \
+		echo "❌ No subfolders found."; \
+		exit 1; \
+	fi; \
+	SELECTED=$$(printf "%s\n" "$${SUBFOLDERS[@]}" | gum choose --header="Select Wallpaper Folder"); \
+	DIR="$DEST/$SELECTED"; \
+	echo ""; \
+	echo "🖼️ Selected: $SELECTED"; \
+	echo "🚀 Starting slideshow..."; \
+	\
+	( while true; do \
+		img=$$(find "$DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n 1); \
+		[ -n "$$img" ] || continue; \
+		gsettings set org.gnome.desktop.background picture-uri "file://$$img"; \
+		gsettings set org.gnome.desktop.background picture-uri-dark "file://$$img"; \
+		sleep "$SLIDESHOW_DELAY"; \
+	done ) > /dev/null 2>&1 & \
+	echo $$! > "$PID_FILE"; \
+	disown; \
+	echo "✅ Wallpaper shuffle running."
 
 
-# ==================================================
-# SYSTEM INFO
-# ==================================================
+#! ==================================================
+#! SYSTEM INFO
+#! ==================================================
 
 report-disk:
     df -h /
@@ -303,9 +365,9 @@ report-cpu:
     lscpu
 
 
-# ==================================================
-# External Tools
-# ==================================================
+#! ==================================================
+#! External Tools
+#! ==================================================
 
 tuxmate:
     xdg-open "https://tuxmate.com/" >/dev/null 2>&1 &
@@ -317,9 +379,9 @@ linutil:
     x-terminal-emulator -e bash -c 'curl -fsSL https://christitus.com/linux | sh'
 
 
-# ==================================================
-# RocketPowerInc
-# ==================================================
+#! ==================================================
+#! RocketPowerInc
+#! ==================================================
 
 rocket-dashboard:
     xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
@@ -344,9 +406,9 @@ clone-rocketpowerinc:
 	printf "✅ All public repositories cloned to: %s\n" "$TARGET_DIR"
 
 
-# ==================================================
-# Deskflow and ClipCascade
-# ==================================================
+#! ==================================================
+#! Deskflow and ClipCascade
+#! ==================================================
 
 install-df:
     @printf "\033[96m🧊 Installing Deskflow (Flatpak)...\033[0m\n"
@@ -376,9 +438,9 @@ status-cc:
     systemctl --user status clipcascade
 
 
-# ==================================================
-# Tools
-# ==================================================
+#! ==================================================
+#! Tools
+#! ==================================================
 
 
 
