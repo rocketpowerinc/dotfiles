@@ -340,7 +340,7 @@ set-wallpapers:
 	echo "🖼️ Selected: $$SELECTED"; \
 	echo "🚀 Starting slideshow..."; \
 	while true; do \
-		img=$$(find "$$DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n 1); \
+		img=$$(find "$$DIR" -type f -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" | shuf -n 1); \
 		[ -n "$$img" ] || continue; \
 		gsettings set org.gnome.desktop.background picture-uri "file://$$img"; \
 		gsettings set org.gnome.desktop.background picture-uri-dark "file://$$img"; \
@@ -349,6 +349,7 @@ set-wallpapers:
 	echo $$! > "$PID_FILE"; \
 	disown; \
 	echo "✅ Wallpaper shuffle running."
+
 
 
 #! ==================================================
