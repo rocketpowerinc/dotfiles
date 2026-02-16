@@ -63,6 +63,7 @@ ARGS=(
 
   --field="${HEADER}CONVENIENCE${FOOTER}:LBL" ""
   --field="Refresh Justfile:BTN" "bash -c 'run_task refresh-justfile'"
+  --field="Refresh Justfile-GUI:BTN" "bash -c 'run_task refresh-justfile-gui'"
   --field="$SEP" ""
 
   --field="${HEADER}SYSTEM${FOOTER}:LBL" ""
