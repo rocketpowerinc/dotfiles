@@ -291,6 +291,7 @@ tune-nautilus:
         "file://$HOME/.local/share/applications App Drawer" \
         "file://$HOME/.config/gtk-3.0/bookmarks Nautilus Bookmarks" \
         "file://$HOME/.config/systemd/user Systemctl Services" \
+        "file:///home/rocket/.local/bin .local bin" \
         > "$HOME/.config/gtk-3.0/bookmarks"
     @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
 
