@@ -301,11 +301,7 @@ install-wallpaper-shuffle:
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
     install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
     rm -rf "$TMPDIR" && \
-    mkdir -p "$HOME/.config/systemd/user" && \
-    printf '[Unit]\nDescription=Wallpaper Shuffle Slideshow\nAfter=graphical-session.target\nWants=graphical-session.target\n\n[Service]\nType=simple\nExecStart=%%h/.local/bin/wallpaper-shuffle\nRestart=on-failure\nRestartSec=5\n\n[Install]\nWantedBy=graphical-session.target\n' > "$HOME/.config/systemd/user/wallpaper-shuffle.service"
-    systemctl --user daemon-reload
-    @echo "✅ Installed systemd user service"
-
+    echo "✅ Installed to ~/.local/bin/wallpaper-shuffle"
 
 start-wallpaper-shuffle:
     systemctl --user enable wallpaper-shuffle && systemctl --user start wallpaper-shuffle
@@ -315,6 +311,7 @@ stop-wallpaper-shuffle:
 
 status-wallpaper-shuffle:
     systemctl --user status wallpaper-shuffle
+
 
 
 
