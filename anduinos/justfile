@@ -52,7 +52,8 @@ default:
     @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n\n"
 
     @printf "{{SECTION}}🧰 CONVENIENCE{{RESET}}\n"
-    @printf "  refresh-justfile        {{ACCENT}}Pull latest toolkit{{RESET}}\n\n"
+    @printf "  refresh-justfile        {{ACCENT}}Pull latest toolkit{{RESET}}\n"
+    @printf "  refresh-justfile-gui    {{ACCENT}}Pull latest toolkit{{RESET}}\n\n"
 
     @printf "{{SECTION}}⚙ SYSTEM{{RESET}}\n"
     @printf "  update                  {{SUCCESS}}Full system update (APT + Flatpak){{RESET}}\n"
@@ -110,6 +111,13 @@ refresh-justfile:
     install -m 644 "$TMPDIR/anduinos/justfile" "$HOME/justfile" && \
     rm -rf "$TMPDIR"
     just
+
+refresh-justfile-gui:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
+    install -m 644 "$TMPDIR/anduinos/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
+    rm -rf "$TMPDIR"
+    ./$HOME/justfile-gui.sh
 
 
 # ==================================================
