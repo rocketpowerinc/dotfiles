@@ -32,6 +32,8 @@ curl -L "https://raw.githubusercontent.com/Anduin2017/AnduinOS/47ef341b4ab911990
 #! Desktop icon + start at boot + add to app drawer  #
 #!####################################################
 
+set -e
+
 # 1. Define the target paths
 DESKTOP_DIR="$HOME/Desktop"
 APPS_DIR="$HOME/.local/share/applications"
@@ -42,8 +44,16 @@ SCRIPT_PATH="/home/$USER/justfile-gui.sh"
 # 2. Create directories if they don't exist
 mkdir -p "$APPS_DIR"
 mkdir -p "$AUTOSTART_DIR"
+mkdir -p "$DESKTOP_DIR"
 
-# 3. Create the standard .desktop file (for Desktop and App Menu)
+# 3. Remove any existing files (guaranteed clean overwrite)
+rm -f "$DESKTOP_DIR/$FILE_NAME"
+rm -f "$APPS_DIR/$FILE_NAME"
+rm -f "$AUTOSTART_DIR/$FILE_NAME"
+rm -f "/tmp/$FILE_NAME"
+rm -f "/tmp/autostart-$FILE_NAME"
+
+# 4. Create the standard .desktop file (Desktop + App Menu)
 cat <<EOF > "/tmp/$FILE_NAME"
 [Desktop Entry]
 Version=1.0
@@ -57,7 +67,7 @@ Comment=Manage your system with Justfile
 StartupNotify=true
 EOF
 
-# 4. Create Autostart version with 5 second delay (no logging)
+# 5. Create Autostart version with 5 second delay
 cat <<EOF > "/tmp/autostart-$FILE_NAME"
 [Desktop Entry]
 Version=1.0
@@ -71,16 +81,16 @@ Comment=Launch Toolkit at boot
 StartupNotify=false
 EOF
 
-# 5. Copy files to their specific locations
-cp "/tmp/$FILE_NAME" "$DESKTOP_DIR/$FILE_NAME"
-cp "/tmp/$FILE_NAME" "$APPS_DIR/$FILE_NAME"
-cp "/tmp/autostart-$FILE_NAME" "$AUTOSTART_DIR/$FILE_NAME"
+# 6. Force copy (overwrites without asking)
+command cp -f "/tmp/$FILE_NAME" "$DESKTOP_DIR/$FILE_NAME"
+command cp -f "/tmp/$FILE_NAME" "$APPS_DIR/$FILE_NAME"
+command cp -f "/tmp/autostart-$FILE_NAME" "$AUTOSTART_DIR/$FILE_NAME"
 
-# 6. Make them all executable
+# 7. Make executable
 chmod +x "$DESKTOP_DIR/$FILE_NAME"
 chmod +x "$APPS_DIR/$FILE_NAME"
 chmod +x "$AUTOSTART_DIR/$FILE_NAME"
 chmod +x "$SCRIPT_PATH"
 
 echo "Installation complete!"
-echo "Desktop icon, App Menu entry, and Autostart created."
+echo "Desktop icon, App Menu entry, and Autostart created (existing files overwritten)."
