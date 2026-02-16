@@ -82,7 +82,7 @@ default:
     @printf "  install-wallpaper-shuffle    {{ACCENT}}Gets Wallpapers and installs script{{RESET}}\n"
     @printf "  start-wallpaper-shuffle      {{SUCCESS}}Shuffle Wallpapers every 10 min{{RESET}}\n"
     @printf "  stop-wallpaper-shuffle       {{ERROR}}Stops Wallpaper Shuffle on Current Wallpaper{{RESET}}\n"
-    @printf "  status-wallpaper-shuffle     {{ERROR}}Is Wallpaper Shuffle Running?{{RESET}}\n"
+    @printf "  status-wallpaper-shuffle     {{ACCENT}}Is Wallpaper Shuffle Running?{{RESET}}\n"
     @printf "  change-wallpaper-folder      {{WARNING}}Change Wallpaper Directory{{RESET}}\n\n"
 
 
