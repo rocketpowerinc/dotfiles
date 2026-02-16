@@ -326,7 +326,7 @@ rocket-dashboard:
 
 
 clone-rocketpowerinc:
-	@TARGET_DIR="$HOME/Github/rocketpowerinc"; \
+	TARGET_DIR="$HOME/Github/rocketpowerinc"; \
 	printf "📦 Fetching public repositories for rocketpowerinc...\n"; \
 	mkdir -p "$$TARGET_DIR"; \
 	curl -s "https://api.github.com/users/rocketpowerinc/repos?per_page=100" \
@@ -341,6 +341,7 @@ clone-rocketpowerinc:
 		fi; \
 	done; \
 	printf "✅ All public repositories cloned to: %s\n" "$$TARGET_DIR"
+
 
 
 
