@@ -297,29 +297,29 @@ tune-nautilus:
 # ==================================================
 
 install-wallpaper-shuffle:
-        TMPDIR=$(mktemp -d) && \
-        git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-        install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
-        rm -rf "$TMPDIR" && \
-        mkdir -p "$HOME/.config/systemd/user" && \
-        printf '%s\n' \
-    "[Unit]
-    Description=Wallpaper Shuffle Slideshow
-    After=graphical-session.target
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
+    rm -rf "$TMPDIR" && \
+    mkdir -p "$HOME/.config/systemd/user" && \
+    printf '%s\n' \
+"[Unit]
+Description=Wallpaper Shuffle Slideshow
+After=graphical-session.target
 
-    [Service]
-    Type=simple
-    ExecStart=%h/.local/bin/wallpaper-shuffle
-    Restart=on-failure
-    RestartSec=5
-    Environment=DISPLAY=:0
-    Environment=XDG_RUNTIME_DIR=/run/user/%U
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/wallpaper-shuffle
+Restart=on-failure
+RestartSec=5
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/%U
 
-    [Install]
-    WantedBy=default.target" \
-        > "$HOME/.config/systemd/user/wallpaper-shuffle.service" && \
-        systemctl --user daemon-reload && \
-        echo "✅ Installed systemd user service"
+[Install]
+WantedBy=default.target" \
+    > "$HOME/.config/systemd/user/wallpaper-shuffle.service" && \
+    systemctl --user daemon-reload && \
+    echo "✅ Installed systemd user service"
 
 start-wallpaper-shuffle:
     systemctl --user enable wallpaper-shuffle && systemctl --user start wallpaper-shuffle
@@ -329,7 +329,6 @@ stop-wallpaper-shuffle:
 
 status-wallpaper-shuffle:
     systemctl --user status wallpaper-shuffle
-
 
 
 
