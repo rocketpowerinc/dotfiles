@@ -75,6 +75,7 @@ default:
     @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
     @printf "  bootload-apps           {{SUCCESS}}Install all essential apps (APT + Flatpak){{RESET}}\n"
     @printf "  tune-gnome              {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n\n"
+    @printf "  nautilus-bookmarks   {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
 
 
     @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
@@ -263,6 +264,22 @@ tune-gnome:
     gsettings set org.gnome.desktop.notifications show-in-lock-screen false
 
     @printf "\n\033[92m✔ GNOME Gsettings Tweaks Applied Successfully!\033[0m\n"
+
+# Reset GTK (Nautilus) bookmarks
+nautilus-bookmarks:
+    @printf "{{INFO}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
+
+    @mkdir -p "$HOME/.config/gtk-3.0"
+
+    @cat << 'EOF' > "$HOME/.config/gtk-3.0/bookmarks"
+    file://$HOME/.config/autostart Auto Start
+    file://$HOME/.local/share/applications App Drawer
+    file://$HOME/.config/gtk-3.0/bookmarks Nautilus Bookmarks
+    file://$HOME/.config/systemd/user Systemctl Services
+    EOF
+
+    @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
+
 # ==================================================
 # Info & Diagnostics
 # ==================================================
