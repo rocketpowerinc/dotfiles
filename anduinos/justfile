@@ -52,8 +52,8 @@ default:
     @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n\n"
 
     @printf "{{SECTION}}🧰 CONVENIENCE{{RESET}}\n"
-    @printf "  refresh-justfile        {{ACCENT}}Pull latest toolkit{{RESET}}\n"
-    @printf "  refresh-justfile-gui    {{ACCENT}}Pull latest toolkit{{RESET}}\n\n"
+    @printf "  plj                     {{ACCENT}}Pull Latest Justfile{{RESET}}\n"
+    @printf "  pljg                    {{ACCENT}}Pull Latest Justfile GUI{{RESET}}\n\n"
 
     @printf "{{SECTION}}⚙ SYSTEM{{RESET}}\n"
     @printf "  update                  {{SUCCESS}}Full system update (APT + Flatpak){{RESET}}\n"
