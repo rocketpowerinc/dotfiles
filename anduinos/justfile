@@ -297,12 +297,17 @@ tune-nautilus:
 # ==================================================
 
 install-wallpaper-shuffle:
-    TMPDIR=$(mktemp -d) && \
-    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-    install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
-    rm -rf "$TMPDIR" && \
-    mkdir -p "$HOME/.config/systemd/user" && \
-    cat > "$HOME/.config/systemd/user/wallpaper-shuffle.service" << 'EOF'
+    bash -c '
+        set -e
+
+        TMPDIR=$(mktemp -d)
+        git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR"
+        install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle"
+        rm -rf "$TMPDIR"
+
+        mkdir -p "$HOME/.config/systemd/user"
+
+        cat > "$HOME/.config/systemd/user/wallpaper-shuffle.service" <<EOF
 [Unit]
 Description=Wallpaper Shuffle Slideshow
 After=graphical-session.target
@@ -317,8 +322,13 @@ RestartSec=5
 [Install]
 WantedBy=graphical-session.target
 EOF
-    systemctl --user daemon-reload && \
-    echo "✅ Installed systemd user service"
+
+        systemctl --user daemon-reload
+        echo "✅ Installed systemd user service"
+    '
+
+
+
 
 start-wallpaper-shuffle:
     systemctl --user enable wallpaper-shuffle && systemctl --user start wallpaper-shuffle
