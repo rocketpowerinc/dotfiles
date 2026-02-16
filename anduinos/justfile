@@ -297,20 +297,39 @@ tune-nautilus:
 # ==================================================
 
 install-wallpaper-shuffle:
-    TMPDIR=$(mktemp -d) && \
-    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-    install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
-    rm -rf "$TMPDIR" && \
-    echo "✅ Installed to ~/.local/bin/wallpaper-shuffle"
+        TMPDIR=$(mktemp -d) && \
+        git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+        install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
+        rm -rf "$TMPDIR" && \
+        mkdir -p "$HOME/.config/systemd/user" && \
+        printf '%s\n' \
+    "[Unit]
+    Description=Wallpaper Shuffle Slideshow
+    After=graphical-session.target
+
+    [Service]
+    Type=simple
+    ExecStart=%h/.local/bin/wallpaper-shuffle
+    Restart=on-failure
+    RestartSec=5
+    Environment=DISPLAY=:0
+    Environment=XDG_RUNTIME_DIR=/run/user/%U
+
+    [Install]
+    WantedBy=default.target" \
+        > "$HOME/.config/systemd/user/wallpaper-shuffle.service" && \
+        systemctl --user daemon-reload && \
+        echo "✅ Installed systemd user service"
 
 start-wallpaper-shuffle:
-    setsid wallpaper-shuffle >/dev/null 2>&1 &
+    systemctl --user enable wallpaper-shuffle && systemctl --user start wallpaper-shuffle
 
 stop-wallpaper-shuffle:
-    wallpaper-shuffle stop
+    systemctl --user disable wallpaper-shuffle && systemctl --user stop wallpaper-shuffle
 
 status-wallpaper-shuffle:
-    wallpaper-shuffle status
+    systemctl --user status wallpaper-shuffle
+
 
 
 
