@@ -294,61 +294,12 @@ tune-nautilus:
 # ==================================================
 
 set-wallpapers:
-	BASE_DIR="$HOME/Pictures/Wallpapers"; \
-	RESOLUTION="3840x2160"; \
-	DEST="$BASE_DIR/$RESOLUTION"; \
-	REPO_URL="https://github.com/rocketpowerinc/assets.git"; \
-	BRANCH="main"; \
-	SPARSE_PATH="wallpapers/$RESOLUTION"; \
-	PID_FILE="$HOME/.cache/wallpaper-shuffle.pid"; \
-	SLIDESHOW_DELAY=5; \
-	\
-	if [ -f "$PID_FILE" ] && kill -0 "$$(cat "$PID_FILE")" 2>/dev/null; then \
-		echo "🛑 Stopping existing wallpaper shuffle..."; \
-		kill "$$(cat "$PID_FILE")" || true; \
-		rm -f "$PID_FILE"; \
-	fi; \
-	\
-	if [ ! -d "$DEST" ]; then \
-		echo "📦 $RESOLUTION not found. Cloning..."; \
-		mkdir -p "$BASE_DIR"; \
-		cd "$BASE_DIR"; \
-		git init temp-assets; \
-		cd temp-assets; \
-		git remote add origin "$REPO_URL"; \
-		git config core.sparseCheckout true; \
-		echo "$SPARSE_PATH/*" >> .git/info/sparse-checkout; \
-		git pull origin "$BRANCH"; \
-		mv "$SPARSE_PATH" "$BASE_DIR/"; \
-		cd "$BASE_DIR"; \
-		rm -rf temp-assets; \
-		echo "✅ Clone complete."; \
-	else \
-		echo "✔ Wallpapers already exist."; \
-	fi; \
-	\
-	echo ""; \
-	echo "🎨 Choose a wallpaper category:"; \
-	SUBFOLDERS=$$(find "$DEST" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort); \
-	if [ -z "$$SUBFOLDERS" ]; then \
-		echo "❌ No subfolders found."; \
-		exit 1; \
-	fi; \
-	SELECTED=$$(printf "%s\n" "$$SUBFOLDERS" | gum choose --header="Select Wallpaper Folder"); \
-	DIR="$DEST/$$SELECTED"; \
-	echo ""; \
-	echo "🖼️ Selected: $$SELECTED"; \
-	echo "🚀 Starting slideshow..."; \
-	while true; do \
-		img=$$(find "$$DIR" -type f -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" | shuf -n 1); \
-		[ -n "$$img" ] || continue; \
-		gsettings set org.gnome.desktop.background picture-uri "file://$$img"; \
-		gsettings set org.gnome.desktop.background picture-uri-dark "file://$$img"; \
-		sleep "$$SLIDESHOW_DELAY"; \
-	done > /dev/null 2>&1 & \
-	echo $$! > "$PID_FILE"; \
-	disown; \
-	echo "✅ Wallpaper shuffle running."
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    chmod +x "$TMPDIR/bash/linux/wallpaper-shuffle.sh" && \
+    bash "$TMPDIR/bash/linux/wallpaper-shuffle.sh" && \
+    rm -rf "$TMPDIR"
+
 
 
 
