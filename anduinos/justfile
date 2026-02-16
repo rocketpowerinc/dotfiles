@@ -303,20 +303,20 @@ install-wallpaper-shuffle:
 	rm -rf "$TMPDIR" && \
 	mkdir -p "$HOME/.config/systemd/user" && \
 	cat > "$HOME/.config/systemd/user/wallpaper-shuffle.service" << 'EOF'
-	[Unit]
-	Description=Wallpaper Shuffle Slideshow
-	After=graphical-session.target
-	Wants=graphical-session.target
+[Unit]
+Description=Wallpaper Shuffle Slideshow
+After=graphical-session.target
+Wants=graphical-session.target
 
-	[Service]
-	Type=simple
-	ExecStart=%h/.local/bin/wallpaper-shuffle
-	Restart=on-failure
-	RestartSec=5
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/wallpaper-shuffle
+Restart=on-failure
+RestartSec=5
 
-	[Install]
-	WantedBy=graphical-session.target
-	EOF
+[Install]
+WantedBy=graphical-session.target
+EOF
 	systemctl --user daemon-reload && \
 	echo "✅ Installed systemd user service"
 
