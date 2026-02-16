@@ -301,10 +301,11 @@ install-wallpaper-shuffle:
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
     install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
     rm -rf "$TMPDIR" && \
-    echo "✅ Installed to ~/.local/bin/wallpaper-shuffle"
+    "$HOME/.local/bin/wallpaper-shuffle" # <--- ADD THIS LINE
+    @echo "✅ Installed and bootstrapped wallpaper-shuffle"
 
 start-wallpaper-shuffle:
-    systemctl --user enable wallpaper-shuffle && systemctl --user start wallpaper-shuffle
+    systemctl --user enable --now wallpaper-shuffle
 
 stop-wallpaper-shuffle:
     systemctl --user disable wallpaper-shuffle && systemctl --user stop wallpaper-shuffle
