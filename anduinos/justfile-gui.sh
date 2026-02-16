@@ -106,7 +106,7 @@ ARGS=(
 
   --field="${HEADER}ROCKETPOWERINC${FOOTER}:LBL" ""
   --field="Rocket Dashboard:BTN" "bash -c 'run_task rocket-dashboard'"
-  --field="Clone RocketPowerInc:BTN" "bash -c 'run_task clone-rocketpowerinc'"
+  --field="Clone RocketPowerInc Repos:BTN" "bash -c 'run_task clone-rocketpowerinc'"
   --field="$SEP" ""
 
   --field="${HEADER}DESKFLOW &amp; CLIPCASCADE${FOOTER}:LBL" ""
