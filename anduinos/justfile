@@ -76,7 +76,7 @@ default:
     @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
     @printf "  bootload-apps                {{ACCENT}}Install all essential apps (APT + Flatpak){{RESET}}\n"
     @printf "  tune-gnome                   {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
-    @printf "  tune-nautilus                {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n"
+    @printf "  tune-nautilus                {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
 
     @printf "{{SECTION}}🖼️ WALLPAPER{{RESET}}\n"
     @printf "  install-wallpaper-shuffle    {{ACCENT}}Gets Wallpapers and installs script{{RESET}}\n"
@@ -317,9 +317,8 @@ status-wallpaper-shuffle:
     systemctl --user status wallpaper-shuffle
 
 change-wallpaper-folder:
-    # 1. Run the script with the new --select flag to trigger gum
-    ~/.local/bin/wallpaper-shuffle --select
-    # 2. Restart the service to pick up the new folder from the cache
+    # We prefix the command with BOLD="" to neutralize the variable
+    BOLD="" ~/.local/bin/wallpaper-shuffle --select
     systemctl --user restart wallpaper-shuffle
     @echo "✅ Switched to new wallpaper folder!"
 
