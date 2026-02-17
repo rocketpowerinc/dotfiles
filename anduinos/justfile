@@ -305,7 +305,7 @@ install-wallpaper-shuffle:
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
     install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
     rm -rf "$TMPDIR" && \
-    "$HOME/.local/bin/wallpaper-shuffle" # <--- ADD THIS LINE
+    "$HOME/.local/bin/wallpaper-shuffle"
     @echo "✅ Installed and bootstrapped wallpaper-shuffle"
 
 start-wallpaper-shuffle:
