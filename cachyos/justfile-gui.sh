@@ -3,7 +3,7 @@ set -euo pipefail
 
 export GTK_THEME=Adwaita:dark
 export JUST_FILE="$HOME/justfile"
-ICON_URL="https://avatars.githubusercontent.com/u/85452089?s=200&v=4"
+ICON_URL="https://discuss.cachyos.org/uploads/default/original/1X/c4053c6b69101d506a40c0403e0e103789209019.png"
 ICON_PATH="/tmp/CachyOS-logo.svg"
 
 # 1. Terminal Detection

@@ -24,7 +24,7 @@ chmod +x "$HOME/justfile-gui.sh"
 
 # Download Icon
 mkdir -p ~/.local/share/icons && \
-curl -L "https://github.com/CachyOS/calamares-config/blob/grub-3.2/etc/calamares/branding/cachyos/logo.png?raw=true" \
+curl -L "https://discuss.cachyos.org/uploads/default/original/1X/c4053c6b69101d506a40c0403e0e103789209019.png" \
 -o ~/.local/share/icons/cachyos-logo.svg
 
 
