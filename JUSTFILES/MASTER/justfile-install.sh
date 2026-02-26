@@ -12,6 +12,11 @@ ICON_DEST_NAME="RocketOS.svg"
 DEPS_INSTALL_CMD="sudo apt update && sudo apt install -y just yad"
 DEPS_REMOVE_CMD="sudo apt remove -y just yad"
 
+#! ==================================================
+#! ==================================================
+#! ==================================================
+
+
 TOOLKIT_DESKTOP_FILE="${DISTRO_NAME// /}-Toolkit.desktop"
 SCRIPT_PATH="$HOME/justfile-gui.sh"
 ICON_DEST="$HOME/.local/share/icons/$ICON_DEST_NAME"

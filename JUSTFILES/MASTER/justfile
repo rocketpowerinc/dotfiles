@@ -8,7 +8,6 @@ set export := true
 DISTRO_NAME               := "xxxxxxxOS"
 DISTRO_FOLDER             := "MASTER"
 REPO_URL                  := "https://github.com/rocketpowerinc/dotfiles.git"
-
 PKG_LABEL                 := "APT"
 PKG_UPDATE_CMD            := "sudo apt update"
 PKG_UPGRADE_CMD           := "sudo apt upgrade -y"
@@ -20,7 +19,6 @@ PKG_AUTOCLEAN_CMD         := "sudo apt autoclean"
 DESKTOP_TWEAKS_INSTALL_CMD := "sudo apt install -y gnome-tweaks"
 DISTRO_UPGRADE_CMD        := "do_xxxxxxxos_upgrade"
 DISTRO_REPAIR_CMD         := "do-xxxxxxxos-autorepair"
-
 BOOTSTRAP_BASE_INSTALL_CMD := "sudo apt install -y fastfetch gh git jq nala yad zenity whiptail just xclip wl-clipboard"
 
 #! ==================================================
