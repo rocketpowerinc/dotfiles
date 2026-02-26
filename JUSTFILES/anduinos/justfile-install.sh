@@ -10,20 +10,24 @@ trap 'rm -rf "$TMPDIR"' EXIT
 
 git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
 
+# Case sentitve fix for AnduinOS vs anduinos
+JUSTFILES_DIR="$TMPDIR/JUSTFILES/anduinos"
+[ -d "$JUSTFILES_DIR" ] || JUSTFILES_DIR="$TMPDIR/JUSTFILES/AnduinOS"
+
 # Copy justfile to $HHOME
 install -m 777 \
-  "$TMPDIR/JUSTFILES/AnduinOS/justfile" \
+  "$JUSTFILES_DIR/justfile" \
   "$HOME/justfile"
 
 # Copy justfile yad gui to $HOME
 install -m 777 \
-  "$TMPDIR/JUSTFILES/AnduinOS/justfile-gui.sh" \
+  "$JUSTFILES_DIR/justfile-gui.sh" \
   "$HOME/justfile-gui.sh"
 chmod +x "$HOME/justfile-gui.sh"
 
 
 # Download Icon
-ICON_SRC="$TMPDIR/JUSTFILES/AnduinOS/AnduinOS.svg"
+ICON_SRC="$JUSTFILES_DIR/AnduinOS.svg"
 ICON_DEST="$HOME/.local/share/icons/anduinos-logo.svg"
 mkdir -p "$HOME/.local/share/icons"
 install -m 644 "$ICON_SRC" "$ICON_DEST"
