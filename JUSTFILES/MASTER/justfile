@@ -1,0 +1,376 @@
+set positional-arguments := true
+set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
+set export := true
+
+#! ==================================================
+#! MASTER TEMPLATE CONFIG (edit this block only)
+#! ==================================================
+DISTRO_NAME               := "xxxxxxxOS"
+DISTRO_FOLDER             := "MASTER"
+REPO_URL                  := "https://github.com/rocketpowerinc/dotfiles.git"
+
+PKG_LABEL                 := "APT"
+PKG_UPDATE_CMD            := "sudo apt update"
+PKG_UPGRADE_CMD           := "sudo apt upgrade -y"
+PKG_SEARCH_CMD            := "apt-cache policy"
+PKG_INSTALL_CMD           := "sudo apt install -y"
+PKG_REMOVE_CMD            := "sudo apt remove -y"
+PKG_AUTOREMOVE_CMD        := "sudo apt autoremove -y"
+PKG_AUTOCLEAN_CMD         := "sudo apt autoclean"
+DESKTOP_TWEAKS_INSTALL_CMD := "sudo apt install -y gnome-tweaks"
+DISTRO_UPGRADE_CMD        := "do_xxxxxxxos_upgrade"
+DISTRO_REPAIR_CMD         := "do-xxxxxxxos-autorepair"
+
+BOOTSTRAP_BASE_INSTALL_CMD := "sudo apt install -y fastfetch gh git jq nala yad zenity whiptail just xclip wl-clipboard"
+
+#! ==================================================
+#! Color System
+#! ==================================================
+ESC    := `printf "\033"`
+RESET  := ESC + "[0m"
+BOLD   := ESC + "[1m"
+DIM    := ESC + "[2m"
+
+RED    := ESC + "[91m"
+GREEN  := ESC + "[92m"
+YELLOW := ESC + "[93m"
+BLUE   := ESC + "[94m"
+PINK   := ESC + "[95m"
+CYAN   := ESC + "[96m"
+
+ACCENT  := CYAN
+HEADER  := BLUE
+SECTION := PINK
+SUCCESS := GREEN
+WARNING := YELLOW
+ERROR   := RED
+INFO    := BLUE
+SUBTLE  := DIM
+
+default:
+    @clear
+    @printf "\n"
+    @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n"
+    @printf "{{BOLD}}             🚀 {{DISTRO_NAME}} System Toolkit 🚀{{RESET}}\n"
+    @printf "{{SUBTLE}}               Powered by RocketPowerInc{{RESET}}\n"
+    @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n\n"
+
+    @printf "{{SECTION}}🧰 CONVENIENCE{{RESET}}\n"
+    @printf "  plj                          {{ACCENT}}Pull Latest Justfile{{RESET}}\n"
+    @printf "  pljg                         {{ACCENT}}Pull Latest Justfile GUI{{RESET}}\n\n"
+
+    @printf "{{SECTION}}⚙ SYSTEM{{RESET}}\n"
+    @printf "  update                       {{SUCCESS}}Full system update ({{PKG_LABEL}} + Flatpak){{RESET}}\n"
+    @printf "  upgrade                      {{SUCCESS}}Run distro upgrade command{{RESET}}\n"
+    @printf "  care                         {{WARNING}}Full system maintenance ({{PKG_LABEL}} + Flatpak){{RESET}}\n"
+    @printf "  factory-reset                {{ERROR}}Run distro repair command{{RESET}}\n\n"
+
+    @printf "{{SECTION}}📦 {{PKG_LABEL}} PACKAGES{{RESET}}\n"
+    @printf "  pkg-search <pkg>             {{INFO}}Search packages{{RESET}}\n"
+    @printf "  pkg-install <pkg>            {{SUCCESS}}Install package{{RESET}}\n"
+    @printf "  pkg-remove <pkg>             {{ERROR}}Remove package{{RESET}}\n\n"
+
+    @printf "{{SECTION}}🧊 FLATPAK PACKAGES{{RESET}}\n"
+    @printf "  flatpak-search <pkg>         {{INFO}}Search flatpaks{{RESET}}\n"
+    @printf "  flatpak-list                 {{INFO}}List flatpaks{{RESET}}\n"
+    @printf "  flatpak-remotes              {{INFO}}List remotes{{RESET}}\n"
+    @printf "  flatpak-remove-remote        {{ERROR}}Remove remote <name>{{RESET}}\n\n"
+
+    @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
+    @printf "  bootload-apps                {{ACCENT}}Install baseline CLI + Flatpaks{{RESET}}\n"
+    @printf "  tune-gnome                   {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
+    @printf "  tune-nautilus                {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
+
+    @printf "{{SECTION}}🖼️ WALLPAPER{{RESET}}\n"
+    @printf "  install-wallpaper-shuffle    {{ACCENT}}Install wallpaper shuffle{{RESET}}\n"
+    @printf "  start-wallpaper-shuffle      {{SUCCESS}}Start wallpaper shuffle{{RESET}}\n"
+    @printf "  stop-wallpaper-shuffle       {{ERROR}}Stop wallpaper shuffle{{RESET}}\n"
+    @printf "  status-wallpaper-shuffle     {{ACCENT}}Show wallpaper shuffle status{{RESET}}\n"
+    @printf "  change-wallpaper-folder      {{WARNING}}Change wallpaper directory{{RESET}}\n\n"
+
+    @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
+    @printf "  report-disk                  {{WARNING}}Disk usage{{RESET}}\n"
+    @printf "  report-memory                {{WARNING}}Memory usage{{RESET}}\n"
+    @printf "  report-cpu                   {{WARNING}}CPU info{{RESET}}\n\n"
+
+    @printf "{{SECTION}}🌐 EXTERNAL TOOLS{{RESET}}\n"
+    @printf "  tuxmate                      {{INFO}}Open TuxMate Website{{RESET}}\n"
+    @printf "  linux-toys                   {{INFO}}Linux Toys installer{{RESET}}\n"
+    @printf "  linutil                      {{INFO}}Chris Titus LinUtil{{RESET}}\n\n"
+
+    @printf "{{SECTION}}🔗 ROCKETPOWERINC{{RESET}}\n"
+    @printf "  rocket-dashboard             {{INFO}}Rocket dashboard{{RESET}}\n"
+    @printf "  clone-rocketpowerinc         {{INFO}}Clone all public repos{{RESET}}\n\n"
+
+    @printf "{{SECTION}}📎 DESKFLOW & CLIPCASCADE{{RESET}}\n"
+    @printf "  install-df                   {{SUCCESS}}Install Deskflow{{RESET}}\n"
+    @printf "  install-cc                   {{SUCCESS}}Install ClipCascade{{RESET}}\n"
+    @printf "  restart-cc                   {{WARNING}}Restart ClipCascade service{{RESET}}\n"
+    @printf "  status-cc                    {{INFO}}Check ClipCascade status{{RESET}}\n\n"
+
+    @printf "{{SECTION}}🔨 TOOLS{{RESET}}\n"
+    @printf "  change-hostname              {{ERROR}}Change machine hostname{{RESET}}\n\n"
+
+#! ==================================================
+#! Convenience
+#! ==================================================
+
+plj:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 {{REPO_URL}} "$TMPDIR" && \
+    install -m 777 "$TMPDIR/JUSTFILES/{{DISTRO_FOLDER}}/justfile" "$HOME/justfile" && \
+    rm -rf "$TMPDIR"
+    just
+
+pljg:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 {{REPO_URL}} "$TMPDIR" && \
+    install -m 777 "$TMPDIR/JUSTFILES/{{DISTRO_FOLDER}}/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
+    rm -rf "$TMPDIR"
+
+#! ==================================================
+#! System
+#! ==================================================
+
+update:
+    bash -lc '{{PKG_UPDATE_CMD}}'
+    bash -lc '{{PKG_UPGRADE_CMD}}'
+    flatpak update -y
+    @echo "System Updated"
+
+upgrade:
+    bash -lc '{{DISTRO_UPGRADE_CMD}}'
+
+care:
+    @printf "\033[1;96m🛠 Running Full System Care...\033[0m\n\n"
+
+    @printf "\033[93m📦 {{PKG_LABEL}} Maintenance...\033[0m\n"
+    bash -lc '{{PKG_UPDATE_CMD}}'
+    bash -lc '{{PKG_UPGRADE_CMD}}'
+    bash -lc '{{PKG_AUTOREMOVE_CMD}}'
+    bash -lc '{{PKG_AUTOCLEAN_CMD}}'
+    @printf "\033[92m✔ {{PKG_LABEL}} Complete.\033[0m\n\n"
+
+    @printf "\033[96m🧊 Flatpak Maintenance...\033[0m\n"
+    flatpak update -y
+    flatpak uninstall --unused -y
+    flatpak repair || true
+    @printf "\033[92m✔ Flatpak Complete.\033[0m\n\n"
+
+    @printf "\033[1;95m✨ System Care Finished Successfully!\033[0m\n"
+
+factory-reset:
+    bash -lc '{{DISTRO_REPAIR_CMD}}'
+    @echo "Factory Reset / Repair Complete"
+
+#! ==================================================
+#! Packages
+#! ==================================================
+
+pkg-search pkg:
+    bash -lc '{{PKG_SEARCH_CMD}} {{pkg}}'
+
+pkg-install pkg:
+    bash -lc '{{PKG_INSTALL_CMD}} {{pkg}}'
+
+pkg-remove pkg:
+    bash -lc '{{PKG_REMOVE_CMD}} {{pkg}}'
+
+#! ==================================================
+#! Packages (Flatpak)
+#! ==================================================
+
+flatpak-search pkg:
+    flatpak search {{pkg}}
+
+flatpak-list:
+    flatpak list
+
+flatpak-remotes:
+    @printf "\033[96m🌐 Listing Flatpak remotes...\033[0m\n"
+    flatpak remotes
+    @printf "\n\033[92m✔ Done.\033[0m\n"
+
+flatpak-remove-remote remote:
+    @printf "\033[91m🗑 Removing Flatpak remote: {{remote}}...\033[0m\n"
+    flatpak remote-delete {{remote}}
+    @printf "\033[92m✔ Remote removed successfully.\033[0m\n"
+
+#! ==================================================
+#! Bootstrap
+#! ==================================================
+
+bootload-apps:
+    @printf "\033[1;96m🚀 Bootload Apps - Installing Essentials...\033[0m\n\n"
+
+    @printf "\033[93m📦 Installing baseline CLI tools...\033[0m\n"
+    bash -lc '{{PKG_UPDATE_CMD}}'
+    bash -lc '{{BOOTSTRAP_BASE_INSTALL_CMD}}'
+    @printf "\033[92m✔ Baseline tools installed.\033[0m\n\n"
+
+    @printf "\033[96m🧊 Ensuring Flathub remote exists...\033[0m\n"
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    @printf "\033[93m📦 Installing Essential Flatpaks...\033[0m\n"
+    flatpak install -y flathub \
+        com.raggesilver.BlackBox \
+        com.github.tchx84.Flatseal \
+        com.mattjakeman.ExtensionManager \
+        org.deskflow.deskflow \
+        io.github.flattool.Warehouse
+
+    @printf "\n\033[92m✨ Bootload Complete!\033[0m\n"
+
+tune-gnome:
+    @printf "\033[1;96m🎛 Applying GNOME Desktop Tweaks...\033[0m\n\n"
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
+    gsettings set org.gnome.desktop.session idle-delay 1500
+    gsettings set org.gnome.desktop.screensaver lock-enabled false
+    gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+    @printf "\n\033[92m✔ GNOME tweaks applied successfully!\033[0m\n"
+
+tune-nautilus:
+    @printf "{{INFO}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
+    @mkdir -p "$HOME/.config/gtk-3.0"
+    @printf "%s\n" \
+        "file://$HOME/.config/autostart Auto Start" \
+        "file://$HOME/.local/share/applications App Drawer" \
+        "file://$HOME/.config/gtk-3.0/bookmarks Nautilus Bookmarks" \
+        "file://$HOME/.config/systemd/user Systemctl Services" \
+        > "$HOME/.config/gtk-3.0/bookmarks"
+    @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
+
+#! ==================================================
+#! Wallpaper
+#! ==================================================
+
+install-wallpaper-shuffle:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
+    rm -rf "$TMPDIR" && \
+    "$HOME/.local/bin/wallpaper-shuffle"
+
+start-wallpaper-shuffle:
+    systemctl --user enable --now wallpaper-shuffle
+
+stop-wallpaper-shuffle:
+    systemctl --user disable wallpaper-shuffle && systemctl --user stop wallpaper-shuffle
+
+status-wallpaper-shuffle:
+    systemctl --user status wallpaper-shuffle
+
+change-wallpaper-folder:
+    BOLD="" ~/.local/bin/wallpaper-shuffle --select
+    systemctl --user restart wallpaper-shuffle
+
+#! ==================================================
+#! SYSTEM INFO
+#! ==================================================
+
+report-disk:
+    df -h /
+
+report-memory:
+    free -h
+
+report-cpu:
+    lscpu
+
+#! ==================================================
+#! External Tools
+#! ==================================================
+
+tuxmate:
+    xdg-open "https://tuxmate.com/" >/dev/null 2>&1 &
+
+linux-toys:
+    x-terminal-emulator -e bash -c 'curl -fsSL https://linux.toys/install.sh | bash'
+
+linutil:
+    x-terminal-emulator -e bash -c 'curl -fsSL https://christitus.com/linux | sh'
+
+#! ==================================================
+#! RocketPowerInc
+#! ==================================================
+
+rocket-dashboard:
+    xdg-open https://rocketdashboard.notion.site/Welcome-to-RocketPowerInc-1a1627bc6fd8805ab693f164a1b3ceda >/dev/null 2>&1 &
+
+clone-rocketpowerinc:
+	TARGET_DIR="$HOME/Github/rocketpowerinc"; \
+	printf "📦 Fetching public repositories for rocketpowerinc...\n"; \
+	mkdir -p "$TARGET_DIR"; \
+	curl -s "https://api.github.com/users/rocketpowerinc/repos?per_page=100" \
+	| jq -r '.[] | "\(.name) \(.clone_url)"' \
+	| while read -r repo_name clone_url; do \
+		repo_path="$TARGET_DIR/$repo_name"; \
+		if [ ! -d "$repo_path/.git" ]; then \
+			echo "Cloning $repo_name..."; \
+			git clone "$clone_url" "$repo_path"; \
+		else \
+			echo "$repo_name already exists. Skipping..."; \
+		fi; \
+	done; \
+	printf "✅ All public repositories cloned to: %s\n" "$TARGET_DIR"
+
+#! ==================================================
+#! Deskflow and ClipCascade
+#! ==================================================
+
+install-df:
+    @printf "\033[96m🧊 Installing Deskflow (Flatpak)...\033[0m\n"
+    flatpak install -y flathub org.deskflow.deskflow
+
+    @printf "\033[93m⚙ Installing desktop tweaks package...\033[0m\n"
+    bash -lc '{{DESKTOP_TWEAKS_INSTALL_CMD}}'
+
+    @printf "\033[92m✔ Deskflow and tweaks package installed successfully.\033[0m\n"
+
+install-cc:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    chmod +x "$TMPDIR/bash/linux/clipcascade-install-ubuntu.sh" && \
+    bash "$TMPDIR/bash/linux/clipcascade-install-ubuntu.sh" && \
+    rm -rf "$TMPDIR"
+
+restart-cc:
+    systemctl --user restart clipcascade
+    sleep 4s
+    systemctl --user status clipcascade
+
+status-cc:
+    systemctl --user status clipcascade
+
+#! ==================================================
+#! Tools
+#! ==================================================
+
+change-hostname:
+    #!/usr/bin/env bash
+    set -e
+    current=$(hostname)
+
+    echo -e "\n🖥 Current hostname: $current\n"
+    read -p "Enter new hostname: " host_input
+    [ -z "$host_input" ] && echo "Aborted." && exit 1
+
+    read -p "Change hostname to '$host_input'? (y/N): " confirm
+    case "$confirm" in
+        [yY]*) ;;
+        *) echo "Cancelled."; exit 1 ;;
+    esac
+
+    sudo hostnamectl set-hostname "$host_input"
+    sudo sed -i "s/$current/$host_input/g" /etc/hosts
+
+    echo "✔ Hostname changed and /etc/hosts updated."
+    echo -e "\n⚠️  A reboot is recommended to ensure all services use the new hostname."
+    read -p "Restart system now? (y/N): " reboot_confirm
+
+    if [[ "$reboot_confirm" =~ ^[yY] ]]; then
+        sudo reboot
+    else
+        echo "Done. Please remember to restart later for changes to fully take effect."
+    fi
