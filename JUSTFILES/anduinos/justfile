@@ -36,78 +36,69 @@ BLUE   := ESC + "[94m"
 PINK   := ESC + "[95m"
 CYAN   := ESC + "[96m"
 
-ACCENT  := CYAN
-HEADER  := BLUE
-SECTION := PINK
-SUCCESS := GREEN
-WARNING := YELLOW
-ERROR   := RED
-INFO    := BLUE
-SUBTLE  := DIM
-
 default:
     @clear
     @printf "\n"
-    @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n"
+    @printf "{{BLUE}}═══════════════════════════════════════════════════════{{RESET}}\n"
     @printf "{{BOLD}}             🚀 {{DISTRO_NAME}} System Toolkit 🚀{{RESET}}\n"
-    @printf "{{SUBTLE}}               Powered by RocketPowerInc{{RESET}}\n"
-    @printf "{{HEADER}}═══════════════════════════════════════════════════════{{RESET}}\n\n"
+    @printf "{{DIM}}               Powered by RocketPowerInc{{RESET}}\n"
+    @printf "{{BLUE}}═══════════════════════════════════════════════════════{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🧰 CONVENIENCE{{RESET}}\n"
-    @printf "  plj                          {{ACCENT}}Pull Latest Justfile{{RESET}}\n"
-    @printf "  pljg                         {{ACCENT}}Pull Latest Justfile GUI{{RESET}}\n\n"
+    @printf "{{PINK}}🧰 CONVENIENCE{{RESET}}\n"
+    @printf "  plj                          {{CYAN}}Pull Latest Justfile{{RESET}}\n"
+    @printf "  pljg                         {{CYAN}}Pull Latest Justfile GUI{{RESET}}\n\n"
 
-    @printf "{{SECTION}}⚙ SYSTEM{{RESET}}\n"
-    @printf "  update                       {{SUCCESS}}Full system update ({{PKG_LABEL}} + Flatpak){{RESET}}\n"
-    @printf "  upgrade                      {{SUCCESS}}Run distro upgrade command{{RESET}}\n"
-    @printf "  care                         {{WARNING}}Full system maintenance ({{PKG_LABEL}} + Flatpak){{RESET}}\n"
-    @printf "  factory-reset                {{ERROR}}Run distro repair command{{RESET}}\n\n"
+    @printf "{{PINK}}⚙ SYSTEM{{RESET}}\n"
+    @printf "  update                       {{GREEN}}Full system update ({{PKG_LABEL}} + Flatpak){{RESET}}\n"
+    @printf "  upgrade                      {{GREEN}}Run distro upgrade command{{RESET}}\n"
+    @printf "  care                         {{YELLOW}}Full system maintenance ({{PKG_LABEL}} + Flatpak){{RESET}}\n"
+    @printf "  factory-reset                {{RED}}Run distro repair command{{RESET}}\n\n"
 
-    @printf "{{SECTION}}📦 {{PKG_LABEL}} PACKAGES{{RESET}}\n"
-    @printf "  pkg-search <pkg>             {{INFO}}Search packages{{RESET}}\n"
-    @printf "  pkg-install <pkg>            {{SUCCESS}}Install package{{RESET}}\n"
-    @printf "  pkg-remove <pkg>             {{ERROR}}Remove package{{RESET}}\n\n"
+    @printf "{{PINK}}📦 {{PKG_LABEL}} PACKAGES{{RESET}}\n"
+    @printf "  pkg-search <pkg>             {{BLUE}}Search packages{{RESET}}\n"
+    @printf "  pkg-install <pkg>            {{GREEN}}Install package{{RESET}}\n"
+    @printf "  pkg-remove <pkg>             {{RED}}Remove package{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🧊 FLATPAK PACKAGES{{RESET}}\n"
-    @printf "  flatpak-search <pkg>         {{INFO}}Search flatpaks{{RESET}}\n"
-    @printf "  flatpak-list                 {{INFO}}List flatpaks{{RESET}}\n"
-    @printf "  flatpak-remotes              {{INFO}}List remotes{{RESET}}\n"
-    @printf "  flatpak-remove-remote        {{ERROR}}Remove remote <name>{{RESET}}\n\n"
+    @printf "{{PINK}}🧊 FLATPAK PACKAGES{{RESET}}\n"
+    @printf "  flatpak-search <pkg>         {{BLUE}}Search flatpaks{{RESET}}\n"
+    @printf "  flatpak-list                 {{BLUE}}List flatpaks{{RESET}}\n"
+    @printf "  flatpak-remotes              {{BLUE}}List remotes{{RESET}}\n"
+    @printf "  flatpak-remove-remote        {{RED}}Remove remote <name>{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🚀 BOOTSTRAP{{RESET}}\n"
-    @printf "  bootload-apps                {{ACCENT}}Install baseline CLI + Flatpaks{{RESET}}\n"
-    @printf "  tune-gnome                   {{ACCENT}}Apply GNOME Gsettings tweaks{{RESET}}\n"
-    @printf "  tune-nautilus                {{ACCENT}}Reset Nautilus bookmarks{{RESET}}\n\n"
+    @printf "{{PINK}}🚀 BOOTSTRAP{{RESET}}\n"
+    @printf "  bootload-apps                {{CYAN}}Install baseline CLI + Flatpaks{{RESET}}\n"
+    @printf "  tune-gnome                   {{CYAN}}Apply GNOME Gsettings tweaks{{RESET}}\n"
+    @printf "  tune-nautilus                {{CYAN}}Reset Nautilus bookmarks{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🖼️ WALLPAPER{{RESET}}\n"
-    @printf "  install-wallpaper-shuffle    {{ACCENT}}Install wallpaper shuffle{{RESET}}\n"
-    @printf "  start-wallpaper-shuffle      {{SUCCESS}}Start wallpaper shuffle{{RESET}}\n"
-    @printf "  stop-wallpaper-shuffle       {{ERROR}}Stop wallpaper shuffle{{RESET}}\n"
-    @printf "  status-wallpaper-shuffle     {{ACCENT}}Show wallpaper shuffle status{{RESET}}\n"
-    @printf "  change-wallpaper-folder      {{WARNING}}Change wallpaper directory{{RESET}}\n\n"
+    @printf "{{PINK}}🖼️ WALLPAPER{{RESET}}\n"
+    @printf "  install-wallpaper-shuffle    {{CYAN}}Install wallpaper shuffle{{RESET}}\n"
+    @printf "  start-wallpaper-shuffle      {{GREEN}}Start wallpaper shuffle{{RESET}}\n"
+    @printf "  stop-wallpaper-shuffle       {{RED}}Stop wallpaper shuffle{{RESET}}\n"
+    @printf "  status-wallpaper-shuffle     {{CYAN}}Show wallpaper shuffle status{{RESET}}\n"
+    @printf "  change-wallpaper-folder      {{YELLOW}}Change wallpaper directory{{RESET}}\n\n"
 
-    @printf "{{SECTION}}📊 SYSTEM INFO{{RESET}}\n"
-    @printf "  report-disk                  {{WARNING}}Disk usage{{RESET}}\n"
-    @printf "  report-memory                {{WARNING}}Memory usage{{RESET}}\n"
-    @printf "  report-cpu                   {{WARNING}}CPU info{{RESET}}\n\n"
+    @printf "{{PINK}}📊 SYSTEM INFO{{RESET}}\n"
+    @printf "  report-disk                  {{YELLOW}}Disk usage{{RESET}}\n"
+    @printf "  report-memory                {{YELLOW}}Memory usage{{RESET}}\n"
+    @printf "  report-cpu                   {{YELLOW}}CPU info{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🌐 EXTERNAL TOOLS{{RESET}}\n"
-    @printf "  tuxmate                      {{INFO}}Open TuxMate Website{{RESET}}\n"
-    @printf "  linux-toys                   {{INFO}}Linux Toys installer{{RESET}}\n"
-    @printf "  linutil                      {{INFO}}Chris Titus LinUtil{{RESET}}\n\n"
+    @printf "{{PINK}}🌐 EXTERNAL TOOLS{{RESET}}\n"
+    @printf "  tuxmate                      {{BLUE}}Open TuxMate Website{{RESET}}\n"
+    @printf "  linux-toys                   {{BLUE}}Linux Toys installer{{RESET}}\n"
+    @printf "  linutil                      {{BLUE}}Chris Titus LinUtil{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🔗 ROCKETPOWERINC{{RESET}}\n"
-    @printf "  rocket-dashboard             {{INFO}}Rocket dashboard{{RESET}}\n"
-    @printf "  clone-rocketpowerinc         {{INFO}}Clone all public repos{{RESET}}\n\n"
+    @printf "{{PINK}}🔗 ROCKETPOWERINC{{RESET}}\n"
+    @printf "  rocket-dashboard             {{BLUE}}Rocket dashboard{{RESET}}\n"
+    @printf "  clone-rocketpowerinc         {{BLUE}}Clone all public repos{{RESET}}\n\n"
 
-    @printf "{{SECTION}}📎 DESKFLOW & CLIPCASCADE{{RESET}}\n"
-    @printf "  install-df                   {{SUCCESS}}Install Deskflow{{RESET}}\n"
-    @printf "  install-cc                   {{SUCCESS}}Install ClipCascade{{RESET}}\n"
-    @printf "  restart-cc                   {{WARNING}}Restart ClipCascade service{{RESET}}\n"
-    @printf "  status-cc                    {{INFO}}Check ClipCascade status{{RESET}}\n\n"
+    @printf "{{PINK}}📎 DESKFLOW & CLIPCASCADE{{RESET}}\n"
+    @printf "  install-df                   {{GREEN}}Install Deskflow{{RESET}}\n"
+    @printf "  install-cc                   {{GREEN}}Install ClipCascade{{RESET}}\n"
+    @printf "  restart-cc                   {{YELLOW}}Restart ClipCascade service{{RESET}}\n"
+    @printf "  status-cc                    {{BLUE}}Check ClipCascade status{{RESET}}\n\n"
 
-    @printf "{{SECTION}}🔨 TOOLS{{RESET}}\n"
-    @printf "  change-hostname              {{ERROR}}Change machine hostname{{RESET}}\n\n"
+    @printf "{{PINK}}🔨 TOOLS{{RESET}}\n"
+    @printf "  change-hostname              {{RED}}Change machine hostname{{RESET}}\n\n"
 
 #! ==================================================
 #! Convenience
@@ -239,7 +230,7 @@ tune-gnome:
     @printf "\n\033[92m✔ GNOME tweaks applied successfully!\033[0m\n"
 
 tune-nautilus:
-    @printf "{{INFO}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
+    @printf "{{BLUE}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
     @mkdir -p "$HOME/.config/gtk-3.0"
     @printf "%s\n" \
         "file://$HOME/.config/autostart Auto Start" \
@@ -247,7 +238,7 @@ tune-nautilus:
         "file://$HOME/.config/gtk-3.0/bookmarks Nautilus Bookmarks" \
         "file://$HOME/.config/systemd/user Systemctl Services" \
         > "$HOME/.config/gtk-3.0/bookmarks"
-    @printf "{{SUCCESS}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
+    @printf "{{GREEN}}✔ GTK bookmarks updated successfully.{{RESET}}\n"
 
 #! ==================================================
 #! Wallpaper
