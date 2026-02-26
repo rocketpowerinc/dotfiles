@@ -62,8 +62,8 @@ ARGS=(
     --text="<b><big>CachyOS Toolkit</big></b>\n"
 
     --field="${HEADER}CONVENIENCE${FOOTER}:LBL" ""
-    --field="Refresh Justfile:BTN" "bash -c 'run_task refresh-justfile'"
-    --field="Refresh Justfile-GUI:BTN" "bash -c 'run_task refresh-justfile-gui'"
+    --field="Refresh Justfile:BTN" "bash -c 'run_task plj'"
+    --field="Refresh Justfile-GUI:BTN" "bash -c 'run_task pljg'"
     --field="$SEP" ""
 
     --field="${HEADER}SYSTEM${FOOTER}:LBL" ""

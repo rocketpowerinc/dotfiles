@@ -118,7 +118,7 @@ default:
 plj:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
-    install -m 777 "$TMPDIR/cachyos/justfile" "$HOME/justfile" && \
+    install -m 777 "$TMPDIR/JUSTFILES/cachyos/justfile" "$HOME/justfile" && \
     rm -rf "$TMPDIR"
     just
 # Pull Latest Justfile GUI

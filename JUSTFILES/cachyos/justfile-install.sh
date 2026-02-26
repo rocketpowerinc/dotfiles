@@ -12,12 +12,12 @@ git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
 
 # Copy justfile to $HHOME
 install -m 777 \
-  "$TMPDIR/cachyos/justfile" \
+  "$TMPDIR/JUSTFILES/cachyos/justfile" \
   "$HOME/justfile"
 
 # Copy justfile yad gui to $HOME
 install -m 777 \
-  "$TMPDIR/cachyos/justfile-gui.sh" \
+  "$TMPDIR/JUSTFILES/cachyos/justfile-gui.sh" \
   "$HOME/justfile-gui.sh"
 chmod +x "$HOME/justfile-gui.sh"
 

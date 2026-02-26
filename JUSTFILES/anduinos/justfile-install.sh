@@ -12,12 +12,12 @@ git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR"
 
 # Copy justfile to $HHOME
 install -m 777 \
-  "$TMPDIR/anduinos/justfile" \
+  "$TMPDIR/JUSTFILES/anduinos/justfile" \
   "$HOME/justfile"
 
 # Copy justfile yad gui to $HOME
 install -m 777 \
-  "$TMPDIR/anduinos/justfile-gui.sh" \
+  "$TMPDIR/JUSTFILES/anduinos/justfile-gui.sh" \
   "$HOME/justfile-gui.sh"
 chmod +x "$HOME/justfile-gui.sh"
 
