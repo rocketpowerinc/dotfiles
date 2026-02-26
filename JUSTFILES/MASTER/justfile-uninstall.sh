@@ -4,8 +4,8 @@ set -euo pipefail
 #! ==================================================
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
-DISTRO_NAME="AnduinOS"
-ICON_DEST_NAME="anduinos-logo.svg"
+DISTRO_NAME="RocketOS"
+ICON_DEST_NAME="RocketOS.svg"
 DEPS_REMOVE_CMD="sudo apt remove -y just yad"
 
 TOOLKIT_DESKTOP_FILE="${DISTRO_NAME// /}-Toolkit.desktop"
