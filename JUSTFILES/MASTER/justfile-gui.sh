@@ -6,7 +6,7 @@ set -euo pipefail
 #! ==================================================
 TOOLKIT_TITLE="RocketOS Toolkit"
 JUST_FILE="$HOME/justfile"
-ICON_PATH="$HOME/.local/share/icons/RocketOS.svg"
+ICON_PATH="$HOME/.local/share/icons/RocketOS.png"
 
 #! ==================================================
 #! ==================================================

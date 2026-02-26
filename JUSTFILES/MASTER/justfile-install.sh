@@ -7,8 +7,8 @@ set -euo pipefail
 DISTRO_NAME="RocketOS"
 DISTRO_FOLDER="MASTER"
 REPO_URL="https://github.com/rocketpowerinc/dotfiles.git"
-ICON_FILE_NAME="RocketOS.svg"
-ICON_DEST_NAME="RocketOS.svg"
+ICON_FILE_NAME="RocketOS.png"
+ICON_DEST_NAME="RocketOS.png"
 DEPS_INSTALL_CMD="sudo apt update && sudo apt install -y just yad"
 DEPS_REMOVE_CMD="sudo apt remove -y just yad"
 
