@@ -5,7 +5,7 @@ set -euo pipefail
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
 DISTRO_NAME="RocketOS"
-ICON_DEST_NAME="RocketOS.svg"
+ICON_DEST_NAME="rocketos-logo.png"
 DEPS_REMOVE_CMD="sudo apt remove -y just yad"
 
 TOOLKIT_DESKTOP_FILE="${DISTRO_NAME// /}-Toolkit.desktop"
