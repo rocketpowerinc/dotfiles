@@ -6,7 +6,7 @@ set export := true
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
 DISTRO_NAME               := "AnduinOS"
-DISTRO_FOLDER             := "anduinos"
+DISTRO_FOLDER             := "AnduinOS"
 REPO_URL                  := "https://github.com/rocketpowerinc/dotfiles.git"
 PKG_LABEL                 := "APT"
 PKG_UPDATE_CMD            := "sudo apt update"
