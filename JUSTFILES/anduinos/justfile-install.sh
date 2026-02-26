@@ -23,9 +23,10 @@ chmod +x "$HOME/justfile-gui.sh"
 
 
 # Download Icon
-mkdir -p ~/.local/share/icons && \
-curl -L "https://raw.githubusercontent.com/Anduin2017/AnduinOS/47ef341b4ab9119905e3abcfd1949d718698ac14/src/mods/30-gnome-extension-arcmenu-patch/logo.svg" \
--o ~/.local/share/icons/anduinos-logo.svg
+ICON_SRC="$TMPDIR/JUSTFILES/AnduinOS/AnduinOS.svg"
+ICON_DEST="$HOME/.local/share/icons/anduinos-logo.svg"
+mkdir -p "$HOME/.local/share/icons"
+install -m 644 "$ICON_SRC" "$ICON_DEST"
 
 
 #!####################################################

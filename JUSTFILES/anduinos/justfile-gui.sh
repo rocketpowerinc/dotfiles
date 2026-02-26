@@ -3,8 +3,7 @@ set -euo pipefail
 
 export GTK_THEME=Adwaita:dark
 export JUST_FILE="$HOME/justfile"
-ICON_URL="https://raw.githubusercontent.com/Anduin2017/AnduinOS/47ef341b4ab9119905e3abcfd1949d718698ac14/src/mods/30-gnome-extension-arcmenu-patch/logo.svg"
-ICON_PATH="/tmp/anduinos-logo.svg"
+ICON_PATH="$HOME/.local/share/icons/anduinos-logo.svg"
 
 # 1. Terminal Detection
 if command -v gnome-terminal >/dev/null 2>&1; then
@@ -37,8 +36,6 @@ run_task() {
 export -f run_task
 export TERM_CMD
 export JUST_FILE
-
-[ -f "$ICON_PATH" ] || curl -fsSL "$ICON_URL" -o "$ICON_PATH"
 
 # 3. Styling Logic (Optimized for 400px width)
 # We use a shorter separator (32 chars) to ensure no horizontal scroll triggers.
