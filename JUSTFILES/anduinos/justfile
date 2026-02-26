@@ -117,14 +117,14 @@ default:
 plj:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
-    install -m 777 "$TMPDIR/JUSTFILES/AnduinOS/justfile" "$HOME/justfile" && \
+    install -m 777 "$TMPDIR/JUSTFILES/anduinos/justfile" "$HOME/justfile" && \
     rm -rf "$TMPDIR"
     just
 # Pull Latest Justfile GUI
 pljg:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/dotfiles.git "$TMPDIR" && \
-    install -m 777 "$TMPDIR/JUSTFILES/AnduinOS/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
+    install -m 777 "$TMPDIR/JUSTFILES/anduinos/justfile-gui.sh" "$HOME/justfile-gui.sh" && \
     rm -rf "$TMPDIR"
 
 
