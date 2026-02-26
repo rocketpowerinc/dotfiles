@@ -1,11 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export GTK_THEME=Adwaita:dark
-export JUST_FILE="$HOME/justfile"
+#! ==================================================
+#! MASTER TEMPLATE CONFIG (edit this block only)
+#! ==================================================
+TOOLKIT_TITLE="AnduinOS Toolkit"
+JUST_FILE="$HOME/justfile"
 ICON_PATH="$HOME/.local/share/icons/anduinos-logo.svg"
 
-# 1. Terminal Detection
+#! ==================================================
+#! ==================================================
+#! ==================================================
+
+export GTK_THEME=Adwaita:dark
+export JUST_FILE
+
 if command -v gnome-terminal >/dev/null 2>&1; then
     TERM_CMD="gnome-terminal --"
 elif command -v kgx >/dev/null 2>&1; then
@@ -14,18 +23,17 @@ else
     TERM_CMD="x-terminal-emulator -e"
 fi
 
-# 2. Task Runner Function
 run_task() {
     local recipe=$1
     local args=""
 
     case "$recipe" in
-        "search")  recipe="apt-search" ;;
-        "install") recipe="apt-install" ;;
-        "remove")  recipe="apt-remove" ;;
+        "search")  recipe="pkg-search" ;;
+        "install") recipe="pkg-install" ;;
+        "remove")  recipe="pkg-remove" ;;
     esac
 
-    if [[ "$recipe" =~ ^(apt-search|apt-install|apt-remove|flatpak-search|flatpak-remove-remote)$ ]]; then
+    if [[ "$recipe" =~ ^(pkg-search|pkg-install|pkg-remove|flatpak-search|flatpak-remove-remote)$ ]]; then
         args=$(yad --entry --title="Input Required" --text="Enter package name:" --width=300 --center)
         [[ -z "$args" ]] && return
     fi
@@ -35,17 +43,13 @@ run_task() {
 
 export -f run_task
 export TERM_CMD
-export JUST_FILE
 
-# 3. Styling Logic (Optimized for 400px width)
-# We use a shorter separator (32 chars) to ensure no horizontal scroll triggers.
 HEADER="<span color='#3498db' size='large'><b>"
 FOOTER="</b></span>"
 SEP="<span color='#444444'>────────────────────────────────</span>:LBL"
 
-# 4. GUI Definition
 ARGS=(
-    --title="AnduinOS Toolkit"
+    --title="$TOOLKIT_TITLE"
     --window-icon="$ICON_PATH"
     --image="$ICON_PATH"
     --image-on-top
@@ -56,7 +60,7 @@ ARGS=(
     --columns=1
     --scroll
     --text-align=center
-    --text="<b><big>AnduinOS Toolkit</big></b>\n"
+    --text="<b><big>$TOOLKIT_TITLE</big></b>\n"
 
     --field="${HEADER}CONVENIENCE${FOOTER}:LBL" ""
     --field="Refresh Justfile:BTN" "bash -c 'run_task plj'"
@@ -70,7 +74,7 @@ ARGS=(
     --field="Factory Reset:BTN" "bash -c 'run_task factory-reset'"
     --field="$SEP" ""
 
-    --field="${HEADER}APT PACKAGES${FOOTER}:LBL" ""
+    --field="${HEADER}PACKAGES${FOOTER}:LBL" ""
     --field="Search Package:BTN" "bash -c 'run_task search'"
     --field="Install Package:BTN" "bash -c 'run_task install'"
     --field="Remove Package:BTN" "bash -c 'run_task remove'"
