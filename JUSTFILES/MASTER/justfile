@@ -131,22 +131,22 @@ upgrade:
     bash -lc '{{DISTRO_UPGRADE_CMD}}'
 
 care:
-    @printf "\033[1;96m🛠 Running Full System Care...\033[0m\n\n"
+    @printf "{{BOLD}}{{CYAN}}🛠 Running Full System Care...{{RESET}}\n\n"
 
-    @printf "\033[93m📦 {{PKG_LABEL}} Maintenance...\033[0m\n"
+    @printf "{{YELLOW}}📦 {{PKG_LABEL}} Maintenance...{{RESET}}\n"
     bash -lc '{{PKG_UPDATE_CMD}}'
     bash -lc '{{PKG_UPGRADE_CMD}}'
     bash -lc '{{PKG_AUTOREMOVE_CMD}}'
     bash -lc '{{PKG_AUTOCLEAN_CMD}}'
-    @printf "\033[92m✔ {{PKG_LABEL}} Complete.\033[0m\n\n"
+    @printf "{{GREEN}}✔ {{PKG_LABEL}} Complete.{{RESET}}\n\n"
 
-    @printf "\033[96m🧊 Flatpak Maintenance...\033[0m\n"
+    @printf "{{CYAN}}🧊 Flatpak Maintenance...{{RESET}}\n"
     flatpak update -y
     flatpak uninstall --unused -y
     flatpak repair || true
-    @printf "\033[92m✔ Flatpak Complete.\033[0m\n\n"
+    @printf "{{GREEN}}✔ Flatpak Complete.{{RESET}}\n\n"
 
-    @printf "\033[1;95m✨ System Care Finished Successfully!\033[0m\n"
+    @printf "{{BOLD}}{{PINK}}✨ System Care Finished Successfully!{{RESET}}\n"
 
 factory-reset:
     bash -lc '{{DISTRO_REPAIR_CMD}}'
@@ -176,31 +176,31 @@ flatpak-list:
     flatpak list
 
 flatpak-remotes:
-    @printf "\033[96m🌐 Listing Flatpak remotes...\033[0m\n"
+    @printf "{{CYAN}}🌐 Listing Flatpak remotes...{{RESET}}\n"
     flatpak remotes
-    @printf "\n\033[92m✔ Done.\033[0m\n"
+    @printf "\n{{GREEN}}✔ Done.{{RESET}}\n"
 
 flatpak-remove-remote remote:
-    @printf "\033[91m🗑 Removing Flatpak remote: {{remote}}...\033[0m\n"
+    @printf "{{RED}}🗑 Removing Flatpak remote: {{remote}}...{{RESET}}\n"
     flatpak remote-delete {{remote}}
-    @printf "\033[92m✔ Remote removed successfully.\033[0m\n"
+    @printf "{{GREEN}}✔ Remote removed successfully.{{RESET}}\n"
 
 #! ==================================================
 #! Bootstrap
 #! ==================================================
 
 bootload-apps:
-    @printf "\033[1;96m🚀 Bootload Apps - Installing Essentials...\033[0m\n\n"
+    @printf "{{BOLD}}{{CYAN}}🚀 Bootload Apps - Installing Essentials...{{RESET}}\n\n"
 
-    @printf "\033[93m📦 Installing baseline CLI tools...\033[0m\n"
+    @printf "{{YELLOW}}📦 Installing baseline CLI tools...{{RESET}}\n"
     bash -lc '{{PKG_UPDATE_CMD}}'
     bash -lc '{{BOOTSTRAP_BASE_INSTALL_CMD}}'
-    @printf "\033[92m✔ Baseline tools installed.\033[0m\n\n"
+    @printf "{{GREEN}}✔ Baseline tools installed.{{RESET}}\n\n"
 
-    @printf "\033[96m🧊 Ensuring Flathub remote exists...\033[0m\n"
+    @printf "{{CYAN}}🧊 Ensuring Flathub remote exists...{{RESET}}\n"
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-    @printf "\033[93m📦 Installing Essential Flatpaks...\033[0m\n"
+    @printf "{{YELLOW}}📦 Installing Essential Flatpaks...{{RESET}}\n"
     flatpak install -y flathub \
         com.raggesilver.BlackBox \
         com.github.tchx84.Flatseal \
@@ -208,16 +208,16 @@ bootload-apps:
         org.deskflow.deskflow \
         io.github.flattool.Warehouse
 
-    @printf "\n\033[92m✨ Bootload Complete!\033[0m\n"
+    @printf "\n{{GREEN}}✨ Bootload Complete!{{RESET}}\n"
 
 tune-gnome:
-    @printf "\033[1;96m🎛 Applying GNOME Desktop Tweaks...\033[0m\n\n"
+    @printf "{{BOLD}}{{CYAN}}🎛 Applying GNOME Desktop Tweaks...{{RESET}}\n\n"
     gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
     gsettings set org.gnome.desktop.session idle-delay 1500
     gsettings set org.gnome.desktop.screensaver lock-enabled false
     gsettings set org.gnome.desktop.notifications show-in-lock-screen false
-    @printf "\n\033[92m✔ GNOME tweaks applied successfully!\033[0m\n"
+    @printf "\n{{GREEN}}✔ GNOME tweaks applied successfully!{{RESET}}\n"
 
 tune-nautilus:
     @printf "{{BLUE}}📚 Replacing GTK Bookmarks...{{RESET}}\n"
@@ -309,13 +309,13 @@ clone-rocketpowerinc:
 #! ==================================================
 
 install-df:
-    @printf "\033[96m🧊 Installing Deskflow (Flatpak)...\033[0m\n"
+    @printf "{{CYAN}}🧊 Installing Deskflow (Flatpak)...{{RESET}}\n"
     flatpak install -y flathub org.deskflow.deskflow
 
-    @printf "\033[93m⚙ Installing desktop tweaks package...\033[0m\n"
+    @printf "{{YELLOW}}⚙ Installing desktop tweaks package...{{RESET}}\n"
     bash -lc '{{DESKTOP_TWEAKS_INSTALL_CMD}}'
 
-    @printf "\033[92m✔ Deskflow and tweaks package installed successfully.\033[0m\n"
+    @printf "{{GREEN}}✔ Deskflow and tweaks package installed successfully.{{RESET}}\n"
 
 install-cc:
     TMPDIR=$(mktemp -d) && \
