@@ -330,8 +330,7 @@ install-df:
 install-cc:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-    chmod +x "$TMPDIR/bash/linux/clipcascade-install-ubuntu.sh" && \
-    bash "$TMPDIR/bash/linux/clipcascade-install-ubuntu.sh" && \
+    bash "$TMPDIR/bash/linux/bootstraps/clipcascade-install-ubuntu.sh" && \
     rm -rf "$TMPDIR"
 
 restart-cc:
