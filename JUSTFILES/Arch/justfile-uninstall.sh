@@ -4,9 +4,9 @@ set -euo pipefail
 #! ==================================================
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
-DISTRO_NAME="RocketOS"
+DISTRO_NAME="Arch Linux"
 ICON_DEST_NAME="rocketos-logo.png"
-DEPS_REMOVE_CMD="sudo apt remove -y just yad"
+DEPS_REMOVE_CMD="sudo pacman -Rns --noconfirm just yad"
 
 TOOLKIT_DESKTOP_FILE="${DISTRO_NAME// /}-Toolkit.desktop"
 
@@ -33,7 +33,6 @@ echo
 read -r -p "Also remove dependencies using '$DEPS_REMOVE_CMD'? (y/N): " remove_deps
 if [[ "$remove_deps" =~ ^[yY]$ ]]; then
     bash -lc "$DEPS_REMOVE_CMD" || true
-    sudo apt autoremove -y || true
     echo "✔ Dependencies removed (if installed)."
 else
     echo "Skipped dependency removal."

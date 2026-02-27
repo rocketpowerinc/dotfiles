@@ -1,18 +1,15 @@
-# MASTER Toolkit Template
+# Arch Linux Toolkit
 
-This folder is a reusable starter for creating distro-specific toolkits (e.g. `ArchOS`, `DebianOS`, etc.) without rewriting structure.
+This folder is preconfigured for Arch Linux using `pacman`.
 
-## Quick workflow
+## Quick usage
 
-1. Copy this folder:
-   - `cp -r JUSTFILES/MASTER JUSTFILES/<YourDistroFolder>`
-2. Rename icon file if desired, and update script variables.
-3. Edit only the `MASTER TEMPLATE CONFIG` block at the top of each file:
+1. Edit only the `MASTER TEMPLATE CONFIG` block at the top of each file if you want to customize values:
    - `justfile`
    - `justfile-gui.sh`
    - `justfile-install.sh`
    - `justfile-uninstall.sh`
-4. Run installer from the new folder.
+2. Run installer from this folder.
 
 ## What to customize
 
@@ -23,7 +20,7 @@ This folder is a reusable starter for creating distro-specific toolkits (e.g. `A
 - `ICON_FILE_NAME` and `ICON_DEST_NAME`: Source icon and installed icon name.
 - `DEPS_INSTALL_CMD`, `DEPS_REMOVE_CMD`: GUI dependency install/remove commands.
 
-## Example: Arch-based setup
+## Current pacman setup
 
 In `justfile` config block:
 
@@ -36,9 +33,7 @@ In `justfile` config block:
 - `PKG_AUTOREMOVE_CMD := "sudo pacman -Qdtq | sudo pacman -Rns - --noconfirm"`
 - `PKG_AUTOCLEAN_CMD := "true"`
 
-In install/uninstall scripts:
-
-- Switch dependency commands to your distro package manager.
+In install/uninstall scripts, dependencies are also set to pacman.
 
 ## Notes
 

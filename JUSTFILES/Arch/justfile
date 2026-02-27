@@ -5,21 +5,21 @@ set export := true
 #! ==================================================
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
-DISTRO_NAME               := "xxxxxxxOS"
-DISTRO_FOLDER             := "MASTER"
+DISTRO_NAME               := "Arch Linux"
+DISTRO_FOLDER             := "Arch"
 REPO_URL                  := "https://github.com/rocketpowerinc/dotfiles.git"
-PKG_LABEL                 := "APT"
-PKG_UPDATE_CMD            := "sudo apt update"
-PKG_UPGRADE_CMD           := "sudo apt upgrade -y"
-PKG_SEARCH_CMD            := "apt-cache policy"
-PKG_INSTALL_CMD           := "sudo apt install -y"
-PKG_REMOVE_CMD            := "sudo apt remove -y"
-PKG_AUTOREMOVE_CMD        := "sudo apt autoremove -y"
-PKG_AUTOCLEAN_CMD         := "sudo apt autoclean"
-DESKTOP_TWEAKS_INSTALL_CMD := "sudo apt install -y gnome-tweaks"
-DISTRO_UPGRADE_CMD        := "do_xxxxxxxos_upgrade"
-DISTRO_REPAIR_CMD         := "do-xxxxxxxos-autorepair"
-BOOTSTRAP_BASE_INSTALL_CMD := "sudo apt install -y fastfetch gh git jq nala yad zenity whiptail just xclip wl-clipboard"
+PKG_LABEL                 := "PACMAN"
+PKG_UPDATE_CMD            := "true"
+PKG_UPGRADE_CMD           := "sudo pacman -Syu --noconfirm"
+PKG_SEARCH_CMD            := "pacman -Ss"
+PKG_INSTALL_CMD           := "sudo pacman -S --needed --noconfirm"
+PKG_REMOVE_CMD            := "sudo pacman -Rns --noconfirm"
+PKG_AUTOREMOVE_CMD        := "sudo pacman -Qdtq | sudo pacman -Rns --noconfirm - || true"
+PKG_AUTOCLEAN_CMD         := "sudo pacman -Scc --noconfirm || true"
+DESKTOP_TWEAKS_INSTALL_CMD := "sudo pacman -S --needed --noconfirm gnome-tweaks"
+DISTRO_UPGRADE_CMD        := "sudo pacman -Syu --noconfirm"
+DISTRO_REPAIR_CMD         := "echo 'No Arch auto-repair command configured.'"
+BOOTSTRAP_BASE_INSTALL_CMD := "sudo pacman -S --needed --noconfirm fastfetch github-cli git jq yad zenity libnewt wl-clipboard xclip xdg-utils"
 
 #! ==================================================
 #! Color System

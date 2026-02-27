@@ -4,13 +4,13 @@ set -euo pipefail
 #! ==================================================
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
-DISTRO_NAME="RocketOS"
-DISTRO_FOLDER="MASTER"
+DISTRO_NAME="Arch Linux"
+DISTRO_FOLDER="Arch"
 REPO_URL="https://github.com/rocketpowerinc/dotfiles.git"
 ICON_FILE_NAME="RocketOS.png"
 ICON_DEST_NAME="rocketos-logo.png"
-DEPS_INSTALL_CMD="sudo apt update && sudo apt install -y just yad"
-DEPS_REMOVE_CMD="sudo apt remove -y just yad"
+DEPS_INSTALL_CMD="sudo pacman -Sy --needed --noconfirm just yad git"
+DEPS_REMOVE_CMD="sudo pacman -Rns --noconfirm just yad"
 
 #! ==================================================
 #! ==================================================

@@ -4,7 +4,7 @@ set -euo pipefail
 #! ==================================================
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
-TOOLKIT_TITLE="RocketOS Toolkit"
+TOOLKIT_TITLE="Arch Linux Toolkit"
 JUST_FILE="$HOME/justfile"
 ICON_PATH="$HOME/.local/share/icons/rocketos-logo.png"
 
