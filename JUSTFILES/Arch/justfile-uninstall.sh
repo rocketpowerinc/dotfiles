@@ -5,7 +5,7 @@ set -euo pipefail
 #! MASTER TEMPLATE CONFIG (edit this block only)
 #! ==================================================
 DISTRO_NAME="Arch Linux"
-ICON_DEST_NAME="rocketos-logo.png"
+ICON_DEST_NAME="arch-logo.png"
 DEPS_REMOVE_CMD="sudo pacman -Rns --noconfirm just yad"
 
 TOOLKIT_DESKTOP_FILE="${DISTRO_NAME// /}-Toolkit.desktop"

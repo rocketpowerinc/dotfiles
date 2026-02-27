@@ -7,8 +7,8 @@ set -euo pipefail
 DISTRO_NAME="Arch Linux"
 DISTRO_FOLDER="Arch"
 REPO_URL="https://github.com/rocketpowerinc/dotfiles.git"
-ICON_FILE_NAME="RocketOS.png"
-ICON_DEST_NAME="rocketos-logo.png"
+ICON_FILE_NAME="Arch.png"
+ICON_DEST_NAME="arch-logo.png"
 DEPS_INSTALL_CMD="sudo pacman -Sy --needed --noconfirm just yad git"
 DEPS_REMOVE_CMD="sudo pacman -Rns --noconfirm just yad"
 
