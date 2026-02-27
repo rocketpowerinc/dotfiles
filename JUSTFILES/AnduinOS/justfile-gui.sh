@@ -61,6 +61,7 @@ ARGS=(
     --scroll
     --text-align=center
     --text="<b><big>$TOOLKIT_TITLE</big></b>\n"
+    --field="$SEP" ""
 
     --field="${HEADER}CONVENIENCE${FOOTER}:LBL" ""
     --field="Refresh Justfile:BTN" "bash -c 'run_task plj'"
