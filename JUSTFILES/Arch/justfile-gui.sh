@@ -6,7 +6,7 @@ set -euo pipefail
 #! ==================================================
 TOOLKIT_TITLE="Arch Linux Toolkit"
 JUST_FILE="$HOME/justfile"
-ICON_PATH="$HOME/.local/share/icons/rocketos-logo.png"
+ICON_PATH="$HOME/.local/share/icons/arch-logo.png"
 
 #! ==================================================
 #! ==================================================
