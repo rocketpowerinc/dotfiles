@@ -227,6 +227,8 @@ tune-gnome:
     gsettings set org.gnome.desktop.session idle-delay 1500
     gsettings set org.gnome.desktop.screensaver lock-enabled false
     gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     @printf "\n{{GREEN}}✔ GNOME tweaks applied successfully!{{RESET}}\n"
 
 tune-nautilus:
