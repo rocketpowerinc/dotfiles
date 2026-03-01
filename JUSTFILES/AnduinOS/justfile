@@ -247,6 +247,7 @@ tune-nautilus:
 #! Wallpaper
 #! ==================================================
 download-sync-wallpapers:
+    #!/usr/bin/env bash
     REPO_URL="https://github.com/rocketpowerinc/assets.git"
     DEST="$HOME/Pictures/Assets"
     BRANCH="main"
