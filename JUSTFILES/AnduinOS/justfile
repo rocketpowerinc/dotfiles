@@ -249,7 +249,7 @@ tune-nautilus:
 download-sync-wallpapers:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-    bash "$TMPDIR/bash/linux/bootstraps/wallpapers/wallpaper-clone-pull.sh" && \
+    bash "$TMPDIR/bash/linux/bootstraps/wallpapers/clone-wallpapers.sh" && \
     rm -rf "$TMPDIR"
 
 
@@ -257,7 +257,7 @@ download-sync-wallpapers:
 install-wallpaper-shuffle:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-    install -Dm755 "$TMPDIR/bash/linux/bootstraps/wallpapers/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
+    install -Dm755 "$TMPDIR/bash/linux/bootstraps/wallpapers/install-wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
     rm -rf "$TMPDIR" && \
     "$HOME/.local/bin/wallpaper-shuffle"
 
