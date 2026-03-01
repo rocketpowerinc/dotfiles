@@ -71,6 +71,7 @@ default:
     @printf "  tune-nautilus                {{CYAN}}Reset Nautilus bookmarks{{RESET}}\n\n"
 
     @printf "{{PINK}}🖼️ WALLPAPER{{RESET}}\n"
+    @printf "  download-sync-wallpapers     {{CYAN}}Download and Sync Assets repo{{RESET}}\n"
     @printf "  install-wallpaper-shuffle    {{CYAN}}Install wallpaper shuffle{{RESET}}\n"
     @printf "  start-wallpaper-shuffle      {{GREEN}}Start wallpaper shuffle{{RESET}}\n"
     @printf "  stop-wallpaper-shuffle       {{RED}}Stop wallpaper shuffle{{RESET}}\n"
@@ -245,6 +246,24 @@ tune-nautilus:
 #! ==================================================
 #! Wallpaper
 #! ==================================================
+download-sync-wallpapers:
+
+    REPO_URL="https://github.com/rocketpowerinc/assets.git"
+    DEST="$HOME/Pictures/Assets"
+    BRANCH="main"
+
+    if [ ! -d "$DEST/.git" ]; then
+        echo "📦 Cloning wallpapers repo to $DEST..."
+        git clone "$REPO_URL" "$DEST"
+        echo "✅ Clone complete."
+    else
+        echo "🔄 Repo exists. Pulling latest wallpapers..."
+        cd "$DEST"
+        git pull origin "$BRANCH"
+        echo "✅ Wallpapers updated."
+    fi
+
+
 
 install-wallpaper-shuffle:
     TMPDIR=$(mktemp -d) && \
