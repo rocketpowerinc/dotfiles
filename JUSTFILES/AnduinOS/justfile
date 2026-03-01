@@ -247,11 +247,9 @@ tune-nautilus:
 #! Wallpaper
 #! ==================================================
 download-sync-wallpapers:
-
     REPO_URL="https://github.com/rocketpowerinc/assets.git"
     DEST="$HOME/Pictures/Assets"
     BRANCH="main"
-
     if [ ! -d "$DEST/.git" ]; then
         echo "📦 Cloning wallpapers repo to $DEST..."
         git clone "$REPO_URL" "$DEST"
