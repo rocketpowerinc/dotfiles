@@ -247,27 +247,17 @@ tune-nautilus:
 #! Wallpaper
 #! ==================================================
 download-sync-wallpapers:
-    #!/usr/bin/env bash
-    REPO_URL="https://github.com/rocketpowerinc/assets.git"
-    DEST="$HOME/Pictures/Assets"
-    BRANCH="main"
-    if [ ! -d "$DEST/.git" ]; then
-        echo "📦 Cloning wallpapers repo to $DEST..."
-        git clone "$REPO_URL" "$DEST"
-        echo "✅ Clone complete."
-    else
-        echo "🔄 Repo exists. Pulling latest wallpapers..."
-        cd "$DEST"
-        git pull origin "$BRANCH"
-        echo "✅ Wallpapers updated."
-    fi
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    bash "$TMPDIR/bash/linux/bootstraps/wallpapers/wallpaper-clone-pull.sh" && \
+    rm -rf "$TMPDIR"
 
 
 
 install-wallpaper-shuffle:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-    install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
+    install -Dm755 "$TMPDIR/bash/linux/bootstraps/wallpapers/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
     rm -rf "$TMPDIR" && \
     "$HOME/.local/bin/wallpaper-shuffle"
 
