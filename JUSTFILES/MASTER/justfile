@@ -71,6 +71,7 @@ default:
     @printf "  tune-nautilus                {{CYAN}}Reset Nautilus bookmarks{{RESET}}\n\n"
 
     @printf "{{PINK}}🖼️ WALLPAPER{{RESET}}\n"
+    @printf "  download-sync-wallpapers     {{CYAN}}Download and Sync Assets repo{{RESET}}\n"
     @printf "  install-wallpaper-shuffle    {{CYAN}}Install wallpaper shuffle{{RESET}}\n"
     @printf "  start-wallpaper-shuffle      {{GREEN}}Start wallpaper shuffle{{RESET}}\n"
     @printf "  stop-wallpaper-shuffle       {{RED}}Stop wallpaper shuffle{{RESET}}\n"
@@ -234,10 +235,17 @@ tune-nautilus:
 #! Wallpaper
 #! ==================================================
 
+download-sync-wallpapers:
+    TMPDIR=$(mktemp -d) && \
+    git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
+    bash "$TMPDIR/bash/linux/bootstraps/wallpapers/clone-wallpapers.sh" && \
+    rm -rf "$TMPDIR"
+
+
 install-wallpaper-shuffle:
     TMPDIR=$(mktemp -d) && \
     git clone --depth 1 https://github.com/rocketpowerinc/scriptbin.git "$TMPDIR" && \
-    install -Dm755 "$TMPDIR/bash/linux/wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
+    install -Dm755 "$TMPDIR/bash/linux/bootstraps/wallpapers/install-wallpaper-shuffle.sh" "$HOME/.local/bin/wallpaper-shuffle" && \
     rm -rf "$TMPDIR" && \
     "$HOME/.local/bin/wallpaper-shuffle"
 
