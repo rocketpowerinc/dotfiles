@@ -174,6 +174,12 @@ alias updateopensuse-nix='export NIXPKGS_ALLOW_UNFREE=1 && sudo zypper dup --all
 alias cleanopensuse-nix='sudo zypper clean && nix-store --gc && sudo flatpak uninstall --unused'
 
 #!###############################################################
+#!#                       Backups                              ##
+#!###############################################################
+echo -e "${MAGENTA}Backup Commands:${ENDCOLOR} ${BLUE}backup-status${ENDCOLOR}"
+alias backup-status='echo "===== TIMESHIFT =====" && sudo timeshift --list && echo && sudo timeshift --check && echo && echo "===== RESTIC =====" && restic -r ~/Backups/restic snapshots && echo && restic -r ~/Backups/restic stats'
+
+#!###############################################################
 #!#                       SystemCTL                            ##
 #!###############################################################
 echo -e "${MAGENTA}SystemCTL Commands:${ENDCOLOR} ${BLUE}sdisable, senable, srestart, sstart, sstatus${ENDCOLOR}"
