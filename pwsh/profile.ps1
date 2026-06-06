@@ -140,8 +140,11 @@ if ($IsWindows) {
   #*############################
   #*#         Backups           #
   #*############################
-  Write-Host "Backup Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " Zipit, MainStackBackup, ReposBackup, UniGetBackup" -ForegroundColor Blue
+  Write-Host "Backup Commands:" -ForegroundColor Magenta -NoNewline; Write-Host " rosbackup, Zipit, MainStackBackup, ReposBackup, UniGetBackup" -ForegroundColor Blue
   function Zipit { & 'C:\Program Files\7-Zip\7z.exe' a -tzip "archived-$(Get-Date -Format 'yyyy-MM-dd').zip" * -pProxmoxcandyass87! -mem=AES256 -mx=5 }
+
+  # Rock OS Encrypted Backup
+  function rosbackup { powershell -ExecutionPolicy Bypass -File "C:\Users\rocket\Github-pwr\rock-os\dev\backups\encrypt-windows-rock-os-daily-backup.ps1" }
 
   #*######################################
   #*#             Docker                 #
