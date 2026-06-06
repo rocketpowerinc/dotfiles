@@ -144,7 +144,7 @@ if ($IsWindows) {
   function Zipit { & 'C:\Program Files\7-Zip\7z.exe' a -tzip "archived-$(Get-Date -Format 'yyyy-MM-dd').zip" * -pProxmoxcandyass87! -mem=AES256 -mx=5 }
 
   # Rock OS Encrypted Backup
-  function rosbackup { powershell -ExecutionPolicy Bypass -File "C:\Users\rocket\Github-pwr\rock-os\dev\backups\encrypt-windows-rock-os-daily-backup.ps1" }
+  function rosbackup { pwsh -ExecutionPolicy Bypass -File "C:\Users\rocket\Github-pwr\rock-os\dev\backups\encrypt-windows-rock-os-daily-backup.ps1" }
 
   #*######################################
   #*#             Docker                 #
